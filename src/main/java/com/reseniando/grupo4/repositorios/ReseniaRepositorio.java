@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface ReseniaRepositorio extends JpaRepository<Resenia, String> {
 
     @Query("SELECT r FROM Resenia r WHERE r.id = :id")
-    public List<Resenia> buscarReseniaPorId(@Param("id") String id); 
+    List<Resenia> buscarReseniaPorId(@Param("id") String id); 
 }

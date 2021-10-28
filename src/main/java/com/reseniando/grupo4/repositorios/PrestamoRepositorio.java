@@ -8,9 +8,14 @@ package com.reseniando.grupo4.repositorios;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.reseniando.grupo4.entidades.Prestamo;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PrestamoRepositorio extends JpaRepository<Prestamo, String>{
     
+     @Query("SELECT p FROM Prestamo p WHERE p.id = :id")
+     List<Prestamo> buscarPrestamoPorId(@Param("id") String id); 
 }

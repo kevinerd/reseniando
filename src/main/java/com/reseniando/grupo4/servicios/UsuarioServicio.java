@@ -4,6 +4,7 @@ import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,9 @@ public class UsuarioServicio {
     }
 
     @Transactional
-    public Usuario saveUsuario(String dni, String nombre, String apellido, String domicilio, String email, String pass) throws ErrorServicio {
+    public Usuario crearUsuario(String dni, String nombre, String apellido, String domicilio, String email, String pass) throws ErrorServicio {
         Usuario usuario = new Usuario();
+        usuario.setAlta(Boolean.TRUE);
         usuario.setDni(dni);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
@@ -52,6 +54,15 @@ public class UsuarioServicio {
 
     public List<Usuario> listarUsuarios() {
         return ur.findAll();
+    }
+    
+        public Usuario findByDni(String dni){
+        Usuario usuario= null;
+        Optional<Usuario> op = ur.findById(dni);
+        if(op.isPresent()){
+            usuario = op.get();
+        }
+        return usuario;
     }
 
     @Transactional

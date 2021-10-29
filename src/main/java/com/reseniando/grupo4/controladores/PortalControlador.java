@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/")
@@ -51,14 +50,13 @@ public class PortalControlador {
             @RequestParam String direccion
     ) {
         try {
-            usuarioServicio.registrar( nombre, apellido, mail, password1, password2, dni, direccion );
+            usuarioServicio.crearUsuario( dni, nombre, apellido, direccion, mail, password1 );
         } catch( ErrorServicio ex ) {
             modelo.put( "error", ex.getMessage() );
             modelo.put( "nombre", nombre );
             modelo.put( "apellido", apellido );
             modelo.put( "mail", mail );
             modelo.put( "password1", password1 );
-            modelo.put( "password2", password2 );
             modelo.put( "dni", dni );
             modelo.put( "direccion", direccion );
             

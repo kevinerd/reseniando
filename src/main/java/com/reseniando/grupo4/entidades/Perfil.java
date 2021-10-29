@@ -17,7 +17,8 @@ public class Perfil {
     private String id;
     private String nickname;
     private String bio;
-    private String foto;
+    @OneToOne
+    private Foto foto;
     @OneToMany
     private List<Resenia> resenias;
     @OneToOne
@@ -28,7 +29,7 @@ public class Perfil {
     public Perfil() {
     }
 
-    public Perfil(String nickname, String bio, String foto, List<Resenia> resenias, Favorito favoritos, Leido leidos) {
+    public Perfil(String nickname, String bio, Foto foto, List<Resenia> resenias, Favorito favoritos, Leido leidos) {
         this.nickname = nickname;
         this.bio = bio;
         this.foto = foto;
@@ -58,11 +59,11 @@ public class Perfil {
         this.bio = bio;
     }
 
-    public String getFoto() {
+    public Foto getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(Foto foto) {
         this.foto = foto;
     }
 

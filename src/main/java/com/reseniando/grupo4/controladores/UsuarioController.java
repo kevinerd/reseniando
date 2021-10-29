@@ -21,7 +21,7 @@ public class UsuarioController {
     @GetMapping("/editar-usuario")
     public String editarUsuario( @RequestParam String dni, ModelMap model ) {
         try {
-            Usuario usuario = usuarioServicio.findByDni( dni );
+            Usuario usuario = usuarioServicio.encontrarPorDni( dni );
             model.addAttribute( "usuario", usuario );
         } catch( ErrorServicio e ) {
             model.addAttribute( "error", e.getMessage() );
@@ -44,7 +44,7 @@ public class UsuarioController {
         Usuario usuario = null;
         
         try {
-            usuario = usuarioServicio.findByDni( dni );
+            usuario = usuarioServicio.encontrarPorDni( dni );
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setEmail(mail);

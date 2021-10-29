@@ -66,7 +66,7 @@ public class UsuarioServicio implements UserDetailsService {
         return ur.findAll();
     }
     
-    public Usuario findByDni(String dni) throws ErrorServicio {
+    public Usuario encontrarPorDni(String dni) throws ErrorServicio {
         Usuario usuario= null;
         
         Optional<Usuario> op = ur.findById(dni);

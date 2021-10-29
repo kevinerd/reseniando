@@ -34,13 +34,14 @@ public class Prestamo {
 
     public Prestamo() {
         this.fechaPrestamo = new Date();
+        this.devuelto = Boolean.FALSE;
     }
 
     public Prestamo(Date fechaPrestamo, Date fechaEstimativa, Date fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) {
         this.fechaPrestamo = new Date();
         this.fechaEstimativa = fechaEstimativa;
         this.fechaDevolucion = fechaDevolucion;
-        this.devuelto = devuelto;
+        this.devuelto = Boolean.FALSE;
         this.libro = libro;
         this.usuario = usuario;
     }

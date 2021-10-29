@@ -4,7 +4,6 @@ import com.reseniando.grupo4.entidades.Foto;
 import com.reseniando.grupo4.entidades.Libro;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
 import com.reseniando.grupo4.errores.ErrorServicio;
-import java.util.Date;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

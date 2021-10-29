@@ -3,7 +3,6 @@ package com.reseniando.grupo4.controladores;
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
 import com.reseniando.grupo4.errores.ErrorServicio;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,9 +19,9 @@ public class UsuarioController {
     private UsuarioServicio usuarioServicio;
     
     @GetMapping("/editar-usuario")
-    public String editarUsuario( @RequestParam Long dni, ModelMap model ) {
+    public String editarUsuario( @RequestParam String dni, ModelMap model ) {
         try {
-            Usuario usuario = usuarioServicio.buscarPorDni( dni );
+            Usuario usuario = usuarioServicio.findByDni( dni );
             model.addAttribute( "usuario", usuario );
         } catch( ErrorServicio e ) {
             model.addAttribute( "error", e.getMessage() );
@@ -34,7 +33,7 @@ public class UsuarioController {
     @PostMapping("/actualizar-usuario")
     public String actualizarUsuario(
             ModelMap modelo,
-            @RequestParam Long dni,
+            @RequestParam String dni,
             @RequestParam String nombre,
             @RequestParam String apellido,
             @RequestParam String mail,
@@ -45,8 +44,13 @@ public class UsuarioController {
         Usuario usuario = null;
         
         try {
-            usuario = usuarioServicio.buscarPorDni( dni );
-            usuarioServicio.modificar( dni, nombre, apellido, mail, password1, password2, direccion );
+            usuario = usuarioServicio.findByDni( dni );
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setEmail(mail);
+            usuario.setPass(password1);
+            usuario.setDomicilio(direccion);
+            usuarioServicio.crearUsuario( usuario );
         } catch( ErrorServicio ex ) {
             modelo.put( "error", ex.getMessage() );
             modelo.put( "usuario", usuario );

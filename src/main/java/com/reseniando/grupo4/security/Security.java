@@ -17,11 +17,11 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Autowired
     public UsuarioServicio usuarioServicio; //Lo necesito para buscar usuario por id o nombre o etc
 
-    // @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
         auth
-            .userDetailsService(usuarioServicio)
-            .passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(usuarioServicio)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
     
     

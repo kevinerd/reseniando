@@ -56,7 +56,7 @@ public class UsuarioServicio {
         return ur.findAll();
     }
     
-        public Usuario findByDni(String dni){
+        public Usuario encontrarPorDni(String dni){
         Usuario usuario= null;
         Optional<Usuario> op = ur.findById(dni);
         if(op.isPresent()){

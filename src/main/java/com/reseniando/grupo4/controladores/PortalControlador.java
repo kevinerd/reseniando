@@ -44,19 +44,19 @@ public class PortalControlador {
             @RequestParam String nombre,
             @RequestParam String apellido,
             @RequestParam String mail,
-            @RequestParam String password1,
-            @RequestParam String password2,
+            @RequestParam String pass1,
+            @RequestParam String pass2,
             @RequestParam String dni,
             @RequestParam String direccion
     ) {
         try {
-            usuarioServicio.crearUsuario( dni, nombre, apellido, direccion, mail, password1 );
+            usuarioServicio.crearUsuario( dni, nombre, apellido, direccion, mail, pass1 );
         } catch( ErrorServicio ex ) {
             modelo.put( "error", ex.getMessage() );
             modelo.put( "nombre", nombre );
             modelo.put( "apellido", apellido );
             modelo.put( "mail", mail );
-            modelo.put( "password1", password1 );
+            modelo.put( "password1", pass1 );
             modelo.put( "dni", dni );
             modelo.put( "direccion", direccion );
             

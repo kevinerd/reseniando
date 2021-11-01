@@ -44,9 +44,9 @@ public class ReseniaServicio {
         return rr.findAll();
     }
 
-    public List<Resenia> buscarReseniasPorNickname(String id) {
+    /*public List<Resenia> buscarReseniasPorNickname(String id) {
         return rr.buscarTodosPorIdPerfil(id);
-    }
+    }*/
 
     public Resenia encontrarPorId(String id) {
         Resenia resenia = null;

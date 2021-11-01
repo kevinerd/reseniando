@@ -21,15 +21,15 @@ public class Perfil {
     private Foto foto;
     @OneToMany
     private List<Resenia> resenias;
-    @OneToOne
-    private Favorito favoritos;
+    /*@OneToOne
+    private Favorito favoritos;*/
     @OneToOne
     private Leido leidos;
 
     public Perfil() {
     }
 
-    public Perfil(String nickname, String bio, Foto foto, List<Resenia> resenias, Favorito favoritos, Leido leidos) {
+    public Perfil(String nickname, String bio, Foto foto) {
         this.nickname = nickname;
         this.bio = bio;
         this.foto = foto;
@@ -75,13 +75,13 @@ public class Perfil {
         this.resenias = resenias;
     }
 
-    public Favorito getFavoritos() {
+    /*public Favorito getFavoritos() {
         return favoritos;
     }
 
     public void setFavoritos(Favorito favoritos) {
         this.favoritos = favoritos;
-    }
+    }*/
 
     public Leido getLeidos() {
         return leidos;

@@ -60,5 +60,5 @@ public class ReseniaServicio {
     @Transactional
     public void borrarResenia(Resenia resenia) {
         rr.delete(resenia);
-    }
+    }                                                          
 }

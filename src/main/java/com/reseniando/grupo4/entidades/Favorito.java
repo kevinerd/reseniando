@@ -1,4 +1,4 @@
-package com.reseniando.grupo4.entidades;
+/*package com.reseniando.grupo4.entidades;
 
 import java.util.List;
 import javax.persistence.Entity;
@@ -40,3 +40,4 @@ public class Favorito {
         this.libros = libros;
     }
 }
+*/

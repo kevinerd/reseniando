@@ -17,7 +17,7 @@ public class Usuario {
     private String pass;
     private String email;
     private Boolean alta;
-    @OneToOne
+    @OneToOne 
     private Perfil perfil;
 
     public Usuario() {

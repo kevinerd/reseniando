@@ -6,6 +6,7 @@ import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.PrestamoRepositorio;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PrestamoServicio {
     @Transactional
     public void agregarPrestamo(Date fechaPrestamo, Date fechaEstimativa, Date fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
 
-        validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
+//        validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
 
         Prestamo prestamo = new Prestamo();
         prestamo.setFechaPrestamo(fechaPrestamo);
@@ -32,6 +33,11 @@ public class PrestamoServicio {
 
         prestamorepositorio.save(prestamo);
 
+    }
+    
+    @Transactional
+    public void agregarPrestamo(Prestamo prestamo){
+        prestamorepositorio.save(prestamo);
     }
 
     @Transactional
@@ -88,5 +94,15 @@ public class PrestamoServicio {
             throw new ErrorServicio("El usuario alquilante no puede ser nulo (SERVICIO PRESTAMO - VALIDARv5).");
         }
 
+    }
+    
+    public Optional <Prestamo> buscarPorid(String id){
+       
+        
+        return  prestamorepositorio.findById(id);  
+    }
+    
+    public List<Prestamo> listarTodo (){
+        return prestamorepositorio.findAll();
     }
 }

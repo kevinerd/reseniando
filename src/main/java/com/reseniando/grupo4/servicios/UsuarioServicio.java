@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -26,30 +27,9 @@ public class UsuarioServicio implements UserDetailsService {
     private UsuarioRepositorio ur;
 
     @Transactional
-    public Usuario crearUsuario(Usuario usuario) throws ErrorServicio {
-        if (usuario.getDni() == null || usuario.getDni().isEmpty() || usuario.getDni().length() < 6) {
-            throw new ErrorServicio("El DNI ingresado no es posible o se encuentra vacio.");
-        }
-        if (usuario.getNombre() == null || usuario.getNombre().trim().isEmpty()) {
-            throw new ErrorServicio("El nombre no puede estar vacio.");
-        }
-        if (usuario.getApellido() == null || usuario.getApellido().trim().isEmpty()) {
-            throw new ErrorServicio("El apellido no puede estar vacio.");
-        }
-        if (usuario.getDomicilio() == null || usuario.getDomicilio().trim().isEmpty()) {
-            throw new ErrorServicio("El domicilio no puede estar vacio.");
-        }
-        if (usuario.getEmail() == null || usuario.getEmail().contains("@") == false) {
-            throw new ErrorServicio("El email ingresado no es correcto o se encuentra vacio.");
-        }
-        if (usuario.getPass() == null || usuario.getPass().length() < 4 || usuario.getPass().trim().isEmpty()) {
-            throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
-        }
-        return ur.save(usuario);
-    }
-
-    @Transactional
-    public Usuario crearUsuario(String dni, String nombre, String apellido, String domicilio, String email, String pass) throws ErrorServicio {
+    public Usuario crearUsuario(String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2) throws ErrorServicio {
+        validar(dni, nombre, apellido, domicilio, email, pass1, pass2);
+        
         Usuario usuario = new Usuario();
         usuario.setAlta(Boolean.TRUE);
         usuario.setDni(dni);
@@ -57,9 +37,31 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setApellido(apellido);
         usuario.setDomicilio(domicilio);
         usuario.setEmail(email);
-        usuario.setPass(pass);
+        String encriptada = new BCryptPasswordEncoder().encode(pass1);
+        usuario.setPass(encriptada);
 
         return ur.save(usuario);
+    }
+    
+    @Transactional
+    public void modificarUsuario( String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2 ) throws ErrorServicio {
+        validar(dni, nombre, apellido, domicilio, email, pass1, pass2);
+        
+        Usuario usuario = ur.findByDni( dni );
+        if( usuario != null ) {
+            usuario.setAlta(Boolean.TRUE);
+            usuario.setDni(dni);
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setDomicilio(domicilio);
+            usuario.setEmail(email);
+            String encriptada = new BCryptPasswordEncoder().encode(pass1);
+            usuario.setPass(encriptada);
+            
+            ur.save(usuario);
+        } else {
+            throw new ErrorServicio( "No se encontró el usuario solicitado." );
+        }
     }
 
     public List<Usuario> listarUsuarios() {
@@ -84,8 +86,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Override
-    public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
-        Usuario usuario = ur.findByDni(dni);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = ur.buscarPorMail(email);
         
         if( usuario != null ) {
             //Esto es lo que le da los permisos al usuario, a que modulos puede acceder
@@ -93,15 +95,6 @@ public class UsuarioServicio implements UserDetailsService {
             
             GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
             permisos.add(p1);
-            
-            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_FOTOS");
-            permisos.add(p2);
-            
-            GrantedAuthority p3 = new SimpleGrantedAuthority("MODULO_MASCOTAS");
-            permisos.add(p3);
-            
-            GrantedAuthority p4 = new SimpleGrantedAuthority("MODULO_VOTOS");
-            permisos.add(p4);
             
             //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -113,6 +106,30 @@ public class UsuarioServicio implements UserDetailsService {
             return user;
         } else {
             return null;
+        }
+    }
+    
+    private void validar(String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2) throws ErrorServicio {
+        if (dni == null || dni.isEmpty() || dni.length() < 6) {
+            throw new ErrorServicio("El DNI ingresado no es posible o se encuentra vacio.");
+        }
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new ErrorServicio("El nombre no puede estar vacio.");
+        }
+        if (apellido == null || apellido.trim().isEmpty()) {
+            throw new ErrorServicio("El apellido no puede estar vacio.");
+        }
+        if (domicilio == null || domicilio.trim().isEmpty()) {
+            throw new ErrorServicio("El domicilio no puede estar vacio.");
+        }
+        if (email == null || email.contains("@") == false) {
+            throw new ErrorServicio("El email ingresado no es correcto o se encuentra vacio.");
+        }
+        if (pass1 == null || pass1.length() < 4 || pass1.trim().isEmpty()) {
+            throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
+        }
+        if (pass2 == null || pass2.length() < 4 || pass2.trim().isEmpty()) {
+            throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
         }
     }
 

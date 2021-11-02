@@ -4,6 +4,7 @@ import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/usuario")
+@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 public class UsuarioController {
     
     @Autowired
@@ -50,7 +52,7 @@ public class UsuarioController {
             usuario.setEmail(mail);
             usuario.setPass(password1);
             usuario.setDomicilio(direccion);
-            usuarioServicio.crearUsuario( usuario );
+            usuarioServicio.modificarUsuario( dni, nombre, apellido, direccion, mail, password1, password2 );
         } catch( ErrorServicio ex ) {
             modelo.put( "error", ex.getMessage() );
             modelo.put( "usuario", usuario );

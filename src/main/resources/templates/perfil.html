@@ -6,20 +6,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Perfil Prueba - Registro</title>
+        <title>Perfil Prueba - Modificación</title>
     </head>
 
     <body>
-        <h2 class="display-4">Completa tu perfil.</h2>
-        <form action="/perfil/registrar" method="POST" enctype="multipart/form-data">
-            <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
+        <h2 class="display-4">Edita tu perfil.</h2>
+        <form action="/perfil/actualizar-perfil" method="POST" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" name="id" th:value="${session.usuariosession.perfil.id}"/>
             <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
             <label>Nickname</label>
-            <input type="text" class="form-control" name="nickname" th:value=${nickname} />
+            <input type="text" class="form-control" name="nickname" th:value=${perfil.nickname} />
             <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
 
             <label>Biografía</label>
-            <input type="text" class="form-control" name="bio" th:value=${bio} />
+            <input type="text" class="form-control" name="bio" th:value=${perfil.bio} />
 
             <label>Foto</label>
             <input type="file" class="form-control" name="archivo"/>

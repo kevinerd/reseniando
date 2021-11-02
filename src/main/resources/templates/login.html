@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Reseñando - Login</title>
+</head>
+<body>
+    <h2 class="display-4">Ingresá a Reseñando</h2>
+    <form action="/logincheck" method="POST">
+        <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+        <p th:if="${logout != null}" th:text="${logout}" style="color:green"></p>
+
+        <label>E-Mail</label>
+        <input type="email" class="form-control" name="username"/>
+        
+        <label>Clave</label>
+        <input type="password" class="form-control" name="password"/>
+        
+        <br/><button type="submit" class="btn btn-primary">Ingresar</button>
+    </form>
+</body>
+
+</html>

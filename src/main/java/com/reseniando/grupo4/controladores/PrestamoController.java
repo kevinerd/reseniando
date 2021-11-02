@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Date;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 @RequestMapping("/prestamos")
 public class PrestamoController {
@@ -31,7 +32,7 @@ public class PrestamoController {
         return "prestamos-lista";
     }
     
-    @GetMapping("/formulario-prestamo")
+    @GetMapping("/prestamoForm")
     public String formularioprestamo(Model model, @RequestParam(required = false) String id){
         
         if (id != null) {
@@ -47,7 +48,7 @@ public class PrestamoController {
             model.addAttribute("prestamoNuevo", new Prestamo());
         }
         
-        return "prestamo-formulario";
+        return "prestamoForm";
         
     }
     

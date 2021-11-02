@@ -2,6 +2,7 @@ package com.reseniando.grupo4.servicios;
 
 import com.reseniando.grupo4.entidades.Foto;
 import com.reseniando.grupo4.entidades.Libro;
+import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class LibroServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis) throws ErrorServicio {
+    public void agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis, Generos genero) throws ErrorServicio {
         //Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
 
         validar(titulo, autor, editorial, ejemplares);
@@ -35,6 +36,7 @@ public class LibroServicio {
         libro.setAutor(autor);
         libro.setEditorial(editorial);
         libro.setSinopsis(sinopsis);
+        libro.setGenero(genero);
 
         Foto foto = fotoServicio.guardar(archivo);
         libro.setPortada(foto);

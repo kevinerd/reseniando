@@ -33,10 +33,10 @@
                             <br>
                             <input type="text" class="form-control" name="sinopsis" th:value="${sinopsis}" placeholder="Ingrese la sinopsis del libro">
                             <br>
-                            <!--<label for="genero" class="form-label"><h5>Género</h5></label>
+                            <label for="genero" class="form-label"><h5>Género</h5></label>
                              <select class="form-select" name="genero">
-                                <option th:each="c:${genero}" th:text="${c.nombre}" th:value="${c.id}"></option>
-                            </select>-->
+                                <option th:each="genero:${genero}" th:text="${genero}" th:value="${genero}"></option>
+                            </select>
                             <label for="anio" class="form-label"><h5>Año de publicación</h5></label>
                             <br>
                             <input type="number" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro">

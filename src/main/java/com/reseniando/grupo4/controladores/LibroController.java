@@ -1,13 +1,12 @@
 package com.reseniando.grupo4.controladores;
 
+import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.servicios.LibroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +20,9 @@ public class LibroController {
     private LibroServicio ls;
 
     @GetMapping("/form")
-    public String form() {
+    public String form(ModelMap model) {
+        model.put("genero", Generos.values());
+        
         return "crearLibro";
     }
 
@@ -34,12 +35,13 @@ public class LibroController {
             @RequestParam String autor,
             @RequestParam String editorial,
             @RequestParam Integer anio,
+            @RequestParam Generos genero,
             @RequestParam String sinopsis,
             @RequestParam Integer ejemplares,
             @RequestParam Integer ejemplaresPrestados
     ) {
         try {
-            ls.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis);
+            ls.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis, genero);
         } catch (ErrorServicio ex) {
             System.out.println("Hola, se cagó algo.");
             return "registro";

@@ -7,8 +7,10 @@ import com.reseniando.grupo4.errores.ErrorServicio;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class LibroServicio {
 
     @Autowired
@@ -18,7 +20,7 @@ public class LibroServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial) throws ErrorServicio {
+    public void agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis) throws ErrorServicio {
         //Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
 
         validar(titulo, autor, editorial, ejemplares);
@@ -32,6 +34,7 @@ public class LibroServicio {
         libro.setAlta(true);
         libro.setAutor(autor);
         libro.setEditorial(editorial);
+        libro.setSinopsis(sinopsis);
 
         Foto foto = fotoServicio.guardar(archivo);
         libro.setPortada(foto);

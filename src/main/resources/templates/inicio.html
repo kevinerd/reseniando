@@ -12,7 +12,7 @@
     <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
     <a th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
 
-    <a th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
+   <!-- <a th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>-->
 </body>
 
 </html>

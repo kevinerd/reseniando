@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Libro Prueba - Creación</title>
+    </head>
+
+    <body>  
+
+        <div class="container">
+            <div class="card mt-5">
+                <div class="card-header d-flex">
+                    <h1>Registrar Libro</h1>
+                </div>
+                <div>
+                    <form th:action="@{/libro/save}" method="POST" th:object="${libro}" class="col-6 mx-auto">
+                        <input hidden name="*{id}">
+                        <br>
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label"><h5>Título</h5></label>
+                            <br>
+                            <input type="text" class="form-control" name="titulo" th:value="${titulo}" placeholder="Ingrese el título del libro">
+                            <br>
+                            <label for="isbn" class="form-label"><h5>ISBN</h5></label>
+                            <br>
+                            <input type="number" class="form-control" name="isbn" th:value="${isbn}" placeholder="Ingrese el ISBN del libro">
+                            <br>
+                            <label for="sinopsis" class="form-label"><h5>Sinopsis</h5></label>
+                            <br>
+                            <input type="text" class="form-control" name="sinopsis" th:value="${sinopsis}" placeholder="Ingrese la sinopsis del libro">
+                            <br>
+                            <!--<label for="genero" class="form-label"><h5>Género</h5></label>
+                             <select class="form-select" name="genero">
+                                <option th:each="c:${genero}" th:text="${c.nombre}" th:value="${c.id}"></option>
+                            </select>-->
+                            <label for="anio" class="form-label"><h5>Año de publicación</h5></label>
+                            <br>
+                            <input type="number" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro">
+                            <br>
+                            <label for="autor" class="form-label"><h5>Autor</h5></label>
+                            <br>
+                            <input type="text" class="form-control" name="autor" th:value="${autor}" placeholder="Ingrese el autor del libro">
+                            <br>
+                            <label for="editorial" class="form-label"><h5>Editorial</h5></label>
+                            <br>
+                            <input type="text" class="form-control" name="editorial" th:value="${editorial}" placeholder="Ingrese el autor del libro">
+                            <br>
+                            <label for="ejemplares" class="form-label"><h5>Ejemplares totales</h5></label>
+                            <br>
+                            <input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}" placeholder="Ingrese la cantidad de ejemplares que posee la librería">
+                            <br>
+                            <label for="ejemplaresPrestados" class="form-label"><h5>Ejemplares prestados</h5></label>
+                            <br>
+                            <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${ejemplaresPrestados}" placeholder="Ingrese la cantidad de ejemplares que han sido prestados">
+                            <br>
+                        </div>
+                        <button type="submit" class="btn-dark px-5 py-2 ms-auto">Guardar</button>
+                        <button type="reset" class="btn-dark px-5 py-2 ms-auto">Limpiar</button>
+                        <button class="btn-dark px-5 py-2 ms-auto"><a th:href="@{/}">Volver</a></button>
+                    </form>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

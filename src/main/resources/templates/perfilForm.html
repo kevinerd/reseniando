@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Perfil Prueba - Registro</title>
+    </head>
+
+    <body>
+        <h2 class="display-4">Registrate</h2>
+        <form action="/perfil/registrar" method="POST" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" name="dni" />
+            <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <label>Nickname</label>
+            <input type="text" class="form-control" name="nickname" />
+
+            <label>Biografía</label>
+            <input type="text" class="form-control" name="bio" />
+
+            <label>Foto</label>
+            <input type="file" class="form-control" name="archivo"/>
+
+            <br/><button type="submit" class="btn btn-primary">Registrarme</button>
+        </form>
+    </body>
+
+</html>

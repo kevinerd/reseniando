@@ -19,7 +19,7 @@ public class PerfilServicio {
     private FotoServicio fotoServicio;
     
     @Transactional
-    public void registrar( MultipartFile archivo, String nickname, String bio ) throws ErrorServicio {
+    public Perfil registrar( MultipartFile archivo, String nickname, String bio ) throws ErrorServicio {
         validar( nickname, bio );
         
         Perfil perfil = new Perfil();
@@ -30,6 +30,8 @@ public class PerfilServicio {
         perfil.setFoto(foto);
         
         perfilRepositorio.save(perfil);
+        
+        return perfil;
     }
     
     @Transactional

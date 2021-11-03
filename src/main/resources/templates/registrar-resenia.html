@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="/resenias/registrar-resenia" method="POST">
+
+            <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <label>TITULO RESENIA</label>
+            <input type="text" class="form-control" name="tituloResenia" />
+
+            <br>
+
+            <label>COMENTARIO</label>
+            <input type="text" class="form-control" name="comentarioResenia" />
+
+            <!---<label>Foto</label>
+            <input type="file" class="form-control" name="archivo"/>--->
+
+            
+
+            <br/><button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </body>
+</html>

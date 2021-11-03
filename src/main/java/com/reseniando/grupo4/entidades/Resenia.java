@@ -1,6 +1,6 @@
 package com.reseniando.grupo4.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,18 +18,20 @@ public class Resenia {
     private String id;
     private String titulo;
     private String comentario;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fecha;
 
     public Resenia() {
-        this.fecha = new Date();
+    }
+    
+    public Resenia(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
-    public Resenia(String titulo, String comentario, Date fecha) {
+    public Resenia(String id, String titulo, String comentario) {
+        this.id = id;
         this.titulo = titulo;
         this.comentario = comentario;
-        this.fecha = new Date();
     }
 
     public String getId() {
@@ -56,11 +58,13 @@ public class Resenia {
         this.comentario = comentario;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+
+    
 }

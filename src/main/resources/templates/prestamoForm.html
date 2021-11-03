@@ -14,24 +14,20 @@
         <h5>Alquila!</h5>
 
         <form action="/prestamos/guardar-prestamo" method="POST" >
-
-
-            <label for="start">Start date:</label>
-
-            <input type="date" id="start" name="fechaPrestamo"
-                   value="2018-07-22"
-                   min="2018-01-01" max="2022-12-31">
             
-            <input type="date" id="start" name="fechaEstimativa"
-                   value="2018-07-22"
-                   min="2018-01-01" max="2022-12-31">
-            
-            <input type="date" id="start" name="fechaDevolucion"
-                   value="2018-07-22"
-                   min="2018-01-01" max="2022-12-31">
-
+            <label for="fechaPrestamo" class="form-label"><h5>Fecha de prestamo</h5></label>
+            <br>
+                <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}">
+            <br>  
+             <label for="fechaEstimativa" class="form-label"><h5>Fecha de devolución</h5></label>
+            <br>
+                <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}">
+            <br>      
+            <label for="libro" class="form-label"><h5>Libro</h5></label>
+                <select class="form-select" name="libro">
+                    <option th:each="libro:${libro}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
+                </select>
             <button type="submit">Guardar</button>
-            
         </form>
 
 

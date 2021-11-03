@@ -5,6 +5,7 @@ import com.reseniando.grupo4.entidades.Prestamo;
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.PrestamoRepositorio;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,17 +20,17 @@ public class PrestamoServicio {
     private PrestamoRepositorio prestamorepositorio;
 
     @Transactional
-    public void agregarPrestamo(Date fechaPrestamo, Date fechaEstimativa, Date fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
+    public void agregarPrestamo(LocalDate fechaPrestamo, LocalDate fechaEstimativa, LocalDate fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
 
 //        validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
 
         Prestamo prestamo = new Prestamo();
         prestamo.setFechaPrestamo(fechaPrestamo);
         prestamo.setFechaEstimativa(fechaEstimativa);
-        prestamo.setFechaDevolucion(fechaDevolucion);
-        prestamo.setDevuelto(devuelto);
+        //prestamo.setFechaDevolucion(fechaDevolucion);
+        //prestamo.setDevuelto(devuelto);
         prestamo.setLibro(libro);
-        prestamo.setUsuario(usuario);
+        //prestamo.setUsuario(usuario);
 
         prestamorepositorio.save(prestamo);
 
@@ -56,9 +57,9 @@ public class PrestamoServicio {
     }
 
     @Transactional
-    public void modificarPrestamo(String id, Date fechaPrestamo, Date fechaEstimativa, Date fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
+    public void modificarPrestamo(String id, LocalDate fechaPrestamo, LocalDate fechaEstimativa, LocalDate fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
 
-        validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
+       // validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
 
         Optional<Prestamo> respuesta = prestamorepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -79,22 +80,22 @@ public class PrestamoServicio {
         }
     }
 
-    public void validar(Date fechaPrestamo, Date fechaEstimativa, Date fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
-
-        if (fechaPrestamo == null || fechaEstimativa == null || fechaDevolucion == null || fechaPrestamo.after(fechaEstimativa) || fechaPrestamo.after(fechaDevolucion)) {
-            throw new ErrorServicio("La fecha del prestamo/estimativa/devolucion no puede ser nula o ser posterior a la fecha estimativa de entrega (SERVICIO PRESTAMO VALIDARv2).");
-        }
-        if (devuelto == null) {
-            throw new ErrorServicio("El estado de devolucion no puede ser nulo (SERVICIO PRESTAMO - VALIDARv3) .");
-        }
-        if (libro == null) {
-            throw new ErrorServicio("El libro prestado no puede ser nulo (SERVICIO PRESTAMO - VALIDARv4).");
-        }
-        if (usuario == null) {
-            throw new ErrorServicio("El usuario alquilante no puede ser nulo (SERVICIO PRESTAMO - VALIDARv5).");
-        }
-
-    }
+//    public void validar(LocalDate fechaPrestamo, LocalDate fechaEstimativa, LocalDate fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
+//
+//        if (fechaPrestamo == null || fechaEstimativa == null || fechaDevolucion == null || fechaPrestamo.after(fechaEstimativa) || fechaPrestamo.after(fechaDevolucion)) {
+//            throw new ErrorServicio("La fecha del prestamo/estimativa/devolucion no puede ser nula o ser posterior a la fecha estimativa de entrega (SERVICIO PRESTAMO VALIDARv2).");
+//        }
+//        if (devuelto == null) {
+//            throw new ErrorServicio("El estado de devolucion no puede ser nulo (SERVICIO PRESTAMO - VALIDARv3) .");
+//        }
+//        if (libro == null) {
+//            throw new ErrorServicio("El libro prestado no puede ser nulo (SERVICIO PRESTAMO - VALIDARv4).");
+//        }
+//        if (usuario == null) {
+//            throw new ErrorServicio("El usuario alquilante no puede ser nulo (SERVICIO PRESTAMO - VALIDARv5).");
+//        }
+//
+//    }
     
     public Optional <Prestamo> buscarPorid(String id){
        

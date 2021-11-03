@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Reseñando - Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <a th:if="${session.usuariosession.perfil.id == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
+        <br>
+        <a th:if="${session.usuariosession.perfil.id != null}" th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
+        <br>
+        <a th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary btn-xl rounded-pill mt-5">Prestamo Nuevo</a>
+        <br>
+        <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="'Prestamos de ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
+        <br>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Libro</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha devolución</th>
+                    <th scope="col">Devuelto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prestamo:${prestamosUsuario}">
+                    <th scope="row">1</th>
+                    <td th:text="${prestamo.libro.titulo}" th:value="${prestamo.libro.isbn}"></td>
+                    <td th:text="${prestamo.fechaPrestamo}" th:value="${prestamo.fechaPrestamo}"></td>
+                    <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaPrestamo}"></td>
+                    <td th:if="${prestamo.devuelto != false}">Si</td>
+                    <td th:if="${prestamo.devuelto == false}">No</td>
+                </tr>
+            </thead>
+        </table>
+
+        <h2 class="masthead-subheading mb-0">Todos los préstamos</h2>
+        <br>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Libro</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha devolución</th>
+                    <th scope="col">Devuelto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prestamo:${prestamos}">
+                    <th scope="row">1</th>
+                    <td th:text="${prestamo.libro.titulo}" th:value="${prestamo.libro.isbn}"></td>
+                    <td th:text="${prestamo.fechaPrestamo}" th:value="${prestamo.fechaPrestamo}"></td>
+                    <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaPrestamo}"></td>
+                    <td th:if="${prestamo.devuelto != false}">Si</td>
+                    <td th:if="${prestamo.devuelto == false}">No</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

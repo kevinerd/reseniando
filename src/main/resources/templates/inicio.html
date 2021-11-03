@@ -10,9 +10,9 @@
 </head>
 <body>
     <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
-    <a th:if="${session.usuariosession.perfil.id == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
+    <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
     <br>
-    <a th:if="${session.usuariosession.perfil.id != null}" th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
+    <a th:if="${session.usuariosession.perfil != null}" th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
     <br>
     <a th:href="@{/prestamos/lista}" class="btn btn-primary btn-xl rounded-pill mt-5">Ver Prestamos</a>
 </body>

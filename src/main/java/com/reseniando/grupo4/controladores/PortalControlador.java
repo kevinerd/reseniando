@@ -25,8 +25,12 @@ public class PortalControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/inicio")
-    public String inicio() {
-        return "inicio.html";
+    public String inicio(@RequestParam(required = false) String dni) {
+        if (dni != null) {
+            return "inicio";
+        } else {
+            return "redirect:/"; //Para Borrar
+        }
     }
     
     @GetMapping("/login")

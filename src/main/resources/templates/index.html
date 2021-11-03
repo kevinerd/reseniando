@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Página Principal</a>
+    </div>
     <title>Reseñando - Inicio</title>
 </head>
 
 <body>
     <h1>Reseñando - Inicio</h1>
+
+    <main class="container">
+        <div class="row m-5">
+            <div class="col">
+                <div class="display-1 text-center m-5">Proyecto Librería</div>
+            </div>
+        </div>
+        <h3>Cuestiones de Usuario</h3>
+        <div class="row m-5">
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/registro}">Registrar Usuario</a></button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/login}" >Login</a></button>
+            </div>
+             <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/inicio}">Inicio</a></button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/perfil/crear-perfil}" >Crear perfil</a></button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/perfil/editar-perfil}" >Editar perfil (no hace nada sin previo Login)</a></button>
+            </div>
+        </div>
+        <h3>Cuestiones de Libros/Alquileres</h3>
+        <div class="row m-5">
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/libro/form}">Crear Libro</a></button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn-dark px-5 py-2"><a th:href="@{/prestamos/crear-prestamo}" >Alquilar (no hace nada sin previo Login)</a></button>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

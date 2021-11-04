@@ -1,13 +1,12 @@
 package com.reseniando.grupo4.entidades;
 
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Resenia {
@@ -17,6 +16,8 @@ public class Resenia {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String titulo;
+    @Lob
+    @Column(columnDefinition = "mediumtext")
     private String comentario;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate  fecha;

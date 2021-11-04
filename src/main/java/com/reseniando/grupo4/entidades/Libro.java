@@ -1,11 +1,12 @@
 package com.reseniando.grupo4.entidades;
 
 import com.reseniando.grupo4.enumeraciones.Generos;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,6 +18,8 @@ public class Libro {
     private String editorial;
     private String titulo;
     private Integer anio;
+    @Lob
+    @Column(columnDefinition = "mediumtext")
     private String sinopsis;
     @Enumerated(EnumType.STRING)
     private Generos genero;

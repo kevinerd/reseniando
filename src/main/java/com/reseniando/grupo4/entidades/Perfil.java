@@ -1,9 +1,11 @@
 package com.reseniando.grupo4.entidades;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,6 +18,8 @@ public class Perfil {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nickname;
+    @Lob
+    @Column(columnDefinition = "mediumtext")
     private String bio;
     @OneToOne
     private Foto foto;

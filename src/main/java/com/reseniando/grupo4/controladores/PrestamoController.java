@@ -36,6 +36,9 @@ public class PrestamoController {
     @GetMapping("/lista")
     public String listarPrestamos( Model model, HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
         model.addAttribute("prestamos", prestamoServicio.listarTodo());
         model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
 
@@ -43,8 +46,11 @@ public class PrestamoController {
     }
 
     @GetMapping("/crear-prestamo")
-    public String crearPrestamo( ModelMap model ) {
-
+    public String crearPrestamo( ModelMap model, HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
         LocalDate fechaPrestamo = LocalDate.now();
         LocalDate fechaEstimativa = fechaPrestamo.plusDays(7);
 
@@ -79,7 +85,11 @@ public class PrestamoController {
     }
     
     @GetMapping("/editar-prestamo")
-    public String editarPrestamo(@RequestParam String id, ModelMap model) {
+    public String editarPrestamo( @RequestParam String id, ModelMap model, HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
         try {
             Prestamo prestamo = prestamoServicio.findById(id);
             model.addAttribute("prestamo", prestamo);

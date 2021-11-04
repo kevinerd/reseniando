@@ -3,7 +3,7 @@ package com.reseniando.grupo4.servicios;
 import com.reseniando.grupo4.entidades.Resenia;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.ReseniaRepositorio;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -31,7 +31,7 @@ public class ReseniaServicio {
     }
 
     @Transactional
-    public Resenia crearResenia(String titulo, String comentario, Date fecha) {
+    public Resenia crearResenia(String titulo, String comentario, LocalDate fecha) {
         Resenia resenia = new Resenia();
         resenia.setTitulo(titulo);
         resenia.setComentario(comentario);

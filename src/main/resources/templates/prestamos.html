@@ -12,9 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <a th:if="${session.usuariosession.perfil.id == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
-        <br>
-        <a th:if="${session.usuariosession.perfil.id != null}" th:href="@{/perfil/editar-perfil(id=__${session.usuariosession.perfil.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
+        <a href="/inicio" class="btn btn-primary mt-5">Inicio</a>
         <br>
         <a th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary btn-xl rounded-pill mt-5">Prestamo Nuevo</a>
         <br>

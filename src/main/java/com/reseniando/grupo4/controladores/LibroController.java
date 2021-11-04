@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/libro")
+@RequestMapping("/libros")
 public class LibroController {
 
     @Autowired
-    private LibroServicio ls;
+    private LibroServicio libroServicio;
 
-    @GetMapping("/form")
+    @GetMapping("/crear-libro")
     public String form(ModelMap model) {
         model.put("genero", Generos.values());
         
         return "crearLibro";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/registrar-libro")
     public String registrarLibro(
             ModelMap modelo,
             MultipartFile archivo,
@@ -41,7 +41,7 @@ public class LibroController {
             @RequestParam Integer ejemplaresPrestados
     ) {
         try {
-            ls.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis, genero);
+            libroServicio.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis, genero);
         } catch (ErrorServicio ex) {
             System.out.println("Hola, se cagó algo.");
             return "registro";

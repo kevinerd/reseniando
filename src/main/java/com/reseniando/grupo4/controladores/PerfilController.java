@@ -28,8 +28,12 @@ public class PerfilController {
     private UsuarioRepositorio ur;
 
     @GetMapping("/crear-perfil")
-    public String crearPerfil() {
-        return "perfilForm";
+    public String crearPerfil( HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
+        return "crearPerfil";
     }
 
     @PostMapping("/registrar")
@@ -52,7 +56,7 @@ public class PerfilController {
             model.put("nickname", nickname);
             model.put("bio", bio);
 
-            return "perfilForm";
+            return "crearPerfil";
         }
         model.put("titulo", "¡Bienvenido a Reseñando!");
         model.put("descripcion", "Ya puedes disfrutar de toda la plataforma.");
@@ -61,7 +65,10 @@ public class PerfilController {
     }
 
     @GetMapping("/editar-perfil")
-    public String editarPerfil(@RequestParam String id, ModelMap model) {
+    public String editarPerfil(@RequestParam( required = false ) String id, ModelMap model) {
+        if( id == null ) {
+            return "redirect:/inicio";
+        }
         try {
             Perfil perfil = perfilServicio.findById(id);
             model.addAttribute("perfil", perfil);

@@ -25,7 +25,6 @@ public class Libro {
     private Integer ejemplares;
     private Integer ejemplaresPrestados;
     private Boolean alta;
-    private Boolean favorito;
 
     public Libro() {
     }
@@ -42,7 +41,6 @@ public class Libro {
         this.ejemplares = ejemplares;
         this.ejemplaresPrestados = ejemplaresPrestados;
         this.alta = alta;
-        this.favorito = Boolean.FALSE;
     }
 
     public Long getIsbn() {
@@ -131,13 +129,5 @@ public class Libro {
 
     public void setAlta(Boolean alta) {
         this.alta = alta;
-    }
-
-    public Boolean getFavorito() {
-        return favorito;
-    }
-
-    public void setFavorito(Boolean favorito) {
-        this.favorito = favorito;
     }
 }

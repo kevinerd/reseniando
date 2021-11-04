@@ -7,32 +7,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>Prestamo Prueba - Creación</title>
     </head>
     
     <body>
-        <h5>Alquila!</h5>
-
-        <form action="/prestamos/registrar-prestamo" method="POST" >
-            <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
-
-            <label for="fechaPrestamo" class="form-label"><h5>Fecha de prestamo</h5></label>
+        <div class="container">
+            <h1>Alquila!</h1>
             <br>
-            <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}" disabled>
-            <br>  
-             <label for="fechaEstimativa" class="form-label"><h5>Fecha de devolución</h5></label>
-            <br>
-                <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}" disabled>
-            <br>      
-            <label for="isbn" class="form-label"><h5>Libro</h5></label>
-                <select class="form-select" name="isbn">
-                    <option value="DEFAULT" selected>-- Elige un libro --</option>
-                    <option th:each="libro:${libros}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
-                </select>
-            <button type="submit">Registrar</button>
-        </form>
+            <form action="/prestamos/registrar-prestamo" method="POST" >
+                <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
 
-
-
+                <label for="fechaPrestamo" class="form-label"><h5>Fecha de prestamo</h5></label>
+                <br>
+                <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}" disabled>
+                <br>  
+                <label for="fechaEstimativa" class="form-label"><h5>Fecha de devolución</h5></label>
+                <br>
+                    <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}" disabled>
+                <br>      
+                <label for="isbn" class="form-label"><h5>Libro</h5></label>
+                    <select class="form-select" name="isbn">
+                        <option value="DEFAULT" selected>-- Elige un libro --</option>
+                        <option th:each="libro:${libros}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
+                    </select>
+                <button type="submit" class="btn btn-primary m-5">Registrar</button>
+            </form>
+        </div>
     </body>
 </html>

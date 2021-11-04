@@ -1,7 +1,9 @@
 package com.reseniando.grupo4.controladores;
 
+import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,11 @@ public class PortalControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/inicio")
-    public String inicio() {
+    public String inicio( HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
         return "inicio.html";
     }
     

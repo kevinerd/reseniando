@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Perfil Prueba - Modificación</title>
-    </head>
+<head th:replace="/fragments/head :: head"></head>
 
-    <body>
+<body>
+    <div class="container">
         <h2 class="display-4">Edita tu perfil.</h2>
         <form action="/perfil/actualizar-perfil" method="POST" enctype="multipart/form-data">
-            <input type="hidden" class="form-control" name="id" th:value="${session.usuariosession.perfil.id}"/>
             <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <input type="hidden" name="id" th:value=${perfil.id}>
+            
             <label>Nickname</label>
             <input type="text" class="form-control" name="nickname" th:value=${perfil.nickname} />
             <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
@@ -24,8 +20,9 @@
             <label>Foto</label>
             <input type="file" class="form-control" name="archivo"/>
 
-            <br/><button type="submit" class="btn btn-primary">Registrarme</button>
+            <br/><button type="submit" class="btn btn-success">Modificar</button>
         </form>
-    </body>
+    </div>
+</body>
 
 </html>

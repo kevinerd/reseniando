@@ -25,7 +25,7 @@ public class PerfilController {
     private PerfilServicio perfilServicio;
 
     @Autowired
-    private UsuarioRepositorio ur;
+    private UsuarioRepositorio usuarioRepositorio;
 
     @GetMapping("/crear-perfil")
     public String crearPerfil( HttpSession session ) {
@@ -39,18 +39,20 @@ public class PerfilController {
     @PostMapping("/registrar")
     public String registrar(
             ModelMap model,
+            HttpSession session,
             MultipartFile archivo,
             @RequestParam String nickname,
-            @RequestParam String bio,
-            @RequestParam String dni
+            @RequestParam String bio
     ) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        if( usuario == null ) {
+            return "redirect:/logout";
+        }
+        
         try {
-            if (dni != null) {
-                Usuario usuario = ur.findByDni(dni);
-                Perfil perfil = perfilServicio.registrar(archivo, nickname, bio);
-                usuario.setPerfil(perfil);
-                ur.save(usuario);
-            }
+            Perfil perfil = perfilServicio.registrar(archivo, nickname, bio);
+            usuario.setPerfil(perfil);
+            usuarioRepositorio.save(usuario);
         } catch (ErrorServicio e) {
             model.put("error", e.getMessage());
             model.put("nickname", nickname);
@@ -60,23 +62,24 @@ public class PerfilController {
         }
         model.put("titulo", "¡Bienvenido a Reseñando!");
         model.put("descripcion", "Ya puedes disfrutar de toda la plataforma.");
-
+        session.setAttribute("usuariosession", usuario);
         return "exito";
     }
 
     @GetMapping("/editar-perfil")
-    public String editarPerfil(@RequestParam( required = false ) String id, ModelMap model) {
-        if( id == null ) {
-            return "redirect:/inicio";
+    public String editarPerfil( HttpSession session, ModelMap model) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
         }
         try {
-            Perfil perfil = perfilServicio.findById(id);
+            Perfil perfil = perfilServicio.findById( login.getPerfil().getId() );
             model.addAttribute("perfil", perfil);
         } catch (ErrorServicio e) {
             model.addAttribute("error", e.getMessage());
         }
 
-        return "perfil";
+        return "modificarPerfil";
     }
 
     @PostMapping("/actualizar-perfil")
@@ -98,7 +101,7 @@ public class PerfilController {
             modelo.put("error", ex.getMessage());
             modelo.put("perfil", perfil);
 
-            return "perfil";
+            return "modificarPerfil";
         }
     }
 }

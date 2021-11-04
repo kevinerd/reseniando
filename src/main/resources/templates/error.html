@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Reseñando - ERROR</title>
-</head>
+<head th:replace="/fragments/head :: head"></head>
 <body>
     <h1 class="masthead-heading mb-0" th:text="${codigo}" ></h1>
         <h2 class="masthead-subheading mb-0" th:text="${mensaje == null ? 'Intenta nuevamente.' : mensaje}" ></h2>
-        <a href="/" class="btn btn-primary btn-xl rounded-pill mt-5">Inicio</a>
+        <a href="/inicio" class="btn btn-primary btn-xl rounded-pill mt-5">Inicio</a>
 </body>
 
 </html>

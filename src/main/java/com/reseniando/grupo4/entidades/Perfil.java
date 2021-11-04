@@ -23,12 +23,8 @@ public class Perfil {
     private List<Resenia> resenias;
     /*@OneToOne
     private Favorito favoritos;*/
-    /*@OneToOne
-    private Leido leidos;*/
-    @OneToMany
-    private List<Libro> leidos;
-    @OneToMany
-    private List<Libro> favoritos;
+    @OneToOne
+    private Leido leidos;
 
     public Perfil() {
     }
@@ -87,27 +83,11 @@ public class Perfil {
         this.favoritos = favoritos;
     }*/
 
-    /*public Leido getLeidos() {
+    public Leido getLeidos() {
         return leidos;
     }
 
     public void setLeidos(Leido leidos) {
         this.leidos = leidos;
-    }*/
-
-    public List<Libro> getLeidos() {
-        return leidos;
-    }
-
-    public void setLeidos(List<Libro> leidos) {
-        this.leidos = leidos;
-    }
-
-    public List<Libro> getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(List<Libro> favoritos) {
-        this.favoritos = favoritos;
     }
 }

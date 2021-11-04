@@ -61,17 +61,15 @@ public class PerfilController {
     }
 
     @GetMapping("/editar-perfil")
-    public String editarPerfil(@RequestParam(required = false) String id, ModelMap model) {
-        if (id != null) {
-            try {
-                Perfil perfil = perfilServicio.findById(id);
-                model.addAttribute("perfil", perfil);
-            } catch (ErrorServicio e) {
-                model.addAttribute("error", e.getMessage());
-            }
-            return "perfil";
-        }else
-            return "redirect:/"; //Para borrar
+    public String editarPerfil(@RequestParam String id, ModelMap model) {
+        try {
+            Perfil perfil = perfilServicio.findById(id);
+            model.addAttribute("perfil", perfil);
+        } catch (ErrorServicio e) {
+            model.addAttribute("error", e.getMessage());
+        }
+
+        return "perfil";
     }
 
     @PostMapping("/actualizar-perfil")

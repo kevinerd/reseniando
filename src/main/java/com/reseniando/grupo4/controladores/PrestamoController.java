@@ -29,12 +29,12 @@ public class PrestamoController {
 
     @Autowired
     private LibroRepositorio libroRepositorio;
-
+    
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
     @GetMapping("/lista")
-    public String listarPrestamos(Model model, HttpSession session) {
+    public String listarPrestamos( Model model, HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
         model.addAttribute("prestamos", prestamoServicio.listarTodo());
         model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
@@ -43,21 +43,18 @@ public class PrestamoController {
     }
 
     @GetMapping("/crear-prestamo")
-    public String crearPrestamo(ModelMap model, @RequestParam(required = false) String dni) {
-        if (dni != null) {
-            LocalDate fechaPrestamo = LocalDate.now();
-            LocalDate fechaEstimativa = fechaPrestamo.plusDays(7);
+    public String crearPrestamo( ModelMap model ) {
 
-            model.addAttribute("fechaPrestamo", fechaPrestamo);
-            model.addAttribute("fechaEstimativa", fechaEstimativa);
-            model.addAttribute("libros", libroRepositorio.findAll());
+        LocalDate fechaPrestamo = LocalDate.now();
+        LocalDate fechaEstimativa = fechaPrestamo.plusDays(7);
 
-            return "crearPrestamo";
-        }else{
-            return "redirect:/"; //Para borrar
-        }
+        model.addAttribute("fechaPrestamo", fechaPrestamo);
+        model.addAttribute("fechaEstimativa", fechaEstimativa);
+        model.addAttribute("libros", libroRepositorio.findAll());
+        
+        return "crearPrestamo";
     }
-
+    
     @PostMapping("/registrar-prestamo")
     public String registrarPrestamo(
             ModelMap model,
@@ -80,7 +77,7 @@ public class PrestamoController {
 
         return "exito";
     }
-
+    
     @GetMapping("/editar-prestamo")
     public String editarPrestamo(@RequestParam String id, ModelMap model) {
         try {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+    <body>
+        <nav th:replace="/fragments/nav :: nav"></nav>
+        <div class="container">
+            <div class="card mt-5">
+                <div class="card-header d-flex">
+                    <h1>Modificar Libro</h1>
+                </div>
+                <div>
+                    <form th:action="@{/libros/actualizar-libro}" method="POST" class="col-6 mx-auto" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label"><h5>Título</h5></label>
+                            <input type="text" class="form-control" name="titulo" th:value="${libro.titulo}" placeholder="Ingrese el título del libro">
+                            <br>
+                            
+                            <label for="isbn" class="form-label"><h5>ISBN</h5></label>
+                            <input type="number" class="form-control" name="isbn" th:value="${libro.isbn}" placeholder="Ingrese el ISBN del libro">
+                            <br>
+                            
+                            <label for="sinopsis" class="form-label"><h5>Sinopsis</h5></label>
+                            <input type="text" class="form-control" name="sinopsis" th:value="${libro.sinopsis}" placeholder="Ingrese la sinopsis del libro">
+                            <br>
+
+                            <label for="genero" class="form-label"><h5>Género</h5></label>
+                            <select class="form-select" name="genero">
+                                <option th:each="genero:${genero}" th:text="${genero}" th:value="${genero}"></option>
+                            </select>
+                            <br>
+
+                            <label for="anio" class="form-label"><h5>Año de publicación</h5></label>
+                            <input type="number" class="form-control" name="anio" th:value="${libro.anio}" placeholder="Ingrese el año de publicación del libro">
+                            <br>
+                            
+                            <label for="autor" class="form-label"><h5>Autor</h5></label>
+                            <input type="text" class="form-control" name="autor" th:value="${libro.autor}" placeholder="Ingrese el autor del libro">
+                            <br>
+
+                            <label for="editorial" class="form-label"><h5>Editorial</h5></label>
+                            <input type="text" class="form-control" name="editorial" th:value="${libro.editorial}" placeholder="Ingrese el autor del libro">
+                            <br>
+
+                            <label for="ejemplares" class="form-label"><h5>Ejemplares totales</h5></label>
+                            <input type="number" class="form-control" name="ejemplares" th:value="${libro.ejemplares}" placeholder="Ingrese la cantidad de ejemplares que posee la librería">
+                            <br>
+
+                            <label for="ejemplaresPrestados" class="form-label"><h5>Ejemplares prestados</h5></label>
+                            <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${libro.ejemplaresPrestados}" placeholder="Ingrese la cantidad de ejemplares que han sido prestados">
+                            <br>
+                            <label for="disponibilidad" class="form-label"><h5>Disponible</h5></label>
+                            <br>
+                            <div class="form-check form-check-inline" id="disponibilidad">
+                                <input class="form-check-input" type="radio" name="alta" id="disponibleSi" value="1" checked>
+                                <label class="form-check-label" for="disponibleSi">
+                                    Si
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="alta" id="disponibleNo" value="0">
+                                <label class="form-check-label" for="disponibleNo">
+                                    No
+                                </label>
+                            </div>
+                            <br><br>
+                            <label for="archivo" class="form-label"><h5>Portada</h5></label>
+                            <input type="file" class="form-control" name="archivo"/>
+                        </div>
+                        <button type="submit" class="btn-dark px-5 py-2 ms-auto">Guardar</button>
+                        <button type="reset" class="btn-dark px-5 py-2 ms-auto">Limpiar</button>
+                    </form>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

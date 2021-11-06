@@ -3,45 +3,36 @@
 
 <head th:replace="/fragments/head :: head"></head>
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
       <h2 class="display-4">Registrate</h2>
       <form action="/registrar" method="POST" enctype="multipart/form-data">
           
-        <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
-        <label>DNI</label>
-        <input type="text" class="form-control" name="dni" />
-        
-        <label>Nombre</label>
-        <input type="text" class="form-control" name="nombre" />
+        <h4 th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></h4>
 
-        <label>Apellido</label>
-        <input type="text" class="form-control" name="apellido" />
-        
-        <label>Dirección</label>
-        <input type="text" class="form-control" name="direccion" />
-        
-        <label>E-Mail</label>
-        <input type="email" class="form-control" name="mail" />
-                
-        <!---<label>Foto</label>
-        <input type="file" class="form-control" name="archivo"/>--->
-    
-        <label>Pass</label>
-        <input type="password" class="form-control" name="pass1" />
-        
-        <label>Repetir Pass</label>
-        <input type="password" class="form-control" name="pass2" />
-        
+        <label><b>DNI</b></label>
+        <input type="text" class="form-control" name="dni" th:value="${dni}" />
+
+        <label><b>Nombre</b></label>
+        <input type="text" class="form-control" name="nombre" th:value="${nombre}" />
+
+        <label><b>Apellido</b></label>
+        <input type="text" class="form-control" name="apellido" th:value="${apellido}" />
+
+        <label><b>Dirección</b></label>
+        <input type="text" class="form-control" name="direccion" th:value="${direccion}" />
+
+        <label><b>E-Mail</b></label>
+        <input type="email" class="form-control" name="mail" th:value="${mail}" />
+
+        <label><b>Contraseña</b></label>
+        <input type="password" class="form-control" name="pass1" th:value="${pass1}" />
+
+        <label><b>Repetir Contraseña</b></label>
+        <input type="password" class="form-control" name="pass2" th:value="${pass2}" />
+
         <br/><button type="submit" class="btn btn-primary">Registrarme</button>
       </form>
-
-      <h3 th:if="${dni != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${nombre != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${apellido != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${direccion != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${mail != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${pass1 != null}" th:text="${error}" style="color:red;"></h3>
-      <h3 th:if="${pass2 != null}" th:text="${error}" style="color:red;"></h3>
     </div>
 </body>
 

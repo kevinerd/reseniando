@@ -3,19 +3,26 @@
 
 <head th:replace="/fragments/head :: head"></head>
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
-        <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
-        <br>
-        <a th:if="${session.usuariosession.perfil != null}" th:href="@{/perfil/editar-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">Edita tu Perfil</a>
-        <br>
+        <div class="card mb-3 mt-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img th:src="${'/foto/perfil/' + session.usuariosession.perfil.id}" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                    <h3 class="card-title" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h3>
+                    <h5 class="card-title text-muted" th:text="'@' + ${session.usuariosession.perfil.nickname}"></h5>
+                    <p class="card-text" th:text="${'DNI: ' + session.usuariosession.dni}"></p>
+                    <p class="card-text" th:text="${'Email: ' + session.usuariosession.email}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <a th:href="@{/libros/crear-libro}" class="btn btn-primary btn-xl rounded-pill mt-5">Crear libro</a>
-        <br>
-        <a th:href="@{/prestamos/lista}" class="btn btn-primary btn-xl rounded-pill mt-5">Ver Prestamos</a>
-        <br>
-        <a th:href="@{/resenias/crear-resenia}" class="btn btn-primary btn-xl rounded-pill mt-5">Crear Resenia</a>
-        <br>
-        <a href="/logout" class="btn btn-danger mt-5">Cerrar Sesión</a>
+
+        
     </div>
 </body>
 

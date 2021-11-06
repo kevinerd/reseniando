@@ -1,9 +1,13 @@
 package com.reseniando.grupo4.servicios;
 
+import com.reseniando.grupo4.entidades.Libro;
+import com.reseniando.grupo4.entidades.Perfil;
 import com.reseniando.grupo4.entidades.Resenia;
 import com.reseniando.grupo4.errores.ErrorServicio;
+import com.reseniando.grupo4.repositorios.LibroRepositorio;
+import com.reseniando.grupo4.repositorios.PerfilRepositorio;
 import com.reseniando.grupo4.repositorios.ReseniaRepositorio;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -14,10 +18,56 @@ import org.springframework.stereotype.Service;
 public class ReseniaServicio {
 
     @Autowired
-    private ReseniaRepositorio rr;
+    private ReseniaRepositorio reseniaRepositorio;
+    
+    @Autowired
+    private PerfilRepositorio perfilRepositorio;
+    
+    @Autowired
+    private LibroRepositorio libroRepositorio;
 
     @Transactional
-    public Resenia crearResenia(Resenia resenia) throws ErrorServicio {
+    public Resenia crearResenia( Resenia resenia, Perfil perfil, Libro libro ) throws ErrorServicio {
+        validar( resenia );
+        
+        List<Resenia> reseniasPerfil = new ArrayList<>(); // Creo una lista local.
+        reseniasPerfil = perfil.getResenias(); // Guardo en la lista las resenias que el perfil ya tenga.
+        
+        List<Resenia> reseniasLibro = new ArrayList<>(); // Creo una lista local.
+        reseniasLibro = libro.getResenias(); // Guardo en la lista las resenias que el libro ya tenga.
+        
+        reseniaRepositorio.save(resenia); // Guardo la resenia en la DB.
+        
+        reseniasPerfil.add(resenia); // Añado la resenia a la lista del perfil.
+        perfil.setResenias(reseniasPerfil); // Seteo la lista actualizada al perfil.
+        perfilRepositorio.save(perfil); // Guardo el perfil.
+        
+        reseniasLibro.add(resenia); // Añado la resenia a la lista del libro.
+        libro.setResenias(reseniasLibro); // Seteo la lista actualizada al libro.
+        libroRepositorio.save(libro); // Guardo el libro.
+        
+        return resenia;
+    }
+    
+    public Resenia findById(String id) {
+        Resenia resenia = null;
+        Optional<Resenia> respuesta = reseniaRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            resenia = respuesta.get();
+        }
+        return resenia;
+    }
+
+    @Transactional
+    public void borrarResenia(Resenia resenia) {
+        reseniaRepositorio.delete(resenia);
+    }
+    
+    public List<Resenia> listarTodo (){
+        return reseniaRepositorio.findAll();
+    }
+    
+    private void validar( Resenia resenia ) throws ErrorServicio {
         if (resenia.getComentario() == null || resenia.getComentario().trim().isEmpty() == true || resenia.getComentario().length() < 4) {
             throw new ErrorServicio("El comentario de la reseña no puede ser nulo o estar vacio.");
         }
@@ -27,38 +77,5 @@ public class ReseniaServicio {
         if (resenia.getFecha() == null) {
             throw new ErrorServicio("La fecha de la reseña no puede ser nula.");
         }
-        return rr.save(resenia);
     }
-
-    @Transactional
-    public Resenia crearResenia(String titulo, String comentario, LocalDate fecha) {
-        Resenia resenia = new Resenia();
-        resenia.setTitulo(titulo);
-        resenia.setComentario(comentario);
-        resenia.setFecha(fecha);
-
-        return rr.save(resenia);
-    }
-
-    public List<Resenia> mostrarLasReseñas() {
-        return rr.findAll();
-    }
-
-    /*public List<Resenia> buscarReseniasPorNickname(String id) {
-        return rr.buscarTodosPorIdPerfil(id);
-    }*/
-
-    public Resenia encontrarPorId(String id) {
-        Resenia resenia = null;
-        Optional<Resenia> op = rr.findById(id);
-        if (op.isPresent()) {
-            resenia = op.get();
-        }
-        return resenia;
-    }
-
-    @Transactional
-    public void borrarResenia(Resenia resenia) {
-        rr.delete(resenia);
-    }                                                          
 }

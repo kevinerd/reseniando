@@ -3,9 +3,8 @@
 
 <head th:replace="/fragments/head :: head"></head>
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <a href="/inicio" class="btn btn-primary mt-5">Inicio</a>
-        <br>
         <a th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary btn-xl rounded-pill mt-5">Prestamo Nuevo</a>
         <br>
         <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="'Prestamos de ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>

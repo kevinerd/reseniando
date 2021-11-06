@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Reseniando</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a class="nav-link" th:href="@{/inicio}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/libros/lista}" class="nav-link">Libros</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/resenias/lista}" class="nav-link">Reseñas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/prestamos/lista}" class="nav-link">Prestamos</a>
+                </li>
+                <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a th:if="${session.usuariosession.perfil != null}" th:href="@{/perfil/editar-perfil}" class="nav-link">Edita tu Perfil</a>
+                </li>
+
+                <div class="d-flex">
+                    <li class="nav-item">
+                        <a th:href="@{/login}" class="nav-link" th:if="${session.usuariosession == null}">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/registro}" class="nav-link" th:if="${session.usuariosession == null}">Registrate</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.usuariosession != null}">
+                        <a th:href="@{/logout}" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>

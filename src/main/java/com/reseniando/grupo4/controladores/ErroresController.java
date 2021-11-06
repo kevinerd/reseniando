@@ -11,13 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ErroresController implements ErrorController {
-    
     @RequestMapping( value = "/error", method = { RequestMethod.GET, RequestMethod.POST } )
     public ModelAndView renderErrorPage( HttpServletRequest httpRequest ) {
         
         ModelAndView errorPage = new ModelAndView("error");
         String errorMsg = "";
-        int httpErrorCode = getErrorCode(httpRequest);
+        Integer httpErrorCode = getErrorCode(httpRequest);
         
         switch( httpErrorCode ) {
             case 400: {
@@ -62,10 +61,10 @@ public class ErroresController implements ErrorController {
             System.out.println( key + ": " + httpRequest.getAttribute(key) );
         }
         
-        return (int) httpRequest.getAttribute("javax-servlet.error.status_code");
+        return (Integer) httpRequest.getAttribute("javax-servlet.error.status_code");
     }
     
     public String getErrorPath() {
-        return "/error";
+        return "error";
     }
 }

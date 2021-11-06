@@ -3,25 +3,26 @@
 
 <head th:replace="/fragments/head :: head"></head>
 
-    <body>
-        <div class="container">
-            <h2 class="display-4">Completa tu perfil.</h2>
-            <form action="/perfil/registrar" method="POST" enctype="multipart/form-data">
-                <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
-                <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
-                <label>Nickname</label>
-                <input type="text" class="form-control" name="nickname" th:value=${nickname} />
-                <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <h2 class="display-4">Completa tu perfil.</h2>
+        <form action="/perfil/registrar" method="POST" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
+            <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <label>Nickname</label>
+            <input type="text" class="form-control" name="nickname" th:value=${nickname} />
+            <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
 
-                <label>Biografía</label>
-                <input type="text" class="form-control" name="bio" th:value=${bio} />
+            <label>Biografía</label>
+            <input type="text" class="form-control" name="bio" th:value=${bio} />
 
-                <label>Foto</label>
-                <input type="file" class="form-control" name="archivo"/>
+            <label>Foto</label>
+            <input type="file" class="form-control" name="archivo"/>
 
-                <br/><button type="submit" class="btn btn-primary">Registrarme</button>
-            </form>
-        </div>
-    </body>
+            <br/><button type="submit" class="btn btn-primary">Registrarme</button>
+        </form>
+    </div>
+</body>
 
 </html>

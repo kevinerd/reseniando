@@ -24,7 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepositorio ur;
+    private UsuarioRepositorio usuarioRepositorio;
 
     @Transactional
     public Usuario crearUsuario(String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2) throws ErrorServicio {
@@ -40,14 +40,14 @@ public class UsuarioServicio implements UserDetailsService {
         String encriptada = new BCryptPasswordEncoder().encode(pass1);
         usuario.setPass(encriptada);
 
-        return ur.save(usuario);
+        return usuarioRepositorio.save(usuario);
     }
     
     @Transactional
     public void modificarUsuario( String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2 ) throws ErrorServicio {
         validar(dni, nombre, apellido, domicilio, email, pass1, pass2);
         
-        Usuario usuario = ur.findByDni( dni );
+        Usuario usuario = usuarioRepositorio.findByDni( dni );
         if( usuario != null ) {
             usuario.setAlta(Boolean.TRUE);
             usuario.setDni(dni);
@@ -58,23 +58,23 @@ public class UsuarioServicio implements UserDetailsService {
             String encriptada = new BCryptPasswordEncoder().encode(pass1);
             usuario.setPass(encriptada);
             
-            ur.save(usuario);
+            usuarioRepositorio.save(usuario);
         } else {
             throw new ErrorServicio( "No se encontró el usuario solicitado." );
         }
     }
 
     public List<Usuario> listarUsuarios() {
-        return ur.findAll();
+        return usuarioRepositorio.findAll();
     }
     
     public Usuario encontrarPorDni(String dni) throws ErrorServicio {
         Usuario usuario= null;
         
-        Optional<Usuario> op = ur.findById(dni);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(dni);
         
-        if(op.isPresent()){
-            usuario = op.get();
+        if(respuesta.isPresent()){
+            usuario = respuesta.get();
         }
         
         return usuario;
@@ -82,12 +82,12 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void borrarUsuario(Usuario usuario) {
-        ur.delete(usuario);
+        usuarioRepositorio.delete(usuario);
     }
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = ur.buscarPorMail(email);
+        Usuario usuario = usuarioRepositorio.buscarPorMail(email);
         
         if( usuario != null ) {
             //Esto es lo que le da los permisos al usuario, a que modulos puede acceder
@@ -112,6 +112,10 @@ public class UsuarioServicio implements UserDetailsService {
     private void validar(String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2) throws ErrorServicio {
         if (dni == null || dni.isEmpty() || dni.length() < 6) {
             throw new ErrorServicio("El DNI ingresado no es posible o se encuentra vacio.");
+        }
+        Usuario respuesta = usuarioRepositorio.findByDni( dni );
+        if( respuesta != null ) {
+            throw new ErrorServicio( "Este documento ya está en uso." );
         }
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new ErrorServicio("El nombre no puede estar vacio.");

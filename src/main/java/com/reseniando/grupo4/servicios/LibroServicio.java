@@ -5,6 +5,7 @@ import com.reseniando.grupo4.entidades.Libro;
 import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
 import com.reseniando.grupo4.errores.ErrorServicio;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,7 @@ public class LibroServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis, Generos genero) throws ErrorServicio {
-        //Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
-
+    public Libro agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis, Generos genero) throws ErrorServicio {
         validar(titulo, autor, editorial, ejemplares);
 
         Libro libro = new Libro();
@@ -42,34 +41,47 @@ public class LibroServicio {
         libro.setPortada(foto);
 
         libroRepositorio.save(libro);
+        return libro;
     }
 
     @Transactional
-    public void modificarLibro(MultipartFile archivo, String libroId, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial) throws ErrorServicio {
+    public void modificarLibro(
+            MultipartFile archivo, 
+            Long isbn, 
+            String titulo,
+            String autor, 
+            String editorial,
+            Integer anio, 
+            Generos genero,
+            String sinopsis,
+            Integer ejemplares, 
+            Integer ejemplaresPrestados,
+            Boolean alta
+    ) throws ErrorServicio {
         validar(titulo, autor, editorial, ejemplares);
-        Optional<Libro> respuesta = libroRepositorio.findById(libroId);
+        Libro libro = libroRepositorio.buscarPorIsbn(isbn);
 
-        if (respuesta.isPresent()) {
-            Libro libro = respuesta.get();
+        if ( libro != null ) {
             if (true) {  //Verificar que el usuario sea ADMIN
                 libro.setIsbn(isbn);
                 libro.setTitulo(titulo);
                 libro.setAnio(anio);
                 libro.setEjemplares(ejemplares);
                 libro.setEjemplaresPrestados(ejemplaresPrestados);
-                libro.setAlta(true);
+                libro.setAlta(alta);
                 libro.setAutor(autor);
                 libro.setEditorial(editorial);
-
-                String idFoto = null;
-                if (libro.getPortada() != null) {
-                    idFoto = libro.getPortada().getId();
+                
+                if( libro.getPortada() != null ) {
+                    String idFoto = libro.getPortada().getId();
+                    Foto foto = fotoServicio.actualizar( idFoto, archivo );
+                    libro.setPortada(foto);
+                    libroRepositorio.save( libro );
+                } else {
+                    Foto foto = fotoServicio.guardar(archivo);
+                    libro.setPortada(foto);
+                    libroRepositorio.save( libro );
                 }
-
-                Foto foto = fotoServicio.actualizar(idFoto, archivo);
-                libro.setPortada(foto);
-
-                libroRepositorio.save(libro);
             } else {
                 throw new ErrorServicio("No tienes los permisos para realizar esta operación.");
             }
@@ -107,5 +119,9 @@ public class LibroServicio {
         if (ejemplares == null || ejemplares <= 0) {
             throw new ErrorServicio("Tiene que haber, al menos, un ejemplar.");
         }
+    }
+    
+    public List<Libro> listarTodo (){
+        return libroRepositorio.findAll();
     }
 }

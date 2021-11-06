@@ -2,6 +2,7 @@ package com.reseniando.grupo4.controladores;
 
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
+import com.reseniando.grupo4.servicios.LibroServicio;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,12 @@ public class PortalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
     
+    @Autowired
+    private LibroServicio libroServicio;
+    
     @GetMapping("/")
-    public String index(){
+    public String index( ModelMap model ){
+        model.addAttribute("libros", libroServicio.listarTodo());
         return "index.html";
     }
     
@@ -41,7 +46,7 @@ public class PortalControlador {
             model.put("error", "Credenciales invalidas. Intente nuevamente.");
         }
         if( logout != null ) {
-            model.put("logout", "Has cerrado sesion." );
+            model.put("logout", "Se ha cerrado la sesion." );
         }
         return "login";
     }

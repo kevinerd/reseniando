@@ -4,14 +4,14 @@
 <head th:replace="/fragments/head :: head"></head>
 
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
         <h1>Reseñando - Index</h1>
 
         <h3>Reseñando será una plataforma virtual para bibliotecas y/o librerías, donde se podrán cargar los libros disponibles, registrar sus socios/clientes, y gestionar los préstamos. Los usuarios registrados podrán acceder a la plataforma y reseñar los libros que hayan leído.</h3>
-
-        <a href="/login" class="btn btn-primary">Iniciar Sesión</a>
-        <a href="/registro" class="btn btn-primary">Registrate</a>
+        <div th:replace="/fragments/libros :: div"></div>
     </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 
 </html>

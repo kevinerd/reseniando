@@ -4,11 +4,10 @@
 <head th:replace="/fragments/head :: head"></head>
 
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
         <h1> TA TODO PIOLA </h1>
         <h2 class="display-4" th:text="${titulo}" ></h2>
         <p th:text="${descripcion}"></p>
-        <br>
-        <a href="/inicio" class="btn btn-primary mt-5">Inicio</a>
     </div>
 </body>

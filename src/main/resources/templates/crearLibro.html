@@ -3,16 +3,15 @@
 
 <head th:replace="/fragments/head :: head"></head>
 
-    <body>  
+    <body>
+        <nav th:replace="/fragments/nav :: nav"></nav>
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header d-flex">
                     <h1>Registrar Libro</h1>
-                    <br>
-                    <a href="/inicio" class="btn btn-primary mt-5">Inicio</a>
                 </div>
                 <div>
-                    <form th:action="@{/libros/registrar-libro}" method="POST" th:object="${libro}" class="col-6 mx-auto">
+                    <form th:action="@{/libros/registrar-libro}" method="POST" th:object="${libro}" class="col-6 mx-auto" enctype="multipart/form-data">
                         <input hidden name="*{id}">
                         <br>
                         <div class="mb-3">
@@ -53,6 +52,8 @@
                             <label for="ejemplaresPrestados" class="form-label"><h5>Ejemplares prestados</h5></label>
                             <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${ejemplaresPrestados}" placeholder="Ingrese la cantidad de ejemplares que han sido prestados">
                             <br>
+                            <label>Foto</label>
+                            <input type="file" class="form-control" name="archivo"/>
                         </div>
                         <button type="submit" class="btn-dark px-5 py-2 ms-auto">Guardar</button>
                         <button type="reset" class="btn-dark px-5 py-2 ms-auto">Limpiar</button>

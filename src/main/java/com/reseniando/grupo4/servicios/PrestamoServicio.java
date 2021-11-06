@@ -6,14 +6,11 @@ import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.PrestamoRepositorio;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class PrestamoServicio {
@@ -42,62 +39,13 @@ public class PrestamoServicio {
         if( respuesta.isPresent() ) {
             Prestamo prestamo = respuesta.get();
             
-            if( prestamo.getDevuelto() != Boolean.TRUE ) {
+            if( !prestamo.getDevuelto().equals(Boolean.TRUE)  ) {
                 prestamo.setDevuelto(Boolean.TRUE);
                 prestamo.setFechaDevolucion(LocalDate.now());
             }
             prestamoRepositorio.save( prestamo );
         } else {
             throw new ErrorServicio( "No se encontró el prestamo solicitado." );
-        }
-    }
-    
-    public Prestamo findById( String id ) throws ErrorServicio {
-        Optional<Prestamo> respuesta = prestamoRepositorio.findById( id );
-        
-        if( respuesta.isPresent() ) {
-            Prestamo prestamo = respuesta.get();
-            return prestamo;
-        } else {
-            throw new ErrorServicio("No se encontró el prestamo solicitado.");
-        }
-    } 
-    
-
-//    @Transactional
-//    public void agregarPrestamo(LocalDate fechaPrestamo, LocalDate fechaEstimativa, LocalDate fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
-//
-////        validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
-//
-//        Prestamo prestamo = new Prestamo();
-//        prestamo.setFechaPrestamo(fechaPrestamo);
-//        prestamo.setFechaEstimativa(fechaEstimativa);
-//        //prestamo.setFechaDevolucion(fechaDevolucion);
-//        //prestamo.setDevuelto(devuelto);
-//        prestamo.setLibro(libro);
-//        //prestamo.setUsuario(usuario);
-//
-//        prestamoRepositorio.save(prestamo);
-//
-//    }
-    
-    @Transactional
-    public void agregarPrestamo(Prestamo prestamo){
-        prestamoRepositorio.save(prestamo);
-    }
-
-    @Transactional
-    public void eliminarPrestamo(String id) throws ErrorServicio {
-        Optional<Prestamo> respuesta = prestamoRepositorio.findById(id);
-
-        if (respuesta.isPresent() == true) {
-            if (true) {  //Verificar que el usuario sea ADMIN
-                prestamoRepositorio.deleteById(id);
-            } else {
-                throw new ErrorServicio("No tienes los permisos para realizar esta operación (PRESTAMO SERVICIOv1).");
-            }
-        } else {
-            throw new ErrorServicio("No existe el prestamo solicitado (PRESTAMO SERVICIOv2).");
         }
     }
 
@@ -119,6 +67,21 @@ public class PrestamoServicio {
             throw new ErrorServicio("No se encontro el prestamo (PRESTAMO SERVICIO - MODIFICARv2))");
         }
     }
+    
+    @Transactional
+    public void eliminarPrestamo(String id) throws ErrorServicio {
+        Optional<Prestamo> respuesta = prestamoRepositorio.findById(id);
+
+        if (respuesta.isPresent() == true) {
+            if (true) {  //Verificar que el usuario sea ADMIN
+                prestamoRepositorio.deleteById(id);
+            } else {
+                throw new ErrorServicio("No tienes los permisos para realizar esta operación (PRESTAMO SERVICIOv1).");
+            }
+        } else {
+            throw new ErrorServicio("No existe el prestamo solicitado (PRESTAMO SERVICIOv2).");
+        }
+    }
 
 //    public void validar(LocalDate fechaPrestamo, LocalDate fechaEstimativa, LocalDate fechaDevolucion, Boolean devuelto, Libro libro, Usuario usuario) throws ErrorServicio {
 //
@@ -137,8 +100,15 @@ public class PrestamoServicio {
 //
 //    }
     
-    public Optional <Prestamo> buscarPorid(String id){
-        return  prestamoRepositorio.findById(id);  
+    public Prestamo findById( String id ) throws ErrorServicio {
+        Optional<Prestamo> respuesta = prestamoRepositorio.findById( id );
+        
+        if( respuesta.isPresent() ) {
+            Prestamo prestamo = respuesta.get();
+            return prestamo;
+        } else {
+            throw new ErrorServicio("No se encontró el prestamo solicitado.");
+        }
     }
     
     public List<Prestamo> listarTodo (){

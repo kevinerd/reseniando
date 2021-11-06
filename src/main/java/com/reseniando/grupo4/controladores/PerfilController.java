@@ -26,7 +26,7 @@ public class PerfilController {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-
+    
     @GetMapping("/crear-perfil")
     public String crearPerfil( HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
@@ -86,7 +86,7 @@ public class PerfilController {
     public String actualizar(
             ModelMap modelo,
             HttpSession session,
-            MultipartFile foto,
+            MultipartFile archivo,
             @RequestParam String id,
             @RequestParam String nickname,
             @RequestParam String bio
@@ -95,10 +95,11 @@ public class PerfilController {
 
         try {
             perfil = perfilServicio.findById(id);
-            perfilServicio.modificarPerfil(foto, id, nickname, bio);
+            perfilServicio.modificarPerfil(archivo, id, nickname, bio);
             return "redirect:/inicio";
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
+            modelo.put( "archivo", archivo );
             modelo.put("perfil", perfil);
 
             return "modificarPerfil";

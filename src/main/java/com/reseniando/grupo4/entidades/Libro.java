@@ -1,12 +1,15 @@
 package com.reseniando.grupo4.entidades;
 
 import com.reseniando.grupo4.enumeraciones.Generos;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -28,6 +31,8 @@ public class Libro {
     private Integer ejemplares;
     private Integer ejemplaresPrestados;
     private Boolean alta;
+    @OneToMany(fetch=FetchType.EAGER)
+    private List<Resenia> resenias;
 
     public Libro() {
     }
@@ -132,5 +137,13 @@ public class Libro {
 
     public void setAlta(Boolean alta) {
         this.alta = alta;
+    }
+    
+    public List<Resenia> getResenias() {
+        return resenias;
+    }
+
+    public void setResenias(List<Resenia> resenias) {
+        this.resenias = resenias;
     }
 }

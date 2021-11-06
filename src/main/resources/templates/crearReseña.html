@@ -3,16 +3,20 @@
 
 <head th:replace="/fragments/head :: head"></head>
 <body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
         <h1>Crear Reseña</h1>
 
         <form action="/resenias/registrar-resenia" method="POST">
             <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <input type="hidden" name="isbn" th:value="${libro.isbn}" th:field="${libro.isbn}">
+            
             <label>Título reseña:</label>
-            <input type="text" class="form-control" name="tituloResenia" />
+            <input type="text" class="form-control" name="titulo" th:value=${titulo} />
+            <p th:if="${titulo != null}" th:text="${error}" style="color:red;"></p>
             <br>
             <label>Comentario:</label>
-            <input type="text" class="form-control" name="comentarioResenia" />
+            <input type="text" class="form-control" name="comentario" th:value=${comentario} />
 
             <br/><button type="submit" class="btn btn-primary">Registrar</button>
         </form>

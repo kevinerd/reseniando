@@ -1,9 +1,7 @@
 package com.reseniando.grupo4.entidades;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
-
 import javax.persistence.OneToOne;
 
 @Entity

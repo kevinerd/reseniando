@@ -5,7 +5,7 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <a th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary btn-xl rounded-pill mt-5">Prestamo Nuevo</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary btn-xl rounded-pill mt-5">Prestamo Nuevo</a>
         <br>
         <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="'Prestamos de ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
         <br>

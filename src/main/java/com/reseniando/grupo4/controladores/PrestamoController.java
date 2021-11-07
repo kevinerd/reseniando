@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/prestamos")
-@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+
 public class PrestamoController {
 
     @Autowired

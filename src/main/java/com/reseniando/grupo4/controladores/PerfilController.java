@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/perfil")
-@PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
 public class PerfilController {
 
     @Autowired

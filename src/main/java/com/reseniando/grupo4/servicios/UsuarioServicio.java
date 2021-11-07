@@ -1,6 +1,7 @@
 package com.reseniando.grupo4.servicios;
 
 import com.reseniando.grupo4.entidades.Usuario;
+import com.reseniando.grupo4.enumeraciones.Role;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setEmail(email);
         String encriptada = new BCryptPasswordEncoder().encode(pass1);
         usuario.setPass(encriptada);
+        usuario.setRol(Role.USER);
 
         return usuarioRepositorio.save(usuario);
     }
@@ -93,8 +95,10 @@ public class UsuarioServicio implements UserDetailsService {
             //Esto es lo que le da los permisos al usuario, a que modulos puede acceder
             List<GrantedAuthority> permisos = new ArrayList<>();
             
-            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
-            permisos.add(p1);
+            permisos.add(new SimpleGrantedAuthority("ROLE_"+usuario.getRol()));
+            
+            //GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO"");
+            //permisos.add(p1);
             
             //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();

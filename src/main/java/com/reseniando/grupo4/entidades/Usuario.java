@@ -1,6 +1,9 @@
 package com.reseniando.grupo4.entidades;
 
+import com.reseniando.grupo4.enumeraciones.Role;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -15,6 +18,8 @@ public class Usuario {
     private String pass;
     private String email;
     private Boolean alta;
+    @Enumerated(EnumType.STRING)
+    private Role rol; 
     @OneToOne 
     private Perfil perfil;
 
@@ -92,5 +97,13 @@ public class Usuario {
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
+    }
+
+    public Role getRol() {
+        return rol;
+    }
+
+    public void setRol(Role rol) {
+        this.rol = rol;
     }
 }

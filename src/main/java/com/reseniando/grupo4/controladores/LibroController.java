@@ -36,7 +36,7 @@ public class LibroController {
     }
 
     @GetMapping("/crear-libro")
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String crearLibro( ModelMap model, HttpSession session ) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         
@@ -49,7 +49,7 @@ public class LibroController {
     }
 
     @PostMapping("/registrar-libro")
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String registrarLibro(
             ModelMap modelo,
             HttpSession session,
@@ -82,7 +82,7 @@ public class LibroController {
     }
     
     @GetMapping("/modificar-libro")
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String modificarLibro( ModelMap model, HttpSession session, @RequestParam Long isbn ) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         Libro libro = libroRepositorio.buscarPorIsbn(isbn);

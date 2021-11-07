@@ -30,7 +30,6 @@ public class PortalControlador {
         return "index.html";
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/inicio")
     public String inicio( HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");

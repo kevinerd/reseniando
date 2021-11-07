@@ -23,7 +23,7 @@ public class Resenia {
     private LocalDate  fecha;
     
     public Resenia() {
-    
+        
     }
 
     public Resenia(LocalDate fecha) {

@@ -5,7 +5,7 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <div class="card mb-3 mt-3" style="max-width: 540px;">
+        <div th:if="${session.usuariosession.perfil}!= null" class="card mb-3 mt-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-5">
                     <img th:src="${'/foto/perfil/' + session.usuariosession.perfil.id}" class="img-fluid rounded-start">

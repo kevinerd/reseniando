@@ -22,6 +22,9 @@
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a th:if="${session.usuariosession.perfil != null}" th:href="@{/perfil/editar-perfil}" class="nav-link">Edita tu Perfil</a>
                 </li>
+                 <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="nav-link">Crea tu perfil</a>
+                </li>
 
                 <div class="d-flex">
                     <li class="nav-item">

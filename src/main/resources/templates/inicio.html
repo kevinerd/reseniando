@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+                <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></div>
             </div>
         </div>
         <div class="row">

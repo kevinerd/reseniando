@@ -6,6 +6,7 @@ import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
 import com.reseniando.grupo4.servicios.ReseniaServicio;
 import java.time.LocalDate;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,12 +89,21 @@ public class ReseniaController {
             return "redirect:/logout";
         }
         try {
+            List <Resenia> resenias = login.getPerfil().getResenias();
             Resenia resenia = reseniaServicio.findById(id);
-            model.addAttribute("resenia", resenia);
+            
+            for(Resenia res : resenias) { 
+                if( res.getId().equals(id) ) {
+                    model.addAttribute("resenia", resenia);
+                    return "modificarResenia";
+                } else {
+                    model.addAttribute("error", "No se pudo encontrar la reseña solicitada.");
+                    return "/inicio";
+                }
+            }
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-
         return "modificarResenia";
     }
 

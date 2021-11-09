@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <h1>Actualizar Reseña</h1>
+
+        <form action="/resenias/actualizar-resenia" method="POST" th:object="${resenia}">
+            <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
+            <input type="hidden" name="id" th:value="${resenia.id}" th:field="${resenia.id}">   
+            <label>Título reseña:</label>
+            <input type="text" class="form-control" name="titulo" th:value="${resenia.titulo}" />
+            <p th:if="${titulo != null}" th:text="${error}" style="color:red;"></p>
+            <br>
+            <label>Comentario:</label>
+            <input type="text" class="form-control" name="comentario" th:value="${resenia.comentario}" />
+
+            <br/><button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    </div>
+</body>
+
+</html>

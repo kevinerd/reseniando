@@ -1,0 +1,239 @@
+*,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+
+    }
+body{
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex-grow: 1;
+    margin: 0%;
+    padding: 0%;
+    background-image: url("/e");
+}
+
+.tituloprincipal {
+    font-family: 'Volkhov', serif;
+    font-size: 75px;
+ 
+    letter-spacing: -0.04em;
+    
+    color: #181E4B;
+
+}
+
+    .inicial{
+    display: flex;
+        min-height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+.titulos{
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+
+   justify-content: flex-start;
+}
+
+.titulo2{
+  
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: uppercase;
+    
+    color: #DF6951;
+    }
+
+    .titulo3{
+
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 30px;
+        width: 60%;
+        
+        
+        color: #5E6282;
+        }
+       .boton1{
+        font-family: Poppins;
+border: none;
+           margin-top: 7vh;
+           width: 20vh;
+           height: 10vh;
+           -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background-color:#eb8634;
+            color: white;
+       }
+       
+/*
+.card1{
+    position: absolute;
+width: 315px;
+height: 457px;
+left: 193px;
+top: 1175px;
+}
+
+.card2{
+    position: absolute;
+width: 315px;
+height: 457px;
+left: 544px;
+top: 1175px;
+}
+
+.card3{
+    position: absolute;
+width: 315px;
+height: 457px;
+left: 918px;
+top: 1175px;
+}
+
+.titulo2{
+  
+font-family: Poppins;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 30px;
+text-transform: uppercase;
+
+color: #DF6951;
+}
+
+.titulo3{
+
+font-family: Poppins;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 30px;
+
+
+
+color: #5E6282;
+}
+
+.boton1{
+    position: absolute;
+width: 170px;
+height: 61.7px;
+left: 153px;
+top: 638.3px;
+}
+.librosprincipales{
+    position: absolute;
+    width: 448px;
+    height: 65px;
+    left: 495px;
+    top: 1050px;
+    
+    font-family: Volkhov;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 64px;
+   
+    
+    text-align: center;
+    text-transform: capitalize;
+    
+ 
+    
+    color: #14183E;
+}
+
+
+
+
+.titulo4{
+    position: absolute;
+width: 669.52px;
+height: 142.42px;
+left: 144px;
+top: 1845.01px;
+
+font-family: Volkhov;
+font-style: normal;
+font-weight: bold;
+font-size: 50px;
+line-height: 64px;
+text-transform: capitalize;
+
+
+
+color: #14183E;
+}
+#pasos{
+    position: absolute;
+width: 911px;
+height: 454px;
+left: 280px;
+top: 2009px;
+}
+
+
+.titulo5{
+ flex-basis: 100%;
+}
+
+.caja1{
+    display: flex;
+flex-direction: row;
+align-items: center;
+flex-wrap: wrap;
+justify-content: space-evenly;
+min-width: 100%;
+
+
+background: #F4F5F7;
+}
+.caja2{
+    display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 0px;
+
+}
+
+
+#container{
+ position: absolute;
+width: 1139px;
+height: 536px;
+left: 156px;
+top: 1133px;
+
+
+background: #C4C4C4;
+opacity: 0;
+}
+
+svg{
+    position: absolute;
+    width: 766.31px;
+    height: 872.58px;
+    left: 736px;
+    top: -149px;
+    
+   
+}

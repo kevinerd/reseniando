@@ -6,22 +6,36 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <h2 class="display-4">Completa tu perfil.</h2>
-        <form action="/perfil/registrar" method="POST" enctype="multipart/form-data">
-            <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
-            <!-- <p th:if="${error != null}" th:text="${error}" style="color:red;"></p> -->
-            <label>Nickname</label>
-            <input type="text" class="form-control" name="nickname" th:value=${nickname} />
-            <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
-
-            <label>Biografía</label>
-            <input type="text" class="form-control" name="bio" th:value=${bio} />
-
-            <label>Foto</label>
-            <input type="file" class="form-control" name="archivo"/>
-
-            <br/><button type="submit" class="btn btn-primary">Registrarme</button>
-        </form>
+        <div class="card mt-5">
+            <div class="card-header d-flex">
+                <h1>Completa tu perfil</h1>
+            </div>
+            <div>
+                <form th:action="@{/perfil/registrar}" method="POST" class="col-6 mx-auto mt-5" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <b><p th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></p></b>
+                        <input type="hidden" name="dni" th:value=${session.usuariosession.dni}>
+                        <div class="form-group">
+                            <label for="nickname" class="form-label"><h5>Nickname</h5></label>
+                            <input type="text" class="form-control" id="nickname" name="nickname" th:value="${nickname}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="bio" class="form-label"><h5>Biografía</h5></label>
+                            <input type="text" class="form-control" id="bio" name="bio" th:value="${bio}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="archivo" class="form-label"><h5>Foto</h5></label>
+                            <input type="file" class="form-control" id="archivo" name="archivo"/>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-success px-5 py-2 ms-auto mb-5">Registrar Perfil</button>
+                    <button type="reset" class="btn-secondary px-5 py-2 ms-auto mb-5">Limpiar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 

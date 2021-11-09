@@ -49,6 +49,28 @@ public class ReseniaServicio {
         return resenia;
     }
     
+    @Transactional
+    public void modificarResenia( Resenia reseniaEdit ) throws ErrorServicio {
+        
+        validar(reseniaEdit);
+
+        Optional<Resenia> respuesta = reseniaRepositorio.findById(reseniaEdit.getId());
+        
+        if( respuesta.isPresent() ) {
+            Resenia resenia = respuesta.get();    
+                
+            if( !reseniaEdit.getTitulo().equals(resenia.getTitulo()) ) {
+                resenia.setTitulo(reseniaEdit.getTitulo());
+            }
+            if (!reseniaEdit.getComentario().equals(resenia.getComentario())) {
+                resenia.setComentario(reseniaEdit.getComentario());
+            }
+            
+        } else {
+            throw new ErrorServicio( "No se encontró la resenia solicitada." );
+        }
+    }
+    
     public Resenia findById(String id) {
         Resenia resenia = null;
         Optional<Resenia> respuesta = reseniaRepositorio.findById(id);

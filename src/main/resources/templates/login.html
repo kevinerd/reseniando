@@ -3,22 +3,30 @@
 
 <head th:replace="/fragments/head :: head"></head>
 <body>
-  <nav th:replace="/fragments/nav :: nav"></nav>
-  <div class="container">
-    <h2 class="display-4">Ingresá a Reseñando</h2>
-    <form action="/logincheck" method="POST">
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <h2 class="display-4">Inicia sesión</h2>
+        <br>
         <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
         <p th:if="${logout != null}" th:text="${logout}" style="color:green"></p>
-
-        <label>E-Mail</label>
-        <input type="email" class="form-control" name="username"/>
-        
-        <label>Clave</label>
-        <input type="password" class="form-control" name="password"/>
-        
-        <br/><button type="submit" class="btn btn-primary">Ingresar</button>
-    </form>
-  </div>
+        <br>
+        <form action="/logincheck" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Email </label>
+                <input type="email" class="form-control" name="username" aria-describedby="emailHelp"/>
+                <div id="emailHelp" class="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="password"/>
+            </div>
+            <!--<div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+            </div>-->
+            <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header d-flex">
+                <h1>Edita tu Usuario</h1>
+                <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+            </div>
+            <div>
+                <form th:action="@{/usuario/actualizar-usuario}" method="POST" class="col-6 mx-auto mt-5" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="dni" th:value="${usuario.dni}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="nombre" class="form-label"><h5>Nombre</h5></label>
+                            <input type="text" class="form-control" name="nombre" th:value="${usuario.nombre}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="apellido" class="form-label"><h5>Apellido</h5></label>
+                            <input type="text" class="form-control" name="apellido" th:value="${usuario.apellido}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="direccion" class="form-label"><h5>Dirección</h5></label>
+                            <input type="text" class="form-control" name="direccion" th:value="${usuario.domicilio}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="mail" class="form-label"><h5>E-Mail</h5></label>
+                            <input type="email" class="form-control" name="mail" th:value="${usuario.email}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="pass1" class="form-label"><h5>Contraseña</h5></label>
+                            <input type="password" class="form-control" name="password1" th:value="${pass1}" />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="pass2" class="form-label"><h5>Repetir Contraseña</h5></label>
+                            <input type="password" class="form-control" name="password2" th:value="${pass2}" />
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-success px-5 py-2 ms-auto mb-5">Modificar</button>
+                    <button type="reset" class="btn-secondary px-5 py-2 ms-auto mb-5">Limpiar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

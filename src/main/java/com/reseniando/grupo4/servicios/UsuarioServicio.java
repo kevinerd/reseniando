@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -46,23 +47,60 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public void modificarUsuario( String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2 ) throws ErrorServicio {
-        validar(dni, nombre, apellido, domicilio, email, pass1, pass2);
-        
+    public void modificarUsuario( String dni, String nombre, String apellido, String domicilio, String email, String pass1, String pass2 ) throws ErrorServicio {       
         Usuario usuario = usuarioRepositorio.findByDni( dni );
         if( usuario != null ) {
-            usuario.setAlta(Boolean.TRUE);
-            usuario.setDni(dni);
-            usuario.setNombre(nombre);
-            usuario.setApellido(apellido);
-            usuario.setDomicilio(domicilio);
-            usuario.setEmail(email);
+            if( !nombre.equals( usuario.getNombre() )) {
+                if ( nombre.trim().isEmpty() ) {
+                    throw new ErrorServicio("El nombre no puede estar vacio.");
+                }
+                usuario.setNombre(nombre);
+            }
+            if( !apellido.equals( usuario.getApellido() )) {
+                if ( apellido.trim().isEmpty() ) {
+                    throw new ErrorServicio("El apellido no puede estar vacio.");
+                }
+                usuario.setApellido(apellido);
+            }
+            if( !domicilio.equals( usuario.getDomicilio() )) {
+                if ( domicilio.trim().isEmpty() ) {
+                    throw new ErrorServicio("La dirección no puede estar vacia.");
+                }
+                usuario.setDomicilio(domicilio);
+            }
+            if( !email.equals( usuario.getEmail() )) {
+                if ( email.trim().isEmpty() ) {
+                    throw new ErrorServicio("El email no puede estar vacio.");
+                }
+                usuario.setEmail(email);
+            }
+            if ( !pass1.equals(pass2) ){
+                throw new ErrorServicio("Las contraseñas tienen que ser iguales.");
+            }
+            if (pass1 == null || pass1.length() < 4 || pass1.trim().isEmpty()) {
+                throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
+            }
+            if (pass2 == null || pass2.length() < 4 || pass2.trim().isEmpty()) {
+                throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
+            }
+            
             String encriptada = new BCryptPasswordEncoder().encode(pass1);
             usuario.setPass(encriptada);
             
             usuarioRepositorio.save(usuario);
         } else {
             throw new ErrorServicio( "No se encontró el usuario solicitado." );
+        }
+    }
+    
+    public Usuario findById( String id ) throws ErrorServicio {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById( id );
+        
+        if( respuesta.isPresent() ) {
+            Usuario usuario = respuesta.get();
+            return usuario;
+        } else {
+            throw new ErrorServicio("No se encontró el perfil solicitado.");
         }
     }
 
@@ -138,6 +176,9 @@ public class UsuarioServicio implements UserDetailsService {
         }
         if (pass2 == null || pass2.length() < 4 || pass2.trim().isEmpty()) {
             throw new ErrorServicio("La contraseña ingresada tiene menos de cuatro caracteres o se encuentra vacia.");
+        }
+        if ( !pass1.equals(pass2) ){
+            throw new ErrorServicio("Las contraseñas tienen que ser iguales.");
         }
     }
 

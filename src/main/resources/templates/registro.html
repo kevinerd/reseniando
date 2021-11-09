@@ -5,35 +5,58 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-      <h2 class="display-4">Registrate</h2>
-      <form action="/registrar" method="POST" enctype="multipart/form-data">
-          
-        <h4 th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></h4>
-
-        <label><b>DNI</b></label>
-        <input type="text" class="form-control" name="dni" th:value="${dni}" />
-
-        <label><b>Nombre</b></label>
-        <input type="text" class="form-control" name="nombre" th:value="${nombre}" />
-
-        <label><b>Apellido</b></label>
-        <input type="text" class="form-control" name="apellido" th:value="${apellido}" />
-
-        <label><b>Dirección</b></label>
-        <input type="text" class="form-control" name="direccion" th:value="${direccion}" />
-
-        <label><b>E-Mail</b></label>
-        <input type="email" class="form-control" name="mail" th:value="${mail}" />
-
-        <label><b>Contraseña</b></label>
-        <input type="password" class="form-control" name="pass1" th:value="${pass1}" />
-
-        <label><b>Repetir Contraseña</b></label>
-        <input type="password" class="form-control" name="pass2" th:value="${pass2}" />
-
-        <br/><button type="submit" class="btn btn-primary">Registrarme</button>
-      </form>
+        <section class="hero__container">
+            <div class="hero__texts">
+                <h1 class="tituloprincipal">Bienvenido a Reseñando, Registrate!</h1>
+                <br/>
+            </div>
+        </section>
+        <br/>
+        <form action="/registrar" method="POST">
+            <div class="row mb-3">
+                <h4 th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></h4>
+                <div class="col">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" aria-label="First name" th:value="${nombre}" />
+                </div>
+                <div class="col">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" placeholder="Apellido" aria-label="Last name" name="apellido" th:value="${apellido}" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" placeholder="DNI" name="dni" th:value="${dni}" />
+                </div>
+                <div class="col">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" placeholder="Dirección" name="direccion" th:value="${direccion}" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="mail" class="form-label">Email </label>
+                    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email" name="mail" th:value="${mail}" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="pass1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="pass1" aria-describedby="passwordHelpBlock" th:value="${pass1}" />
+                    <div id="passwordHelpBlock" class="form-text"></div>
+                </div>
+                <div class="col">
+                    <label for="pass2" class="form-label">Repita la contraseña</label>
+                    <input type="password" class="form-control" name="pass2" aria-describedby="passwordHelpBlock"  th:value="${pass2}" />
+                    <div id="passwordHelpBlock" class="form-text"></div>
+                </div>
+            </div>
+            
+            <input type="radio" id="contactChoice1" name="contact" value="email">
+            <label for="contactChoice1">Estoy de acuerdo con los términos y condiciones</label><br><br>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
     </div>
 </body>
-
 </html>

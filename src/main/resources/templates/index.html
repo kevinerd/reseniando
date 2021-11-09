@@ -1,17 +1,234 @@
 <!DOCTYPE html>
-<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
-
+<html lang="en">
 <head th:replace="/fragments/head :: head"></head>
-
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
-    <div class="container">
-        <h1>Reseñando - Index</h1>
+    <main class="container">
+        <div class="inicial"> 
+            <div class="titulos">
+                <h2 class="titulo2">Historias que te hacen volar </h2>
+                
+                <div>   
+                    <h1 class="tituloprincipal">Leer, Disfrutar</h1>
+                    <p class="tituloprincipal">y vivir la vida.</p>
+                </div>
 
-        <h3>Reseñando será una plataforma virtual para bibliotecas y/o librerías, donde se podrán cargar los libros disponibles, registrar sus socios/clientes, y gestionar los préstamos. Los usuarios registrados podrán acceder a la plataforma y reseñar los libros que hayan leído.</h3>
-        <div th:replace="/fragments/libros :: div"></div>
+                <h2 class="titulo3">La plataforma basada en narrativa mas amada del mundo</h2>
+                <a class="btn boton1" th:href="@{/registro}">Registrarse</a>
+            </div>
+            <div>
+                <img src="https://i.postimg.cc/QMyMqkNg/gettyimages-1072058632-2048x2048.png" border="0" alt="gettyimages-1072058632-2048x2048" class="fotoprincipal">
+            </div>
+        </div>
+        <div class="segundacaja"> 
+            <h2 class="librosprincipales">Libros principales</h2>
+            <div th:replace="/fragments/libros :: div"></div>
+            <div class="card1">
+                <img src="https://i.ibb.co/dWsPR6R/9788467037005.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14"/></a>
+                <h4>Que la muerte te acompañe</h4>
+                <p></p>
+                <a href="#">Comprar</a>
+            </div>
+
+            <div class="card2">
+                <img src="https://i.ibb.co/6RCxZ6L/9788413487649.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14-2"/></a>
+                <h4>Paris puede esperar</h4>
+                <p></p>
+                <a href="#">Comprar</a>
+            </div>
+
+            <div class="card3">
+                <img src="https://i.ibb.co/tYY2HZy/9788425354168.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14-1"/></a>
+                <h4>Un robot en mi Jardin</h4>
+                <p></p>
+                <a href="#">Comprar</a>
+            </div>
+        </div>
+        <div> 
+            <h2 class="pasosalquiler">Reserve su próximo libro en 3 sencillos pasos</h2>
+            <p></p>
+        </div>
+
+        <div id="pasos">
+            <div class="stepContainer">
+                <div class="step">
+                    <h2 class="number">1</h2>
+                    <h3 class="title">Registrate! </h3>
+                    <p class="description">"Lorem Ipsum is simply dummy of the printing and typesetting industry."</p>
+                </div>
+            </div>
+
+            <div class="stepContainer">
+                <div class="step">
+                    <h2 class="number">2</h2>
+                    <h3 class="title">Edita! </h3>
+                    <p class="description">"Lorem Ipsum is simply text of the printing and typesetting industry."</p>
+                </div>
+            </div>
+            <div class="stepContainer">
+                <div class="step">
+                    <h2 class="number">3</h2>
+                    <h3 class="title">Compra! </h3>
+                    <p class="description">"Lorem Ipsum is simply dummy text of the printing and typesetting industry."</p>
+                </div>
+            </div>
+        </div>
+        <div class="segundacaja" > 
+            <h2 class="librosprincipales">Nuestros clientes hablan</h2>
+
+            <div class="card1">
+                <h4>Sebastian</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
+                <a href="#">Comprar</a>
+            </div>
+            
+            <div class="card2">
+                <h4>Sebastian</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
+                <a href="#">Comprar</a>
+            </div>
+            
+        
+            <div class="card3">
+                <h4>Sebastian</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
+                <a href="#">Comprar</a>
+            </div>
+        
+<!--
+
+
+<h2 class="titulo4">Reserve su próximo libro
+    en 3 sencillos pasos</h2>
+    <p></p>
+
+
+<div id="pasos">
+    <div class="stepContainer">
+        <div class="step">
+            <h2 class="number">1</h2>
+            <div>
+                <h3 class="title">Registrate! </h3>
+                <p class="description">
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                </p>
+            </div>
+        </div>
+        
+<div class="statBubble">
+  <div> 
+    <div class="count"> 50mil+</div>
+    <div class="stepContainer"> Lectores reseñando </div>
+</div>
+</div>
+</div>
+
+<div class="stepContainer">
+  <div class="step">
+      <h2 class="number">2</h2>
+      <div>
+          <h3 class="title">Edita! </h3>
+          <p class="description">
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          </p>
+      </div>
+  </div>
+<div class="statBubble">
+<div> 
+<div class="count"> 50mil+</div>
+<div class="stepContainer"> Lectores reseñando </div>
+</div>
+</div>
+</div>
+<div class="stepContainer">
+  <div class="step">
+      <h2 class="number">3</h2>
+      <div>
+          <h3 class="title">Compra! </h3>
+          <p class="description">
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          </p>
+      </div>
+  </div>
+<div class="statBubble">
+<div> 
+<div class="count"> 50mil+</div>
+<div class="stepContainer"> Lectores reseñando </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<! –– TESTIMONIOS DE CLIENTES, AGREGAR IMAGEN,ETC ––>
+<div class="caja1" >
+<h2 class="titulo5">Nuestros clientes hablan</h2>
+
+<div class="caja2" >
+  <h5>Sebastian</h5>
+  <h6>subtitulo</h6>
+  <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
+  </p>
+  </div>
+
+  <div class="caja2" >
+  <h5>Sebastian</h5>
+  <h6>subtitulo</h6>
+  <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
+  </p>
+  </div>
+
+  <div class="caja2" >
+    <h5>Sebastian</h5>
+    <h6>subtitulo</h6>
+    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
+    </p>
     </div>
-    <footer th:replace="/fragments/footer :: footer"></footer>
-</body>
 
+</div>
+</div>
+
+</main>
+<!--
+  <footer class="footer-07">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-12 text-center">
+						<h2 class="footer-heading"><a href="#" class="logo">Reseñando</a></h2>
+						<p class="menu">
+							<a href="#">Inicio</a>
+							<a href="#">Categorias</a>
+							<a href="#">Preguntas frecuentes</a>
+							<a href="#">Contacto</a>
+						</p>
+						<ul class="ftco-footer-social p-0">
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+            </ul>
+					</div>
+				</div>
+				<div class="row mt-5">
+					<div class="col-md-12 text-center">
+						<p class="copyright">
+					  Copyright ©<script>document.write(new Date().getFullYear());</script>2021 All rights reserved | This template is made with <i class="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Reseñando.com</a>
+					  </p>
+					</div>
+				</div>
+			</div>
+		</footer>-->
+
+    </main>
+</body>
 </html>

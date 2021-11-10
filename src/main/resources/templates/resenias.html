@@ -37,6 +37,7 @@
                     <th scope="col">Título</th>
                     <th scope="col">Comentario</th>
                     <th scope="col">Fecha</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                     <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
                     <td th:text="${resenia.comentario}" th:value="${resenia.comentario}"></td>
                     <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
+                    <td><button><a th:href="@{/resenias/editar-resenia(id=__${resenia.id}__)}" class="btn btn-outline-warning btn-sm" role="button">Modificar</a></button></td>
                 </tr>
             </thead>
         </table>

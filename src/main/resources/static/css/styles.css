@@ -1,29 +1,34 @@
 *,
-    *::after,
-    *::before {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body{
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color:transparent;
+    background-repeat: no-repeat;
+}
+
+html{
+    min-height: 100%;
 }
 
 main{
     flex-grow: 1;
     margin: 0%;
     padding: 0%;
-    background-image: url("/e");
 }
 
-.tituloprincipal {
-    font-family: 'Volkhov', serif;
-    font-size: 75px;
-    letter-spacing: -0.04em;
-    color: #181E4B;
+/* --- HEADER --- */
+.imgHeader {
+    margin-top: 5rem;
+    max-width: 40rem;
 }
 
 .inicial{
@@ -31,10 +36,10 @@ main{
     min-height: 100%;
     justify-content: center;
     align-items: center;
+    margin-top: 5rem;
 }
 
 .titulos{
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -48,7 +53,7 @@ main{
     line-height: 30px;
     text-transform: uppercase;
     color: #DF6951;
-    }
+}
 
 .titulo3{
     font-family: Poppins;
@@ -58,14 +63,25 @@ main{
     line-height: 30px;
     width: 60%;
     color: #5E6282;
-    }
-    
-.boton1{
+    margin-top: 5rem;
+}
+
+.tituloprincipal {
+    font-family: 'Volkhov', serif;
+    font-size: 75px;
+    color: #181E4B;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.botonHeader{
     font-family: Poppins;
+    font-weight: 700;
+    font-size: 1.5rem;
     border: none;
     margin-top: 7vh;
     width: 20vh;
-    height: 10vh;
+    height: 3.5rem;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -73,133 +89,96 @@ main{
     color: white;
 }
 
-/*
-.card1{
-    position: absolute;
-    width: 315px;
-    height: 457px;
-    left: 193px;
-    top: 1175px;
+.titulares {
+    padding: 1rem;
+    background-color:transparent;
+    color: #EEE;
+    font-size: 2.5vh;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Kanit', sans-serif;
 }
 
-.card2{
-    position: absolute;
-    width: 315px;
-    height: 457px;
-    left: 544px;
-    top: 1175px;
+/* --- MENÚ / NAV BAR --- */
+li a{
+    text-decoration: none;
+    color: white;
 }
 
-.card3{
-    position: absolute;
-    width: 315px;
-    height: 457px;
-    left: 918px;
-    top: 1175px;
+a:visited{
+    text-decoration:none;
+    color: none;
 }
 
-.titulo2{
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-    text-transform: uppercase;
-    color: #DF6951;
-}
-
-.titulo3{
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
+li a:hover{
     font-size: 24px;
-    line-height: 30px;
-    color: #5E6282;
+    color: tomato;
 }
 
-.boton1{
-    position: absolute;
-    width: 170px;
-    height: 61.7px;
-    left: 153px;
-    top: 638.3px;
+.nav-bar{
+    font-size: 22px;
+    font-family: 'Kanit', sans-serif;
 }
-.librosprincipales{
-    position: absolute;
-    width: 448px;
-    height: 65px;
-    left: 495px;
-    top: 1050px;
+
+.number {
+    font-size: 7.5rem;
+}
+
+.title {
+    font-family: Poppins;
+    font-weight: bold;
+}
+
+/* --- TITULOS SECUNDARIOS --- */
+.titleSec{
     font-family: Volkhov;
-    font-style: normal;
     font-weight: bold;
     font-size: 50px;
-    line-height: 64px;
     text-align: center;
     text-transform: capitalize;
     color: #14183E;
 }
 
-.titulo4{
-    position: absolute;
-    width: 669.52px;
-    height: 142.42px;
-    left: 144px;
-    top: 1845.01px;
-    font-family: Volkhov;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 50px;
-    line-height: 64px;
-    text-transform: capitalize;
-    color: #14183E;
+/* --- FONDO PARA LAS SECCIONES --- */
+#sectionBack {
+    margin-top: 3rem;
+    background-color: #e2e2e2;
+    padding-bottom: 3rem;
 }
 
-#pasos{
-    position: absolute;
-    width: 911px;
-    height: 454px;
-    left: 280px;
-    top: 2009px;
+/* --- PASOS --- */
+.pasos {
+    background-color: #DF6951;
+    border-radius: 20px;
+    border: none;
 }
 
-.titulo5{
-    flex-basis: 100%;
+.pasos p {
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
-.caja1{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    min-width: 100%;
-    background: #F4F5F7;
+/* --- RESEÑAS POPULARES LANDING --- */
+.reseñas {
+    background-color: #92D7E0;
+    border-radius: 20px;
+    border: none;
 }
 
-.caja2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
+.reseñas p {
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
-#container{
-    position: absolute;
-    width: 1139px;
-    height: 536px;
-    left: 156px;
-    top: 1133px;
-    background: #C4C4C4;
-    opacity: 0;
+.imgPerfil {
+    background-color: #ffffff;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
 }
 
-svg{
-    position: absolute;
-    width: 766.31px;
-    height: 872.58px;
-    left: 736px;
-    top: -149px;
+/* --- LIBROS --- */
+.libros {
+    box-shadow: 6px 6px #c7c7c7;
+    border: 2px solid rgb(105, 105, 105)
 }
-*/

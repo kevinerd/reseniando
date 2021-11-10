@@ -33,11 +33,12 @@ public class Libro {
     private Boolean alta;
     @OneToMany(fetch=FetchType.EAGER)
     private List<Resenia> resenias;
+    private Boolean destacado;
 
     public Libro() {
     }
 
-    public Libro(Long isbn, String autor, String editorial, String titulo, Integer anio, String sinopsis, Generos genero, Foto portada, Integer ejemplares, Integer ejemplaresPrestados, Boolean alta) {
+    public Libro(Long isbn, String autor, String editorial, String titulo, Integer anio, String sinopsis, Generos genero, Foto portada, Integer ejemplares, Integer ejemplaresPrestados, Boolean alta, Boolean destacado) {
         this.isbn = isbn;
         this.autor = autor;
         this.editorial = editorial;
@@ -49,6 +50,7 @@ public class Libro {
         this.ejemplares = ejemplares;
         this.ejemplaresPrestados = ejemplaresPrestados;
         this.alta = alta;
+        this.destacado = destacado;
     }
 
     public Long getIsbn() {
@@ -145,5 +147,13 @@ public class Libro {
 
     public void setResenias(List<Resenia> resenias) {
         this.resenias = resenias;
+    }
+
+    public Boolean getDestacado() {
+        return destacado;
+    }
+
+    public void setDestacado(Boolean destacado) {
+        this.destacado = destacado;
     }
 }

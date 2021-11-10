@@ -3,205 +3,115 @@
 <head th:replace="/fragments/head :: head"></head>
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
-    <main class="container">
-        <div class="inicial"> 
-            <div class="titulos">
-                <h2 class="titulo2">Historias que te hacen volar </h2>
-                
-                <div>   
+    <header>
+        <div class="row justify-content-center">
+            <div class="offset-md-1 col-md-5 inicial">
+                <div class="titulos">
+                    <h2 class="titulo2">Historias que te hacen volar </h2>
+                    
                     <h1 class="tituloprincipal">Leer, Disfrutar</h1>
-                    <p class="tituloprincipal">y vivir la vida.</p>
+                    <h1 class="tituloprincipal">y Vivir la Vida.</h1>
+    
+                    <h2 class="titulo3">La plataforma basada en narrativa mas amada del mundo</h2>
+                    <a class="btn botonHeader" th:href="@{/registro}">Registrarse</a>
                 </div>
-
-                <h2 class="titulo3">La plataforma basada en narrativa mas amada del mundo</h2>
-                <a class="btn boton1" th:href="@{/registro}">Registrarse</a>
             </div>
-            <div>
-                <img src="https://i.postimg.cc/QMyMqkNg/gettyimages-1072058632-2048x2048.png" border="0" alt="gettyimages-1072058632-2048x2048" class="fotoprincipal">
+            <div class="col-md-5 imgHeader">
+                <img src="/img/imgHeader2.png" class="img-fluid">
             </div>
         </div>
-        <div class="segundacaja"> 
-            <h2 class="librosprincipales">Libros principales</h2>
+    </header>
+    <section id="sectionBack">
+        <div class="container">
+            <h2 class="titleSec mt-4">Libros principales</h2>
             <div th:replace="/fragments/libros :: div"></div>
-            <div class="card1">
-                <img src="https://i.ibb.co/dWsPR6R/9788467037005.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14"/></a>
-                <h4>Que la muerte te acompañe</h4>
-                <p></p>
-                <a href="#">Comprar</a>
-            </div>
-
-            <div class="card2">
-                <img src="https://i.ibb.co/6RCxZ6L/9788413487649.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14-2"/></a>
-                <h4>Paris puede esperar</h4>
-                <p></p>
-                <a href="#">Comprar</a>
-            </div>
-
-            <div class="card3">
-                <img src="https://i.ibb.co/tYY2HZy/9788425354168.jpg" border="0" alt="Whats-App-Image-2021-11-01-at-20-32-14-1"/></a>
-                <h4>Un robot en mi Jardin</h4>
-                <p></p>
-                <a href="#">Comprar</a>
-            </div>
         </div>
-        <div> 
-            <h2 class="pasosalquiler">Reserve su próximo libro en 3 sencillos pasos</h2>
-            <p></p>
-        </div>
-
-        <div id="pasos">
-            <div class="stepContainer">
-                <div class="step">
-                    <h2 class="number">1</h2>
-                    <h3 class="title">Registrate! </h3>
-                    <p class="description">"Lorem Ipsum is simply dummy of the printing and typesetting industry."</p>
+    </section>
+    <section id="pasos">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h2 class="titleSec mb-5">Estás a 3 pasos de tu próxima aventura</h2>
                 </div>
             </div>
-
-            <div class="stepContainer">
-                <div class="step">
-                    <h2 class="number">2</h2>
-                    <h3 class="title">Edita! </h3>
-                    <p class="description">"Lorem Ipsum is simply text of the printing and typesetting industry."</p>
+    
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="card pasos text-white">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h1 class="number">1</h1>
+                            </div>
+                            <div class="col-md-10">
+                                <h2 class="title">Registrate.</h2>
+                                <p>Completa tus datos personales y accede a la plataforma.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="stepContainer">
-                <div class="step">
-                    <h2 class="number">3</h2>
-                    <h3 class="title">Compra! </h3>
-                    <p class="description">"Lorem Ipsum is simply dummy text of the printing and typesetting industry."</p>
+                <div class="col-md-4">
+                    <div class="card pasos text-white">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h1 class="number">2</h1>
+                            </div>
+                            <div class="col-md-10">
+                                <h2 class="title">Crea tu perfil.</h2>
+                                <p>Crea tu perfil para acceder a todas las funcionalidades, como guardar tus libros favoritos y escribir reseñas sobre ellos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card pasos text-white">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h1 class="number">3</h1>
+                            </div>
+                            <div class="col-md-10">
+                                <h2 class="title">Reserva!</h2>
+                                <p>Busca el libro que quieras leer, reservalo y retiralo el día y horario que se te asigne. </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="segundacaja" > 
-            <h2 class="librosprincipales">Nuestros clientes hablan</h2>
-
-            <div class="card1">
-                <h4>Sebastian</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
-                <a href="#">Comprar</a>
-            </div>
-            
-            <div class="card2">
-                <h4>Sebastian</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
-                <a href="#">Comprar</a>
-            </div>
-            
-        
-            <div class="card3">
-                <h4>Sebastian</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In esse et sit a, quibusdam blanditiis .</p>
-                <a href="#">Comprar</a>
-            </div>
-        
-<!--
-
-
-<h2 class="titulo4">Reserve su próximo libro
-    en 3 sencillos pasos</h2>
-    <p></p>
-
-
-<div id="pasos">
-    <div class="stepContainer">
-        <div class="step">
-            <h2 class="number">1</h2>
-            <div>
-                <h3 class="title">Registrate! </h3>
-                <p class="description">
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                </p>
+    </section>
+    <section id="sectionBack">
+        <div class="container">
+            <div class="row" > 
+                <h2 class="titleSec mt-4">Reseñas más populares</h2>
+                <div class="col-md-4">
+                    <div class="card reseñas text-white">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-2 imgPerfil">
+                                    <img src="/img/lisa.png" class="img-fluid">
+                                </div>
+                                <div class="col-md-10">
+                                    <h4>Lisa Simpson</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-10">
+                                <h2 class="title">Este libro es genial</h2>
+                                <p>Este libro me gustó mucho. No podía parar de leerlo, lo terminé en sólo 3 días.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-<div class="statBubble">
-  <div> 
-    <div class="count"> 50mil+</div>
-    <div class="stepContainer"> Lectores reseñando </div>
-</div>
-</div>
-</div>
-
-<div class="stepContainer">
-  <div class="step">
-      <h2 class="number">2</h2>
-      <div>
-          <h3 class="title">Edita! </h3>
-          <p class="description">
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-          </p>
-      </div>
-  </div>
-<div class="statBubble">
-<div> 
-<div class="count"> 50mil+</div>
-<div class="stepContainer"> Lectores reseñando </div>
-</div>
-</div>
-</div>
-<div class="stepContainer">
-  <div class="step">
-      <h2 class="number">3</h2>
-      <div>
-          <h3 class="title">Compra! </h3>
-          <p class="description">
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-          </p>
-      </div>
-  </div>
-<div class="statBubble">
-<div> 
-<div class="count"> 50mil+</div>
-<div class="stepContainer"> Lectores reseñando </div>
-</div>
-</div>
-</div>
+    </section>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>
 
 
-
-
-
-
-
-
-
-
-
-<! –– TESTIMONIOS DE CLIENTES, AGREGAR IMAGEN,ETC ––>
-<div class="caja1" >
-<h2 class="titulo5">Nuestros clientes hablan</h2>
-
-<div class="caja2" >
-  <h5>Sebastian</h5>
-  <h6>subtitulo</h6>
-  <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
-  </p>
-  </div>
-
-  <div class="caja2" >
-  <h5>Sebastian</h5>
-  <h6>subtitulo</h6>
-  <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
-  </p>
-  </div>
-
-  <div class="caja2" >
-    <h5>Sebastian</h5>
-    <h6>subtitulo</h6>
-    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit
-    </p>
-    </div>
-
-</div>
-</div>
-
-</main>
-<!--
-  <footer class="footer-07">
+<!--<footer class="footer-07">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-12 text-center">
@@ -228,7 +138,3 @@
 				</div>
 			</div>
 		</footer>-->
-
-    </main>
-</body>
-</html>

@@ -34,6 +34,12 @@ public class LibroController {
 
         return "libros";
     }
+    
+    @GetMapping("/generos/")
+    public String listarPorGenero( Model model, @RequestParam Generos genero ) {
+        model.addAttribute("libros", libroServicio.listarPorGenero(genero));
+        return "generos";
+    }
 
     @GetMapping("/crear-libro")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -62,7 +68,8 @@ public class LibroController {
             @RequestParam Generos genero,
             @RequestParam String sinopsis,
             @RequestParam Integer ejemplares,
-            @RequestParam Integer ejemplaresPrestados
+            @RequestParam Integer ejemplaresPrestados,
+            @RequestParam Boolean destacado
     ) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         
@@ -70,7 +77,7 @@ public class LibroController {
             return "redirect:/logout";
         }
         try {
-            libroServicio.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis, genero);
+            libroServicio.agregarLibro(archivo, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresPrestados, Boolean.FALSE, autor, editorial, sinopsis, genero, destacado);
         } catch (ErrorServicio ex) {
             System.out.println("Hola, se cagó algo.");
             return "registro";
@@ -109,10 +116,11 @@ public class LibroController {
             @RequestParam String sinopsis,
             @RequestParam Integer ejemplares,
             @RequestParam Integer ejemplaresPrestados,
-            @RequestParam Boolean alta
+            @RequestParam Boolean alta,
+            @RequestParam Boolean destacado
     ) {
         try {
-            libroServicio.modificarLibro( archivo, isbn, titulo, autor, editorial, anio, genero, sinopsis, ejemplares, ejemplaresPrestados, alta);
+            libroServicio.modificarLibro( archivo, isbn, titulo, autor, editorial, anio, genero, sinopsis, ejemplares, ejemplaresPrestados, alta, destacado);
         } catch ( ErrorServicio ex ) {
             return "registro";
         }

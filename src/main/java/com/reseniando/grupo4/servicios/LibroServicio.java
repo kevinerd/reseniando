@@ -22,7 +22,7 @@ public class LibroServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public Libro agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis, Generos genero) throws ErrorServicio {
+    public Libro agregarLibro(MultipartFile archivo, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial, String sinopsis, Generos genero, Boolean destacado) throws ErrorServicio {
         validar(titulo, autor, editorial, ejemplares);
 
         Libro libro = new Libro();
@@ -36,6 +36,7 @@ public class LibroServicio {
         libro.setEditorial(editorial);
         libro.setSinopsis(sinopsis);
         libro.setGenero(genero);
+        libro.setDestacado(destacado);
 
         Foto foto = fotoServicio.guardar(archivo);
         libro.setPortada(foto);
@@ -56,7 +57,8 @@ public class LibroServicio {
             String sinopsis,
             Integer ejemplares, 
             Integer ejemplaresPrestados,
-            Boolean alta
+            Boolean alta,
+            Boolean destacado
     ) throws ErrorServicio {
         validar(titulo, autor, editorial, ejemplares);
         Libro libro = libroRepositorio.buscarPorIsbn(isbn);
@@ -71,6 +73,7 @@ public class LibroServicio {
                 libro.setAlta(alta);
                 libro.setAutor(autor);
                 libro.setEditorial(editorial);
+                libro.setDestacado(destacado);
                 
                 if( libro.getPortada() != null ) {
                     String idFoto = libro.getPortada().getId();
@@ -121,7 +124,17 @@ public class LibroServicio {
         }
     }
     
-    public List<Libro> listarTodo (){
+    public List<Libro> listarTodo(){
         return libroRepositorio.findAll();
+    }
+    
+    public List<Libro> listarDestacados() {
+        List<Libro> librosDest = libroRepositorio.buscarDestacados(Boolean.TRUE);
+        return librosDest;
+    }
+    
+    public List<Libro> listarPorGenero( Generos genero ) {
+        List<Libro> libros = libroRepositorio.buscarPorGenero(genero);
+        return libros;
     }
 }

@@ -26,7 +26,7 @@ public class PortalControlador {
     
     @GetMapping("/")
     public String index( ModelMap model ){
-        model.addAttribute("libros", libroServicio.listarTodo());
+        model.addAttribute("libros", libroServicio.listarDestacados());
         model.put("genero", Generos.values());
         return "index.html";
     }

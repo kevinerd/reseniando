@@ -82,7 +82,6 @@ public class LibroController {
             System.out.println("Hola, se cagó algo.");
             return "registro";
         }
-
         modelo.put("titulo", "¡Libro ingresado!");
         modelo.put("descripcion", "Libro ingresado.");
         return "exito";

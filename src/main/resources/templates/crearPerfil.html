@@ -6,37 +6,47 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <div class="card mt-5">
+        <div class="card mt-5 shadow">
             <div class="card-header d-flex">
                 <h1>Completa tu perfil</h1>
+                <p th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></p>
             </div>
-            <div>
-                <form th:action="@{/perfil/registrar}" method="POST" class="col-6 mx-auto mt-5" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <b><p th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></p></b>
-                        <input type="hidden" name="dni" th:value=${session.usuariosession.dni}>
-                        <div class="form-group">
-                            <label for="nickname" class="form-label"><h5>Nickname</h5></label>
-                            <input type="text" class="form-control" id="nickname" name="nickname" th:value="${nickname}" />
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="bio" class="form-label"><h5>Biografía</h5></label>
-                            <input type="text" class="form-control" id="bio" name="bio" th:value="${bio}" />
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="archivo" class="form-label"><h5>Foto</h5></label>
-                            <input type="file" class="form-control" id="archivo" name="archivo"/>
+            <div class="card-body d-flex">
+                <form th:action="@{/perfil/registrar}" method="POST" class="col-offset-2 col-md-8 mx-auto mt-5" enctype="multipart/form-data">
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="username-addon">@</span>
+                                <input type="text" class="form-control" id="nickname" name="nickname" th:value="${nickname}" placeholder="Username" aria-label="Username" aria-describedby="username-addon" />
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <button type="submit" class="btn-success px-5 py-2 ms-auto mb-5">Registrar Perfil</button>
-                    <button type="reset" class="btn-secondary px-5 py-2 ms-auto mb-5">Limpiar</button>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <label class="input-group-text" for="btn_enviar1">Foto</label>
+                                <input type="file" class="form-control" id="btn_enviar1" name="archivo"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="bio-addon">Biografía</span>
+                                <input type="text" class="form-control" id="bio" name="bio" th:value="${bio}" aria-describedby="bio-addon" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Registrar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
-
 </html>

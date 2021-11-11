@@ -31,7 +31,7 @@ public class LibroServicio {
         libro.setAnio(anio);
         libro.setEjemplares(ejemplares);
         libro.setEjemplaresPrestados(ejemplaresPrestados);
-        libro.setAlta(true);
+        libro.setAlta(Boolean.TRUE);
         libro.setAutor(autor);
         libro.setEditorial(editorial);
         libro.setSinopsis(sinopsis);
@@ -82,7 +82,7 @@ public class LibroServicio {
                     libroRepositorio.save( libro );
                 } else {
                     Foto foto = fotoServicio.guardar(archivo);
-                    libro.setPortada(foto);
+                    libro.setPortada(libro.getPortada());
                     libroRepositorio.save( libro );
                 }
             } else {

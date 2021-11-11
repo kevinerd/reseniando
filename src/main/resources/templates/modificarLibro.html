@@ -3,106 +3,143 @@
 
 <head th:replace="/fragments/head :: head"></head>
 
-    <body>
-        <nav th:replace="/fragments/nav :: nav"></nav>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header d-flex">
-                    <h1>Modificar Libro</h1>
-                </div>
-                <div>
-                    <form th:action="@{/libros/actualizar-libro}" method="POST" class="col-6 mx-auto" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <div class="form-group">
-                                <label for="titulo" class="form-label"><h5>Título</h5></label>
-                                <input type="text" class="form-control" name="titulo" th:value="${libro.titulo}" placeholder="Ingrese el título del libro">
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="card mt-5 mb-5 shadow">
+            <div class="card-header d-flex">
+                <h1>Modificar Libro</h1>
+                <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+            </div>
+            <div class="card-body d-flex">
+                <form th:action="@{/libros/actualizar-libro}" method="POST" th:object="${libro}" class="col-offset-2 col-md-8 mx-auto mt-5" enctype="multipart/form-data">
+                    <input hidden name="*{id}">
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="titulo-addon">Título</span>
+                                <input type="text" class="form-control" name="titulo" th:value="${libro.titulo}" placeholder="Ingrese el título del libro" aria-label="Titulo" aria-describedby="titulo-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="isbn" class="form-label"><h5>ISBN</h5></label>
-                                <input type="number" class="form-control" name="isbn" th:value="${libro.isbn}" placeholder="Ingrese el ISBN del libro">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="isbn-addon">ISBN</span>
+                                <input type="number" class="form-control" name="isbn" th:value="${libro.isbn}" placeholder="Ingrese el ISBN del libro" aria-label="ISBN" aria-describedby="isbn-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="sinopsis" class="form-label"><h5>Sinopsis</h5></label>
-                                <input type="text" class="form-control" name="sinopsis" th:value="${libro.sinopsis}" placeholder="Ingrese la sinopsis del libro">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="sinopsis-addon">Sinopsis</span>
+                                <input type="text" class="form-control" name="sinopsis" th:value="${libro.sinopsis}" placeholder="Ingrese la sinopsis del libro" aria-label="Sinopsis" aria-describedby="sinopsis-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="genero" class="form-label"><h5>Género</h5></label>
-                                <select class="form-select" name="genero">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="generoAddon">Género</label>
+                                <select class="form-select" name="genero" id="generoAddon">
                                     <option th:each="genero:${genero}" th:text="${genero}" th:value="${genero}"></option>
                                 </select>
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="anio" class="form-label"><h5>Año de publicación</h5></label>
-                                <input type="number" class="form-control" name="anio" th:value="${libro.anio}" placeholder="Ingrese el año de publicación del libro">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="anio-addon">Año de Publicación</span>
+                                <input type="number" class="form-control" name="anio" th:value="${libro.anio}" placeholder="Ingrese el año de publicación del libro" aria-label="Año" aria-describedby="anio-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="autor" class="form-label"><h5>Autor</h5></label>
-                                <input type="text" class="form-control" name="autor" th:value="${libro.autor}" placeholder="Ingrese el autor del libro">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="autor-addon">Autor</span>
+                                <input type="text" class="form-control" name="autor" th:value="${libro.autor}" placeholder="Ingrese el autor del libro" aria-label="Autor" aria-describedby="autor-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="editorial" class="form-label"><h5>Editorial</h5></label>
-                                <input type="text" class="form-control" name="editorial" th:value="${libro.editorial}" placeholder="Ingrese el autor del libro">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="editorial-addon">Editorial</span>
+                                <input type="text" class="form-control" name="editorial" th:value="${libro.editorial}" placeholder="Ingrese la editorial del libro" aria-label="Editorial" aria-describedby="editorial-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="ejemplares" class="form-label"><h5>Ejemplares totales</h5></label>
-                                <input type="number" class="form-control" name="ejemplares" th:value="${libro.ejemplares}" placeholder="Ingrese la cantidad de ejemplares que posee la librería">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="ejemplares-addon">Ejemplares Totales</span>
+                                <input type="number" class="form-control" name="ejemplares" th:value="${libro.ejemplares}" placeholder="Cantidad de ejemplares que posee" aria-label="Ejemplares" aria-describedby="ejemplares-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="ejemplaresPrestados" class="form-label"><h5>Ejemplares prestados</h5></label>
-                                <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${libro.ejemplaresPrestados}" placeholder="Ingrese la cantidad de ejemplares que han sido prestados">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="ejemplaresPres-addon">Ejemplares Prestados</span>
+                                <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${libro.ejemplaresPrestados}" placeholder="Cantidad de ejemplares prestados" aria-label="EjemplaresPrestados" aria-describedby="ejemplaresPres-addon">
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="disponibilidad" class="form-label"><h5>Disponible</h5></label>
-                                <br>
-                                <div class="form-check form-check-inline" id="disponibilidad">
-                                    <input class="form-check-input" type="radio" name="alta" id="disponibleSi" value="1" checked>
-                                    <label class="form-check-label" for="disponibleSi">
-                                        Si
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="alta" id="disponibleNo" value="0">
-                                    <label class="form-check-label" for="disponibleNo">
-                                        No
-                                    </label>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <label class="input-group-text" for="btn_enviar1">Foto</label>
+                                <input type="file" class="form-control" id="btn_enviar1" name="archivo"/>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-4">
+                            <label for="disponibilidad" class="form-label"><h5>Disponible</h5></label>
                             <br>
+                            <div class="form-check form-check-inline" id="disponibilidad">
+                                <input class="form-check-input" type="radio" name="alta" id="disponibleSi" value="1" checked>
+                                <label class="form-check-label" for="disponibleSi">
+                                    Si
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="alta" id="disponibleNo" value="0">
+                                <label class="form-check-label" for="disponibleNo">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <label for="destacado" class="form-label"><h5>Destacado</h5></label>
                             <br>
                             <div class="form-check form-check-inline" id="destacado">
-                                <input class="form-check-input" type="radio" name="dest" id="destacadoSi" value="1">
+                                <input class="form-check-input" type="radio" name="destacado" id="destacadoSi" value="1">
                                 <label class="form-check-label" for="destacadoSi">
                                     Si
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="dest" id="destacadoNo" value="0" checked>
+                                <input class="form-check-input" type="radio" name="destacado" id="destacadoNo" value="0" checked>
                                 <label class="form-check-label" for="destacadoNo">
                                     No
                                 </label>
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="archivo" class="form-label"><h5>Portada</h5></label>
-                                <input type="file" class="form-control" name="archivo"/>
-                            </div>
-                            <br>
                         </div>
-                        <button type="submit" class="btn-success px-5 py-2 ms-auto">Guardar</button>
-                        <button type="reset" class="btn-secondary px-5 py-2 ms-auto">Limpiar</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Guardar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
 </html>

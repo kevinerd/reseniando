@@ -3,58 +3,101 @@
 
 <head th:replace="/fragments/head :: head"></head>
 
-    <body>
-        <nav th:replace="/fragments/nav :: nav"></nav>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header d-flex">
-                    <h1>Registrar Libro</h1>
-                </div>
-                <div>
-                    <form th:action="@{/libros/registrar-libro}" method="POST" th:object="${libro}" class="col-6 mx-auto" enctype="multipart/form-data">
-                        <input hidden name="*{id}">
-                        <br>
-                        <div class="mb-3">
-                            <label for="titulo" class="form-label"><h5>Título</h5></label>
-                            <input type="text" class="form-control" name="titulo" th:value="${titulo}" placeholder="Ingrese el título del libro">
-                            <br>
-                            
-                            <label for="isbn" class="form-label"><h5>ISBN</h5></label>
-                            <input type="number" class="form-control" name="isbn" th:value="${isbn}" placeholder="Ingrese el ISBN del libro">
-                            <br>
-                            
-                            <label for="sinopsis" class="form-label"><h5>Sinopsis</h5></label>
-                            <input type="text" class="form-control" name="sinopsis" th:value="${sinopsis}" placeholder="Ingrese la sinopsis del libro">
-                            <br>
-
-                            <label for="genero" class="form-label"><h5>Género</h5></label>
-                            <select class="form-select" name="genero">
-                                <option th:each="genero:${genero}" th:text="${genero}" th:value="${genero}"></option>
-                            </select>
-                            <br>
-
-                            <label for="anio" class="form-label"><h5>Año de publicación</h5></label>
-                            <input type="number" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro">
-                            <br>
-                            
-                            <label for="autor" class="form-label"><h5>Autor</h5></label>
-                            <input type="text" class="form-control" name="autor" th:value="${autor}" placeholder="Ingrese el autor del libro">
-                            <br>
-
-                            <label for="editorial" class="form-label"><h5>Editorial</h5></label>
-                            <input type="text" class="form-control" name="editorial" th:value="${editorial}" placeholder="Ingrese el autor del libro">
-                            <br>
-
-                            <label for="ejemplares" class="form-label"><h5>Ejemplares totales</h5></label>
-                            <input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}" placeholder="Ingrese la cantidad de ejemplares que posee la librería">
-                            <br>
-
-                            <label for="ejemplaresPrestados" class="form-label"><h5>Ejemplares prestados</h5></label>
-                            <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${ejemplaresPrestados}" placeholder="Ingrese la cantidad de ejemplares que han sido prestados">
-                            <br>
-                            <label>Foto</label>
-                            <input type="file" class="form-control" name="archivo"/>
-                            <br>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="card mt-5 mb-5 shadow">
+            <div class="card-header d-flex">
+                <h1>Registrar Libro</h1>
+                <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+            </div>
+            <div class="card-body d-flex">
+                <form th:action="@{/libros/registrar-libro}" method="POST" th:object="${libro}" class="col-offset-2 col-md-8 mx-auto mt-5" enctype="multipart/form-data">
+                    <input hidden name="*{id}">
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="titulo-addon">Título</span>
+                                <input type="text" class="form-control" name="titulo" th:value="${titulo}" placeholder="Ingrese el título del libro" aria-label="Titulo" aria-describedby="titulo-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="isbn-addon">ISBN</span>
+                                <input type="number" class="form-control" name="isbn" th:value="${isbn}" placeholder="Ingrese el ISBN del libro" aria-label="ISBN" aria-describedby="isbn-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="sinopsis-addon">Sinopsis</span>
+                                <input type="text" class="form-control" name="sinopsis" th:value="${sinopsis}" placeholder="Ingrese la sinopsis del libro" aria-label="Sinopsis" aria-describedby="sinopsis-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="generoAddon">Género</label>
+                                <select class="form-select" name="genero" id="generoAddon">
+                                    <option th:each="genero:${genero}" th:text="${genero}" th:value="${genero}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="anio-addon">Año de Publicación</span>
+                                <input type="number" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro" aria-label="Año" aria-describedby="anio-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="autor-addon">Autor</span>
+                                <input type="text" class="form-control" name="autor" th:value="${autor}" placeholder="Ingrese el autor del libro" aria-label="Autor" aria-describedby="autor-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="editorial-addon">Editorial</span>
+                                <input type="text" class="form-control" name="editorial" th:value="${editorial}" placeholder="Ingrese la editorial del libro" aria-label="Editorial" aria-describedby="editorial-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="ejemplares-addon">Ejemplares Totales</span>
+                                <input type="number" class="form-control" name="ejemplares" th:value="${ejemplares}" placeholder="Cantidad de ejemplares que posee" aria-label="Ejemplares" aria-describedby="ejemplares-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="ejemplaresPres-addon">Ejemplares Prestados</span>
+                                <input type="number" class="form-control" name="ejemplaresPrestados" th:value="${ejemplaresPrestados}" placeholder="Cantidad de ejemplares prestados" aria-label="EjemplaresPrestados" aria-describedby="ejemplaresPres-addon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <label class="input-group-text" for="btn_enviar1">Foto</label>
+                                <input type="file" class="form-control" id="btn_enviar1" name="archivo"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-4">
                             <label for="disponibilidad" class="form-label"><h5>Disponible</h5></label>
                             <br>
                             <div class="form-check form-check-inline" id="disponibilidad">
@@ -69,7 +112,8 @@
                                     No
                                 </label>
                             </div>
-                            <br>
+                        </div>
+                        <div class="col-md-4">
                             <label for="destacado" class="form-label"><h5>Destacado</h5></label>
                             <br>
                             <div class="form-check form-check-inline" id="destacado">
@@ -85,12 +129,17 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn-dark px-5 py-2 ms-auto">Guardar</button>
-                        <button type="reset" class="btn-dark px-5 py-2 ms-auto">Limpiar</button>
-                    </form>
-                    <p></p>
-                </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Guardar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
 </html>

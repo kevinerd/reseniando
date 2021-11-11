@@ -1,32 +1,54 @@
 <!DOCTYPE html>
-
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="/fragments/head :: head"></head>
-    
-    <body>
-        <nav th:replace="/fragments/nav :: nav"></nav>
-        <div class="container">
-            <h1>Alquila!</h1>
-            <br>
-            <form action="/prestamos/registrar-prestamo" method="POST" >
-                <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
-
-                <label for="fechaPrestamo" class="form-label"><h5>Fecha de prestamo</h5></label>
-                <br>
-                <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}" disabled>
-                <br>  
-                <label for="fechaEstimativa" class="form-label"><h5>Fecha de devolución</h5></label>
-                <br>
-                    <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}" disabled>
-                <br>      
-                <label for="isbn" class="form-label"><h5>Libro</h5></label>
-                    <select class="form-select" name="isbn">
-                        <option value="DEFAULT" selected>-- Elige un libro --</option>
-                        <option th:each="libro:${libros}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
-                    </select>
-                <button type="submit" class="btn btn-primary m-5">Registrar</button>
-            </form>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="card mt-5 shadow">
+            <div class="card-header d-flex">
+                <h1>Registrar Préstamo</h1>
+                <p th:if="${error != null}" th:text="${'ERROR: ' + error}" style="color:red;"></p>
+            </div>
+            <div class="card-body d-flex">
+                <form th:action="@{/prestamos/registrar-prestamo}" method="POST" class="col-offset-2 col-md-8 mx-auto mt-5">
+                    <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="fecha1-addon">Fecha de Inicio</span>
+                                <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}" aria-label="FechaInicio" aria-describedby="fecha1-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="fecha2-addon">Fecha de Devolución</span>
+                                <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}" aria-label="FechaFin" aria-describedby="fecha2-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <label for="isbnAddon" class="input-group-text"><h5>Libro</h5></label>
+                                <select class="form-select" name="isbn" id="isbnAddon">
+                                    <option value="DEFAULT" selected>-- Elige un libro --</option>
+                                    <option th:each="libro:${libros}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Registrar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </body>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
 </html>

@@ -6,39 +6,48 @@
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <div class="card mt-5">
+        <div class="card mt-5 shadow">
             <div class="card-header d-flex">
-                <h1>Edita tu perfil</h1>
+                <h1>Edita tu Perfil</h1>
                 <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
             </div>
-            <div>
-                <form th:action="@{/perfil/actualizar-perfil}" method="POST" class="col-6 mx-auto mt-5" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <input type="hidden" name="id" th:value=${perfil.id}>
-                        <div class="form-group">
-                            <label for="nickname" class="form-label"><h5>Nickname</h5></label>
-                            <input type="text" class="form-control" id="nickname" name="nickname" th:value="${perfil.nickname}" />
-                            <p th:if="${nickname != null}" th:text="${error}" style="color:red;"></p>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="bio" class="form-label"><h5>Biografía</h5></label>
-                            <input type="text" class="form-control" id="bio" name="bio" th:value="${perfil.bio}" />
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="archivo" class="form-label"><h5>Foto</h5></label>
-                            <input type="file" class="form-control" id="archivo" name="archivo"/>
-                            <p th:if="${archivo != null}" th:text="${error}" style="color:red;"></p>
+            <div class="card-body d-flex">
+                <form th:action="@{/perfil/actualizar-perfil}" method="POST" class="col-offset-2 col-md-8 mx-auto mt-5" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:value=${perfil.id}>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <input type="text" class="form-control" id="nickname" name="nickname" th:value="${perfil.nickname}" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <button type="submit" class="btn-success px-5 py-2 ms-auto mb-5">Modificar</button>
-                    <button type="reset" class="btn-secondary px-5 py-2 ms-auto mb-5">Limpiar</button>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <label class="input-group-text" for="btn_enviar1">Foto</label>
+                                <input type="file" class="form-control" id="btn_enviar1" name="archivo"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="bio-addon">Biografía</span>
+                                <input type="text" class="form-control" id="bio" name="bio" th:value="${perfil.bio}" aria-describedby="bio-addon" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Modificar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
-
 </html>

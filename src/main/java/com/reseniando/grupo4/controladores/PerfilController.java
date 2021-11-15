@@ -1,10 +1,13 @@
 package com.reseniando.grupo4.controladores;
 
 import com.reseniando.grupo4.entidades.Perfil;
+import com.reseniando.grupo4.entidades.Resenia;
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import com.reseniando.grupo4.servicios.PerfilServicio;
+import com.reseniando.grupo4.servicios.PrestamoServicio;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,22 @@ public class PerfilController {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    
+    @Autowired
+    private PrestamoServicio prestamoServicio;
+    
+    @GetMapping("/")
+    public String perfil( ModelMap model, HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
+        List<Resenia> reseniasPerfil = perfilServicio.listarResenias(login.getPerfil());
+        model.addAttribute("reseniasPerfil", reseniasPerfil);
+        model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
+        
+        return "perfil";
+    }
     
     @GetMapping("/crear-perfil")
     public String crearPerfil( HttpSession session ) {
@@ -94,7 +113,7 @@ public class PerfilController {
         try {
             perfil = perfilServicio.findById(id);
             perfilServicio.modificarPerfil(archivo, id, nickname, bio);
-            return "redirect:/inicio";
+            return "redirect:/perfil/";
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put( "archivo", archivo );

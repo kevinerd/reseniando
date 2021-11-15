@@ -39,7 +39,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                             .loginProcessingUrl("/logincheck") //autentifica usuario
                             .usernameParameter("username") // Como viajan los parametros usuario
                             .passwordParameter("password")// Como viajan los parametros clave
-                            .defaultSuccessUrl("/inicio") // A que URL viaja si el usuario se autentica con exÃ­to
+                            .defaultSuccessUrl("/perfil/") // A que URL viaja si el usuario se autentica con exÃ­to
                             .permitAll()
                 .and().logout() // Aca configuro la URL de salida
                         .logoutUrl("/logout") //si el usuario sale

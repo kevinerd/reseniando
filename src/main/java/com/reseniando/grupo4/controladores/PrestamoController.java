@@ -38,8 +38,7 @@ public class PrestamoController {
             return "redirect:/logout";
         }
         model.addAttribute("prestamos", prestamoServicio.listarTodo());
-        model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
-
+        
         return "prestamos";
     }
 
@@ -109,7 +108,7 @@ public class PrestamoController {
         try {
             prestamo = prestamoServicio.findById(id);
 //            prestamoServicio.modificarPrestamo( id, fechaDevolucion, devuelto );
-            return "redirect:/inicio";
+            return "redirect:/perfil/";
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("prestamo", prestamo);

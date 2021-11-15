@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-8">
+                <div class="card shadow" th:each="dataRes:${resenia}">
+                    <h3 class="card-header" th:text="${dataRes.titulo}"></h3>
+                    <div class="card-body">
+                        <p th:text="${dataRes.comentario}"></p>
+                    </div>
+                    <div class="card-footer text-muted" th:each="dataPerfil:${perfil}" >
+                        <p>
+                            Escrita por <a th:href="@{/perfil(id=__${perfil.id}__)}" th:text="${dataPerfil.nickname}" class="card-link">
+                            </a>, el <span th:text="${dataRes.fecha}"></span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card libros" style="max-width: 250px;" th:each="dataLibro:${libro}">
+                    <img th:if="${ dataLibro.portada != null }" th:src="${'/foto/libro/' + dataLibro.isbn}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${dataLibro.titulo}" th:value="${dataLibro.isbn}"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

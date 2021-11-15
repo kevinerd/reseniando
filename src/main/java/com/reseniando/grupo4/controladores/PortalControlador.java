@@ -1,11 +1,9 @@
 package com.reseniando.grupo4.controladores;
 
-import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.servicios.LibroServicio;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,15 +29,15 @@ public class PortalControlador {
         return "index.html";
     }
     
-    @GetMapping("/inicio")
-    public String inicio( HttpSession session ) {
-        Usuario login = (Usuario) session.getAttribute("usuariosession");
-        if( login == null ) {
-            return "redirect:/logout";
-        }
-        return "inicio.html";
-    }
-    
+//    @GetMapping("/lista")
+//    public String lista(ModelMap modelo) {
+//
+//            List<Perro> perrosLista = perroService.listarTodos();
+//
+//            modelo.addAttribute("perros",perrosLista);		
+//            return "list-perro";
+//    }
+
     @GetMapping("/login")
     public String login( @RequestParam( required = false ) String error, @RequestParam( required = false ) String logout, ModelMap model ) {
         if( error != null ) {

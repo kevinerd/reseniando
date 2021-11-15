@@ -4,53 +4,35 @@
 <head th:replace="/fragments/head :: head"></head>
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
-    <div class="container mt-2">
-        <!-- <div th:if="${session.usuariosession != null}">
-            <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="'Resenias de ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
-            <br>
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Título</th>
-                        <th scope="col">Comentario</th>
-                        <th scope="col">Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="resenia:${reseniasPerfil}">
-                        <th scope="row">1</th>
-                        <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
-                        <td th:text="${resenia.comentario}" th:value="${resenia.comentario}"></td>
-                        <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
-                    </tr>
-                </thead>
-            </table>
-        </div> -->
-
-        <h2 class="masthead-subheading mb-0">Todas las Reseñas</h2>
-        <br>
-        <table class="table table-dark table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Comentario</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="resenia:${resenias}">
-                    <th scope="row">1</th>
-                    <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
-                    <td th:text="${resenia.comentario}" th:value="${resenia.comentario}"></td>
-                    <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
-                    <td><button><a th:href="@{/resenias/editar-resenia(id=__${resenia.id}__)}" class="btn btn-outline-warning btn-sm" role="button">Modificar</a></button></td>
-                </tr>
-            </thead>
-        </table>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="offset-2 col-md-8">
+                <h2 class="masthead-subheading mb-0">Reseñas disponibles</h2>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="offset-2 col-md-8">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Título</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="resenia:${resenias}">
+                            <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
+                            <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
+                            <td>
+                                <a th:href="@{/resenias/resenia(id=__${resenia.id}__)}" class="btn btn-outline-primary btn-sm" role="button">Ver</a>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
-
 </html>

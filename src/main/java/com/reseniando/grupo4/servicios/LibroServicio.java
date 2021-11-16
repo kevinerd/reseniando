@@ -47,15 +47,15 @@ public class LibroServicio {
 
     @Transactional
     public void modificarLibro(
-            MultipartFile archivo, 
-            Long isbn, 
+            MultipartFile archivo,
+            Long isbn,
             String titulo,
-            String autor, 
+            String autor,
             String editorial,
-            Integer anio, 
+            Integer anio,
             Generos genero,
             String sinopsis,
-            Integer ejemplares, 
+            Integer ejemplares,
             Integer ejemplaresPrestados,
             Boolean alta,
             Boolean destacado
@@ -63,7 +63,7 @@ public class LibroServicio {
         validar(titulo, autor, editorial, ejemplares);
         Libro libro = libroRepositorio.buscarPorIsbn(isbn);
 
-        if ( libro != null ) {
+        if (libro != null) {
             if (true) {  //Verificar que el usuario sea ADMIN
                 libro.setIsbn(isbn);
                 libro.setTitulo(titulo);
@@ -74,16 +74,16 @@ public class LibroServicio {
                 libro.setAutor(autor);
                 libro.setEditorial(editorial);
                 libro.setDestacado(destacado);
-                
-                if( libro.getPortada() != null ) {
+
+                if (libro.getPortada() != null) {
                     String idFoto = libro.getPortada().getId();
-                    Foto foto = fotoServicio.actualizar( idFoto, archivo );
+                    Foto foto = fotoServicio.actualizar(idFoto, archivo);
                     libro.setPortada(foto);
-                    libroRepositorio.save( libro );
+                    libroRepositorio.save(libro);
                 } else {
                     Foto foto = fotoServicio.guardar(archivo);
                     libro.setPortada(libro.getPortada());
-                    libroRepositorio.save( libro );
+                    libroRepositorio.save(libro);
                 }
             } else {
                 throw new ErrorServicio("No tienes los permisos para realizar esta operación.");
@@ -123,17 +123,17 @@ public class LibroServicio {
             throw new ErrorServicio("Tiene que haber, al menos, un ejemplar.");
         }
     }
-    
-    public List<Libro> listarTodo(){
+
+    public List<Libro> listarTodo() {
         return libroRepositorio.findAll();
     }
-    
+
     public List<Libro> listarDestacados() {
         List<Libro> librosDest = libroRepositorio.buscarDestacados(Boolean.TRUE);
         return librosDest;
     }
-    
-    public List<Libro> listarPorGenero( Generos genero ) {
+
+    public List<Libro> listarPorGenero(Generos genero) {
         List<Libro> libros = libroRepositorio.buscarPorGenero(genero);
         return libros;
     }

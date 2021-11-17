@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="card mt-5 shadow">
+            <div class="card-header d-flex">
+                <h1>Editar Préstamo</h1>
+                <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+            </div>
+            <div class="card-body d-flex mb-5">
+                <form th:action="@{/prestamos/actualizar-prestamo}" method="POST" class="col-offset-2 col-md-8 mx-auto mt-5">
+                    <input type="hidden" name="id" th:value=${prestamo.id}>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="usuario-addon">Usuario</span>
+                                <input type="text" class="form-control" name="usuario" th:value="${usuario.nombre + ' ' + usuario.apellido}" aria-label="Usuario" aria-describedby="usuario-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="fecha1-addon">Fecha de Inicio</span>
+                                <input type="date" class="form-control" name="fechaPrestamo" th:value="${prestamo.fechaPrestamo}" aria-label="FechaInicio" aria-describedby="fecha1-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="fecha2-addon">Fecha de Devolución</span>
+                                <input type="date" class="form-control" name="fechaEstimativa" th:value="${prestamo.fechaEstimativa}" aria-label="FechaFin" aria-describedby="fecha2-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="libro-addon">Libro</span>
+                                <input type="text" class="form-control" name="titulo" th:value="${libro.titulo + ' - ' + libro.autor}" aria-label="FechaFin" aria-describedby="libro-addon" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-2 col-md-8 d-flex">
+                            <button type="submit" class="btn btn-warning px-5 py-2 m-5">Modificar</button>
+                            <button type="reset" class="btn btn-secondary px-5 py-2 m-5">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

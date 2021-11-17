@@ -12,13 +12,10 @@
                         <button class="nav-link active" id="pills-datos-tab" data-bs-toggle="pill" data-bs-target="#pills-datos" type="button" role="tab" aria-controls="pills-datos" aria-selected="true">Mis Datos</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-resenias-tab" data-bs-toggle="pill" data-bs-target="#pills-resenias" type="button" role="tab" aria-controls="pills-resenias" aria-selected="false">Reseñas</button>
+                        <button class="nav-link" id="pills-resenias-tab" data-bs-toggle="pill" data-bs-target="#pills-resenias" type="button" role="tab" aria-controls="pills-resenias" aria-selected="false">Mis Reseñas</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-prestamos-tab" data-bs-toggle="pill" data-bs-target="#pills-prestamos" type="button" role="tab" aria-controls="pills-prestamos" aria-selected="false">Prestamos</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-admin-tab" data-bs-toggle="pill" data-bs-target="#pills-admin" type="button" role="tab" aria-controls="pills-admin" aria-selected="false">Administración</button>
+                        <button class="nav-link" id="pills-prestamos-tab" data-bs-toggle="pill" data-bs-target="#pills-prestamos" type="button" role="tab" aria-controls="pills-prestamos" aria-selected="false">Mis Prestamos</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -117,31 +114,6 @@
                                         </tr>
                                     </thead>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
-                        <div class="row">
-                            <div class="offset-2 col-md-8">
-                                <div class="card mt-5 bg-dark text-white" sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <div class="card-header d-flex">
-                                        <h1>Administración</h1>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="mb-3">
-                                                    <a th:href="@{/libros/crear-libro}" class="btn btn-primary px-5 py-2 ms-auto">Crear libro</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="mb-3 p0">
-                                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary py-2 ms-auto">Crear Prestamo</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

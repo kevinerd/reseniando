@@ -29,9 +29,6 @@
                 <li class="nav-item">
                     <a th:href="@{/resenias/lista}" class="nav-link">Reseñas</a>
                 </li>
-                <li class="nav-item">
-                    <a th:href="@{/prestamos/lista}" class="nav-link">Prestamos</a>
-                </li>
                 <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Perfil
@@ -47,6 +44,19 @@
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="nav-link">Crea tu perfil</a>
+                </li>
+                <li class="nav-item dropdown" th:if="${session.usuariosession != null}"  sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Administración
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/admin/libros}">Libros</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/admin/prestamos}">Prestamos</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <form class="d-flex">

@@ -10,8 +10,8 @@ import com.reseniando.grupo4.servicios.PrestamoServicio;
 import java.time.LocalDate;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,18 +30,7 @@ public class PrestamoController {
     
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-
-    @GetMapping("/lista")
-    public String listarPrestamos( Model model, HttpSession session ) {
-        Usuario login = (Usuario) session.getAttribute("usuariosession");
-        if( login == null ) {
-            return "redirect:/logout";
-        }
-        model.addAttribute("prestamos", prestamoServicio.listarTodo());
-        
-        return "prestamos";
-    }
-
+    
     @GetMapping("/crear-prestamo")
     public String crearPrestamo( ModelMap model, HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
@@ -82,6 +71,7 @@ public class PrestamoController {
     }
     
     @GetMapping("/editar-prestamo")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String editarPrestamo( @RequestParam String id, ModelMap model, HttpSession session ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
         if( login == null ) {
@@ -89,15 +79,21 @@ public class PrestamoController {
         }
         try {
             Prestamo prestamo = prestamoServicio.findById(id);
+            Usuario usuario = usuarioRepositorio.findByDni(prestamo.usuario.getDni());
+            Libro libro = libroRepositorio.buscarPorIsbn(prestamo.libro.getIsbn());
+            
             model.addAttribute("prestamo", prestamo);
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("libro", libro);
         } catch (ErrorServicio e) {
             model.addAttribute("error", e.getMessage());
         }
 
-        return "prestamo";
+        return "modificarPrestamo";
     }
 
     @PostMapping("/actualizar-prestamo")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String actualizar(
             ModelMap modelo,
             HttpSession session,

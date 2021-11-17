@@ -28,6 +28,23 @@ main{
     padding: 0%;
 }
 
+h1, h2, h3 {
+    font-family: 'Volkhov', serif;
+    color: #181E4B;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+h2 {
+    font-size: 3rem;
+}
+h3 {
+    font-size: 2rem;
+}
+
 /*
 header{
     height: 15vh;
@@ -307,4 +324,9 @@ header.masthead .bg-circle-4 {
     header.masthead .masthead-content .masthead-subheading {
         font-size: 4rem;
     }
+}
+
+/* --- LIBRO --- */
+.imgLibro {
+    max-width: 20rem;
 }

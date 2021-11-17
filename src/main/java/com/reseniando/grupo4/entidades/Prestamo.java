@@ -1,15 +1,11 @@
 package com.reseniando.grupo4.entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Prestamo {
@@ -29,9 +25,9 @@ public class Prestamo {
     private LocalDate fechaDevolucion;
     private Boolean devuelto;
     @ManyToOne
-    private Libro libro;
+    public Libro libro;
     @ManyToOne
-    private Usuario usuario;
+    public Usuario usuario;
 
     public Prestamo() {
         //this.fechaPrestamo = new LocalDate();

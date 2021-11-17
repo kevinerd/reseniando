@@ -64,30 +64,20 @@ public class LibroServicio {
         Libro libro = libroRepositorio.buscarPorIsbn(isbn);
 
         if (libro != null) {
-            if (true) {  //Verificar que el usuario sea ADMIN
-                libro.setIsbn(isbn);
-                libro.setTitulo(titulo);
-                libro.setAnio(anio);
-                libro.setEjemplares(ejemplares);
-                libro.setEjemplaresPrestados(ejemplaresPrestados);
-                libro.setAlta(alta);
-                libro.setAutor(autor);
-                libro.setEditorial(editorial);
-                libro.setDestacado(destacado);
-
-                if (libro.getPortada() != null) {
-                    String idFoto = libro.getPortada().getId();
-                    Foto foto = fotoServicio.actualizar(idFoto, archivo);
-                    libro.setPortada(foto);
-                    libroRepositorio.save(libro);
-                } else {
-                    Foto foto = fotoServicio.guardar(archivo);
-                    libro.setPortada(libro.getPortada());
-                    libroRepositorio.save(libro);
-                }
-            } else {
-                throw new ErrorServicio("No tienes los permisos para realizar esta operación.");
-            }
+            libro.setIsbn(isbn);
+            libro.setTitulo(titulo);
+            libro.setAutor(autor);
+            libro.setEditorial(editorial);
+            libro.setAnio(anio);
+            libro.setGenero(genero);
+            libro.setSinopsis(sinopsis);
+            libro.setEjemplares(ejemplares);
+            libro.setEjemplaresPrestados(ejemplaresPrestados);
+            libro.setAlta(alta);
+            libro.setDestacado(destacado);
+            Foto foto = fotoServicio.actualizar(libro.getPortada().getId(), archivo);
+            libro.setPortada(foto);
+            libroRepositorio.save(libro);
         } else {
             throw new ErrorServicio("No existe el libro solicitado.");
         }
@@ -99,11 +89,7 @@ public class LibroServicio {
 
         if (respuesta.isPresent()) {
             Libro libro = respuesta.get();
-            if (true) {  //Verificar que el usuario sea ADMIN
-                libro.setAlta(Boolean.FALSE);
-            } else {
-                throw new ErrorServicio("No tienes los permisos para realizar esta operación.");
-            }
+            libro.setAlta(Boolean.FALSE);
         } else {
             throw new ErrorServicio("No existe el libro solicitado.");
         }

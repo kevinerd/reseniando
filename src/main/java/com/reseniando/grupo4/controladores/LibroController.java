@@ -40,6 +40,16 @@ public class LibroController {
         model.addAttribute("libros", libroServicio.listarPorGenero(genero));
         return "generos";
     }
+    
+    @GetMapping("/libro")
+    public String libro( Model model, @RequestParam Long isbn ) {
+        Libro libro = libroRepositorio.buscarPorIsbn(isbn);
+        
+        model.addAttribute("libro", libro);
+        model.addAttribute("resenias", libro.getResenias());
+        
+        return "libro";
+    }
 
     @GetMapping("/crear-libro")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -104,6 +114,7 @@ public class LibroController {
     }
     
     @PostMapping("/actualizar-libro")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String actualizarLibro( ModelMap modelo,
             MultipartFile archivo,
             @RequestParam Long isbn,

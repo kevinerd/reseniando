@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container" th:each="dataLibro:${libro}">
+        <div class="card shadow mt-5 mb-5">
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="row"> <!-- -- PORTADA -- -->
+                        <div class="col-md-12 text-center">
+                            <img th:if="${ dataLibro.portada != null }" th:src="${'/foto/libro/' + dataLibro.isbn}" class="card-img-top imgLibro m-3">
+                            <img th:if="${ libro.portada == null }" src="/img/portadaLibro.png" class="card-img-top imgLibro m-3"/>
+                        </div>
+                    </div>
+                    <div class="row"> <!-- -- BOTONES -- -->
+                        <div class="d-grid gap-1 offset-2 col-8 mx-auto">
+                            <a th:href="@{/resenias/crear-resenia(isbn=__${libro.isbn}__)}" class="btn btn-outline-primary btn-lg mb-3 d-inline py-1" type="button" style="border-radius: 0px;" sec:authorize="isAuthenticated()" role="button">Reseñar</a>
+                            <a th:href="@{/resenias/crear-resenia(isbn=__${libro.isbn}__)}" class="btn btn-outline-primary btn-lg mb-3 d-inline py-1" type="button" style="border-radius: 0px;" sec:authorize="isAuthenticated()" role="button">Guardar en Favoritos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7"> <!-- -- INFO LIBRO -- -->
+                    <div class="row">
+                        <h1 th:text="${dataLibro.titulo}"></h1>
+                        <h3 th:text="${dataLibro.autor}"></h3>
+                    </div>
+                    <div class="row mt-3">
+                        <h5 th:text="${'Editorial: ' + dataLibro.editorial}"></h5>
+                        <h5 th:text="${'Año: ' + dataLibro.anio}"></h5>
+                        <h5 th:text="${'Género: ' + dataLibro.genero}"></h5>
+                    </div>
+                    <div class="row mt-3">
+                        <h5>Sinopsis:</h5>
+                        <p th:text="${dataLibro.sinopsis}"></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row"> <!-- -- RESEÑAS -- -->
+                <div class="col-md-12 text-center">
+                    <h1 th:text="${'Reseñas de ' + dataLibro.titulo}"></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" th:each="resenia:${resenias}">
+                    <div class="card shadow m-3">
+                        <div class="card-head">
+                            <h5 th:text="${resenia.titulo}"></h5>
+                        </div>
+                        <div class="card-body">
+                            <p th:text="${resenia.comentario}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

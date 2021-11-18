@@ -37,6 +37,16 @@ public class PortalControlador {
 
         return "index.html";
     }
+    
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "contacto";
+    }
+    
+    @PostMapping("/contacto/exito")
+    public String exito() {
+        return "contactoExito";
+    }
 
 //    @GetMapping("/lista")
 //    public String lista(ModelMap modelo) {

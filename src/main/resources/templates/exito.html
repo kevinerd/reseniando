@@ -5,9 +5,24 @@
 
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
-    <div class="container">
-        <h1> TA TODO PIOLA </h1>
-        <h2 class="display-4" th:text="${titulo}" ></h2>
-        <p th:text="${descripcion}"></p>
-    </div>
+    <header class="masthead-exito text-center">
+        <div class="masthead-content my-auto">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-md-12 mt-5">
+                        <h1 class="masthead-heading mb-0" th:text="${titulo}"></h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mt-5">
+                        <h2 class="mb-0" th:text="${descripcion}"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </header>
 </body>

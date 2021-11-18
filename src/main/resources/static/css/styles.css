@@ -45,11 +45,6 @@ h3 {
     font-size: 2rem;
 }
 
-/*
-header{
-    height: 15vh;
-}*/
-
 /* --- HEADER --- */
 .imgHeader {
     margin-top: 5rem;
@@ -125,6 +120,11 @@ header{
 }
 
 /* --- MENÚ / NAV BAR --- */
+a.navbar-brand {
+    font-family: 'Volkhov', serif;
+    font-size: 1.75rem;
+}
+
 li a{
     text-decoration: none;
     color: white;
@@ -250,19 +250,86 @@ footer {
     width: 100%;
     height: 150px;
 }
+/* --- ÉXITO --- */
+header.masthead-exito {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(0deg, #ABDFEB 0%, #54C4C4 100%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+    height: 50rem;
+}
+
+header.masthead-exito .masthead-content {
+    z-index: 1;
+    position: relative;
+}
+
+header.masthead-exito .masthead-content .masthead-heading {
+    font-size: 4rem;
+}
+
+header.masthead-exito .masthead-content .masthead-subheading {
+    font-size: 2rem;
+}
+
+header.masthead-exito .bg-circle {
+    z-index: 0;
+    position: absolute;
+    border-radius: 100%;
+    background: linear-gradient(0deg, #54C4C4 0%, #ABDFEB 100%);
+    height: 100%;
+}
+
+header.masthead-exito .bg-circle-1 {
+    height: 90rem;
+    width: 90rem;
+    bottom: -55rem;
+    left: -55rem;
+}
+
+header.masthead-exito .bg-circle-2 {
+    height: 50rem;
+    width: 50rem;
+    top: -25rem;
+    right: -25rem;
+}
+
+header.masthead-exito .bg-circle-3 {
+    height: 20rem;
+    width: 20rem;
+    bottom: -10rem;
+    right: 5%;
+}
+
+header.masthead-exito .bg-circle-4 {
+    height: 30rem;
+    width: 30rem;
+    top: -5rem;
+    right: 35%;
+}
+
+@media (min-width: 992px) {
+    header.masthead-exito .masthead-content .masthead-heading {
+        font-size: 6rem;
+    }
+    header.masthead-exito .masthead-content .masthead-subheading {
+        font-size: 4rem;
+    }
+}
 
 /* --- ERROR --- */
 header.masthead {
     position: relative;
     overflow: hidden;
-    padding-top: calc(7rem + 72px);
-    padding-bottom: 7rem;
-    background: linear-gradient(0deg, #ABDFEB 0%, #56C5C5 100%);
-    /*background-image: url("/img/error.jpg");*/
+    background: linear-gradient(0deg, #ec8181 0%, #c55656 100%);
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
     background-size: cover;
+    height: 65rem;
 }
 
 header.masthead .masthead-content {
@@ -282,7 +349,8 @@ header.masthead .bg-circle {
     z-index: 0;
     position: absolute;
     border-radius: 100%;
-    background: linear-gradient(0deg, #338494 0%, #46C0BE 100%);
+    background: linear-gradient(0deg, #c55656 0%, #ec8181 100%);
+    height: 100%;
 }
 
 header.masthead .bg-circle-1 {
@@ -314,10 +382,6 @@ header.masthead .bg-circle-4 {
 }
 
 @media (min-width: 992px) {
-    header.masthead {
-        padding-top: calc(10rem + 55px);
-        padding-bottom: 10rem;
-    }
     header.masthead .masthead-content .masthead-heading {
         font-size: 6rem;
     }
@@ -329,4 +393,51 @@ header.masthead .bg-circle-4 {
 /* --- LIBRO --- */
 .imgLibro {
     max-width: 20rem;
+}
+
+/* --- CONTACTO --- */
+.iconContacto {
+    max-width: 3rem;
+    margin-right: 1rem;
+}
+
+a.aContact {
+    text-decoration: none!important;
+}
+
+.headerReseñas {
+    background-image: url("/img/HeaderContacto.png");
+    background-color: #BAD0FF;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
+
+.bright {
+    border-right: #a8a8a8 1px solid;
+}
+
+.mapaContacto {
+    max-width: 33rem;
+    margin: 1rem;
+}
+
+.infoContacto {
+    font-weight: bold;
+    color: #DF6951;
+    margin-top: 1rem;
+    font-family: Poppins;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+/* --- REGISTRO --- */
+.headerRegistro {
+    background-image: url("/img/headerRegistro.png");
+    background-color: #FEE0D5;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
 }

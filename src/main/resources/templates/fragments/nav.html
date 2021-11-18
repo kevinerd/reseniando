@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Reseñando</a>
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="/img/logoLibros.svg" alt="" width="50" height="34" class="d-inline-block align-text-top"> Reseñando
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,7 +26,7 @@
                     <a class="nav-link" th:href="@{/inicio}">Preguntas frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contactos</a>
+                    <a class="nav-link" th:href="@{/contacto}">Contacto</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/resenias/lista}" class="nav-link">Reseñas</a>

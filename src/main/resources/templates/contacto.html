@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <header class="headerContacto text-center"></header>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card shadow mb-5">
+                    <div class="card-header text-center">
+                        <h1>Contacto</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 bright text-center m-auto">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>¡Seguinos en nuestras redes!</h3>
+                                    <h5 class="infoContacto">BUSCANOS COMO @RESENIANDO.OK Y ENTERATE DE TODAS LAS NOVEDADES</h5>
+                                    <div class="mt-3 text-center mx-auto">
+                                        <a href="" class="aContact">
+                                            <img class="iconContacto" src="/img/facebook.png">
+                                        </a>
+                                        <a href="https://instagram.com/reseniando.ok" target="_blank" class="aContact">
+                                            <img class="iconContacto" src="/img/instagram.png">
+                                        </a>
+                                        <a href="" class="aContact">
+                                            <img class="iconContacto" src="/img/twitter.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <h3>Encontranos en: </h3>
+                                <h5 class="infoContacto">PEATONAL CÓRDOBA 1234 - ROSARIO</h5>
+                                <img src="/img/mapa.png" class="img-fluid mapaContacto">
+                            </div>
+                        </div>
+                        <div class="col-md-7 text-center m-auto">
+                            <div class="row">
+                                <form th:action="@{/contacto/exito}" method="POST" class="col-offset-1 col-md-10 mx-auto mt-5">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="nombre-addon">Nombre</span>
+                                                <input type="text" class="form-control" name="nombre" placeholder="Ingresa tu nombre" aria-label="Nombre" aria-describedby="nombre-addon" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="apellido-addon">Apellido</span>
+                                                <input type="text" class="form-control" name="apellido" placeholder="Ingresa tu apellido" aria-label="Apellido" aria-describedby="apellido-addon" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="email-addon">Email</span>
+                                                <input type="email" class="form-control" name="mail" placeholder="ejemplo@gmail.com" aria-label="Email" aria-describedby="email-addon" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="asunto-addon">Asunto</span>
+                                                <input type="text" class="form-control" name="asunto" placeholder="Ingrese un asunto" aria-label="Asunto" aria-describedby="asunto-addon" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="mensaje-addon">Mensaje</span>
+                                                <textarea class="form-control" rows="5" aria-label="Mensaje" aria-describedby="mensaje-addon" name="mensaje" required ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <button type="submit" class="btn btn-success px-5 py-2 m-5">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

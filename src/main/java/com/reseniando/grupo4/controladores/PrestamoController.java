@@ -5,9 +5,11 @@ import com.reseniando.grupo4.entidades.Prestamo;
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
+import com.reseniando.grupo4.repositorios.PrestamoRepositorio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import com.reseniando.grupo4.servicios.PrestamoServicio;
 import java.time.LocalDate;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +26,9 @@ public class PrestamoController {
 
     @Autowired
     private PrestamoServicio prestamoServicio;
+    
+    @Autowired
+    private PrestamoRepositorio prestamoRepositorio;
 
     @Autowired
     private LibroRepositorio libroRepositorio;
@@ -97,19 +102,31 @@ public class PrestamoController {
     public String actualizar(
             ModelMap modelo,
             HttpSession session,
-            String id
+            @RequestParam String id,
+            @RequestParam Boolean devuelto
     ) {
-        Prestamo prestamo = null;
+        Prestamo prestamo = new Prestamo();
 
         try {
-            prestamo = prestamoServicio.findById(id);
-//            prestamoServicio.modificarPrestamo( id, fechaDevolucion, devuelto );
-            return "redirect:/perfil/";
+            Optional<Prestamo> respuesta = prestamoRepositorio.findById( id );
+            if( respuesta.isPresent() ) {
+                prestamo = respuesta.get();
+                if( !devuelto.equals(prestamo.getDevuelto()) ) {
+                    prestamoServicio.modificarPrestamo(id);
+                }
+            } else {
+                modelo.put("titulo", "Prestamo no modificado");
+                modelo.put("descripcion", "Prestamo no modificado correctamente.");
+                return "exito";
+            }
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("prestamo", prestamo);
 
             return "prestamo";
         }
+        modelo.put("titulo", "Préstamo modificado");
+        modelo.put("descripcion", "Préstamo modificado correctamente.");
+        return "exito";
     }
 }

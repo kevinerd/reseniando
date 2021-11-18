@@ -17,11 +17,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-dark table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Libro</th>
                             <th scope="col">Fecha inicio</th>
+                            <th scope="col">Fecha estimativa</th>
                             <th scope="col">Fecha devolución</th>
                             <th scope="col">Devuelto</th>
                             <th scope="col">Acciones</th>
@@ -31,7 +32,8 @@
                         <tr th:each="prestamo:${prestamos}">
                             <td th:text="${prestamo.libro.titulo}" th:value="${prestamo.libro.isbn}"></td>
                             <td th:text="${prestamo.fechaPrestamo}" th:value="${prestamo.fechaPrestamo}"></td>
-                            <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaPrestamo}"></td>
+                            <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaEstimativa}"></td>
+                            <td th:text="${prestamo.fechaDevolucion}" th:value="${prestamo.fechaDevolucion}"></td>
                             <td th:if="${prestamo.devuelto != false}">Si</td>
                             <td th:if="${prestamo.devuelto == false}">No</td>
                             <td>

@@ -203,6 +203,14 @@ li a:hover{
 }
 
 /* --- LIBROS --- */
+.headerLibros {
+    background-image: url("/img/HeaderLibros.png");
+    background-color: #303754;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
 .libros {
     box-shadow: 6px 6px #c7c7c7;
     border: 2px solid rgb(105, 105, 105)
@@ -405,9 +413,9 @@ a.aContact {
     text-decoration: none!important;
 }
 
-.headerReseñas {
-    background-image: url("/img/HeaderContacto.png");
-    background-color: #BAD0FF;
+.headerContacto {
+    background-image: url("/img/HeaderContacTo.png");
+    background-color: #A9DCDD;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center top;
@@ -436,6 +444,26 @@ a.aContact {
 .headerRegistro {
     background-image: url("/img/headerRegistro.png");
     background-color: #FEE0D5;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
+
+/* --- RESEÑAS --- */
+.headerReseñas {
+    background-image: url("/img/HeaderReseñas.png");
+    background-color: #BAD0FF;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
+
+/* --- LOGIN --- */
+.headerLogin {
+    background-image: url("/img/Headerlogin.jpg");
+    background-color: #FFD2D5;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center top;

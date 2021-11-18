@@ -38,33 +38,11 @@ public class PrestamoServicio {
         Optional<Prestamo> respuesta = prestamoRepositorio.findById( id );
         if( respuesta.isPresent() ) {
             Prestamo prestamo = respuesta.get();
-            
-            if( !prestamo.getDevuelto().equals(Boolean.TRUE)  ) {
-                prestamo.setDevuelto(Boolean.TRUE);
-                prestamo.setFechaDevolucion(LocalDate.now());
-            }
+            prestamo.setDevuelto(Boolean.TRUE);
+            prestamo.setFechaDevolucion(LocalDate.now());
             prestamoRepositorio.save( prestamo );
         } else {
             throw new ErrorServicio( "No se encontró el prestamo solicitado." );
-        }
-    }
-
-    @Transactional
-    public void modificarPrestamo(String id, LocalDate fechaDevolucion, Boolean devuelto) throws ErrorServicio {
-
-       // validar(fechaPrestamo, fechaEstimativa, fechaDevolucion, devuelto, libro, usuario);
-
-        Optional<Prestamo> respuesta = prestamoRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            Prestamo prestamo = respuesta.get();
-            if (true) {  //Verificar que el usuario sea ADMIN
-                prestamo.setFechaDevolucion(fechaDevolucion);
-                prestamo.setDevuelto(devuelto);
-            } else {
-                throw new ErrorServicio("No tienes los permisos para realizar esta operación (SERVICIO PRESTAMO - MODIFICARv1).");
-            }
-        } else {
-            throw new ErrorServicio("No se encontro el prestamo (PRESTAMO SERVICIO - MODIFICARv2))");
         }
     }
     

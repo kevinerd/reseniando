@@ -11,17 +11,14 @@
             </div>
             <div class="card-body d-flex">
                 <form th:action="@{/prestamos/registrar-prestamo}" method="POST" class="col-offset-2 col-md-8 mx-auto mt-5">
-                    <input type="hidden" class="form-control" name="dni" th:value="${session.usuariosession.dni}"/>
                     <div class="row mb-4">
-                        <div class="offset-2 col-md-8">
+                        <div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-text" id="fecha1-addon">Fecha de Inicio</span>
                                 <input type=date class="form-control" name="fechaPrestamo" th:value="${fechaPrestamo}" aria-label="FechaInicio" aria-describedby="fecha1-addon" disabled>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="offset-2 col-md-8">
+                        <div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-text" id="fecha2-addon">Fecha de Devolución</span>
                                 <input type=date class="form-control" name="fechaEstimativa" th:value="${fechaEstimativa}" aria-label="FechaFin" aria-describedby="fecha2-addon" disabled>
@@ -29,11 +26,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="offset-2 col-md-8">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <label for="dniAddon" class="input-group-text"><h5>Usuario</h5></label>
+                                <select class="form-select" name="dni" id="dniAddon">
+                                    <option value="DEFAULT" selected disabled>-- Elige un usuario --</option>
+                                    <option th:each="usuario:${usuarios}" th:text="${usuario.nombre + ' ' + usuario.apellido + ' - ' + usuario.dni}" th:value="${usuario.dni}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="input-group">
                                 <label for="isbnAddon" class="input-group-text"><h5>Libro</h5></label>
                                 <select class="form-select" name="isbn" id="isbnAddon">
-                                    <option value="DEFAULT" selected>-- Elige un libro --</option>
+                                    <option value="DEFAULT" selected disabled>-- Elige un libro --</option>
                                     <option th:each="libro:${libros}" th:text="${libro.titulo}" th:value="${libro.isbn}"></option>
                                 </select>
                             </div>

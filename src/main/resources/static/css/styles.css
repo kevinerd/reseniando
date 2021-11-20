@@ -145,10 +145,6 @@ li a:hover{
     font-family: 'Kanit', sans-serif;
 }
 
-.number {
-    font-size: 7.5rem;
-}
-
 .title {
     font-family: Poppins;
     font-weight: bold;
@@ -165,22 +161,48 @@ li a:hover{
 }
 
 /* --- FONDO PARA LAS SECCIONES --- */
-#sectionBack {
+#sectionBack1 {
     margin-top: 3rem;
-    background-color: #e2e2e2;
     padding-bottom: 3rem;
+    background-color: #BAD0FF;
+}
+
+#sectionBack2 {
+    margin-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: #FEE0D5;
 }
 
 /* --- PASOS --- */
-.pasos {
-    background-color: #DF6951;
-    border-radius: 20px;
-    border: none;
+.number {
+    margin: 1rem;
+    font-size: 7.5rem;
+}
+.number.one {
+    margin-left: 1.5rem;
 }
 
-.pasos p {
+.pasosTxt {
+    font-family: Poppins;
     font-size: 1.1rem;
     font-weight: 500;
+    margin-top: 1rem;
+}
+
+.paso1 {
+    background-color: #A9DCDD;
+}
+
+.card-header {
+    background: none!important;
+}
+
+.paso2 {
+    background-color: #FFD2D5;
+}
+
+.paso3 {
+    background-color: #FEE0D5;
 }
 
 /* --- RESEÑAS POPULARES LANDING --- */
@@ -205,12 +227,31 @@ li a:hover{
 /* --- LIBROS --- */
 .headerLibros {
     background-image: url("/img/HeaderLibros.png");
-    background-color: #303754;
+    background-color: #BFEACF;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center top;
     height: 40rem;
 }
+
+.headerGeneros {
+    background-image: url("/img/HeaderGeneros.png");
+    background-color: #C396C4;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
+
+.fallaGeneros {
+    background-image: url("/img/FallaGeneros.png");
+    background-color: #EEC4AA;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 40rem;
+}
+
 .libros {
     box-shadow: 6px 6px #c7c7c7;
     border: 2px solid rgb(105, 105, 105)
@@ -414,7 +455,7 @@ a.aContact {
 }
 
 .headerContacto {
-    background-image: url("/img/HeaderContacTo.png");
+    background-image: url("/img/HeaderContacto.png");
     background-color: #A9DCDD;
     background-size: contain;
     background-repeat: no-repeat;

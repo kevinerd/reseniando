@@ -6,6 +6,7 @@ import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.LibroRepositorio;
 import com.reseniando.grupo4.servicios.LibroServicio;
+import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,13 @@ public class LibroController {
     
     @GetMapping("/lista")
     public String listarLibros( Model model ) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.addAttribute("libros", libroServicio.listarTodo());
 
         return "libros";
@@ -37,6 +45,14 @@ public class LibroController {
     
     @GetMapping("/generos/")
     public String listarPorGenero( Model model, @RequestParam Generos genero ) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("genero", genero.getGen());
+        model.addAttribute("generos", generos);
         model.addAttribute("libros", libroServicio.listarPorGenero(genero));
         return "generos";
     }
@@ -45,6 +61,13 @@ public class LibroController {
     public String libro( Model model, @RequestParam Long isbn ) {
         Libro libro = libroRepositorio.buscarPorIsbn(isbn);
         
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.addAttribute("libro", libro);
         model.addAttribute("resenias", libro.getResenias());
         
@@ -55,6 +78,13 @@ public class LibroController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String crearLibro( ModelMap model, HttpSession session ) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         
         if( usuario == null ) {
             return "redirect:/logout";
@@ -92,6 +122,13 @@ public class LibroController {
             System.out.println("Hola, se cagó algo.");
             return "registro";
         }
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        modelo.addAttribute("generos", generos);
         modelo.put("titulo", "¡Libro ingresado!");
         modelo.put("descripcion", "Libro ingresado.");
         return "exito";
@@ -107,6 +144,13 @@ public class LibroController {
             return "redirect:/logout";
         }
         
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.addAttribute("libro", libro);
         model.put("genero", Generos.values());
         
@@ -132,8 +176,22 @@ public class LibroController {
         try {
             libroServicio.modificarLibro( archivo, isbn, titulo, autor, editorial, anio, genero, sinopsis, ejemplares, ejemplaresPrestados, alta, destacado);
         } catch ( ErrorServicio ex ) {
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            modelo.addAttribute("generos", generos);
             return "registro";
         }
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        modelo.addAttribute("generos", generos);
         modelo.put("titulo", "¡Libro modificado!");
         modelo.put("descripcion", "Libro modificado correctamente.");
         return "exito";

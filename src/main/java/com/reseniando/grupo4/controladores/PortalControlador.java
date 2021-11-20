@@ -4,7 +4,7 @@ import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.servicios.LibroServicio;
 import com.reseniando.grupo4.servicios.UsuarioServicio;
-import java.util.ArrayList;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,26 +25,42 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String index(ModelMap model) {
-        ArrayList<String> todosLosGeneros = new ArrayList();
-        String aux;
+        HashMap<String, String> generos = new HashMap();
         for (Generos nombreGen : Generos.values()) {
-            aux = nombreGen.getGen();
-            todosLosGeneros.add(aux);
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
         }
-
+        
         model.addAttribute("libros", libroServicio.listarDestacados());
-        model.addAttribute("genero", todosLosGeneros);
+        model.addAttribute("generos", generos);
 
         return "index.html";
     }
     
     @GetMapping("/contacto")
-    public String contacto() {
+    public String contacto( ModelMap model ) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        
+        model.addAttribute("generos", generos);
         return "contacto";
     }
     
     @PostMapping("/contacto/exito")
-    public String exito() {
+    public String exito( ModelMap model ) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        
+        model.addAttribute("generos", generos);
         return "contactoExito";
     }
 
@@ -64,11 +80,27 @@ public class PortalControlador {
         if (logout != null) {
             model.put("logout", "Se ha cerrado la sesion.");
         }
+        
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
+        
         return "login";
     }
 
     @GetMapping("/registro")
-    public String registro(ModelMap modelo) {
+    public String registro(ModelMap model) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         return "registro";
     }
 
@@ -100,6 +132,14 @@ public class PortalControlador {
 
         modelo.put("titulo", "¡Bienvenido a Reseniando!");
         modelo.put("descripcion", "Tu usuario fue registrado correctamente.");
+        
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombreG = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombreG, valueGen);
+        }
+        modelo.addAttribute("generos", generos);
 
         return "exito";
     }

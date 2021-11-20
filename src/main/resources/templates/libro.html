@@ -55,11 +55,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="resenia:${resenias}">
+                            <tr th:each="resenia:${resenias}" th:if="${ resenias != null }">
                                 <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
                                 <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
                                 <td>
                                     <a th:href="@{/resenias/resenia(id=__${resenia.id}__)}" class="btn btn-outline-primary btn-sm" role="button">Ver</a>
+                                </td>
+                            </tr>
+                            <tr th:if="${ resenias.isEmpty() }">
+                                <td colspan="3" class="text-center">
+                                    NO HAY NINGUNA RESEÑA POR EL MOMENTO.
+                                </td>
+                            </tr>
+                            <tr  th:if="${ resenias.isEmpty() }">
+                                <td colspan="3" class="text-center">
+                                    <p>¡SÉ EL PRIMERO EN ESCRIBIR UNA!</p>
                                 </td>
                             </tr>
                         </thead>

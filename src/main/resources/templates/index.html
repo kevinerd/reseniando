@@ -21,7 +21,7 @@
             </div>
         </div>
     </header>
-    <section id="sectionBack">
+    <section id="sectionBack1">
         <div class="container">
             <h2 class="titleSec mt-4">Libros principales</h2>
             <div th:replace="/fragments/libros :: div"></div>
@@ -37,40 +37,46 @@
     
             <div class="row mb-5">
                 <div class="col-md-4">
-                    <div class="card pasos text-white">
+                    <div class="card shadow paso1">
                         <div class="row">
-                            <div class="col-md-2">
-                                <h1 class="number">1</h1>
+                            <div class="col-md-3 text-center">
+                                <h1 class="number one">1</h1>
                             </div>
-                            <div class="col-md-10">
-                                <h2 class="title">Registrate.</h2>
-                                <p>Completa tus datos personales y accede a la plataforma.</p>
+                            <div class="col-md-9 my-auto">
+                                <div class="card-header">
+                                    <h3 class="title">Registrate.</h3>
+                                </div>
+                                <p class="pasosTxt">Completa tus datos personales y accede a la plataforma.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card pasos text-white">
+                    <div class="card shadow paso2">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3 text-center">
                                 <h1 class="number">2</h1>
                             </div>
-                            <div class="col-md-10">
-                                <h2 class="title">Crea tu perfil.</h2>
-                                <p>Crea tu perfil para acceder a todas las funcionalidades, como guardar tus libros favoritos y escribir reseñas sobre ellos.</p>
+                            <div class="col-md-9 my-auto">
+                                <div class="card-header">
+                                    <h3 class="title">Crea tu perfil.</h3>
+                                </div>
+                                <p class="pasosTxt">Elige tu nickname y avatar para distinguirte en la plataforma.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card pasos text-white">
+                    <div class="card shadow paso3">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3 text-center">
                                 <h1 class="number">3</h1>
                             </div>
-                            <div class="col-md-10">
-                                <h2 class="title">Reserva!</h2>
-                                <p>Busca el libro que quieras leer, reservalo y retiralo el día y horario que se te asigne. </p>
+                            <div class="col-md-9 my-auto">
+                                <div class="card-header">
+                                    <h3 class="title">Busca!</h3>
+                                </div>
+                                <p class="pasosTxt">Busca el libro que quieras leer y retiralo en el Punto Reseñando más cercano. </p>
                             </div>
                         </div>
                     </div>
@@ -78,27 +84,40 @@
             </div>
         </div>
     </section>
-    <section id="sectionBack">
+    <section id="sectionBack2">
         <div class="container">
-            <div class="row" > 
-                <h2 class="titleSec mt-4">Reseñas más populares</h2>
-                <div class="col-md-4">
-                    <div class="card reseñas text-white">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-2 imgPerfil">
-                                    <img src="/img/lisa.png" class="img-fluid">
-                                </div>
-                                <div class="col-md-10">
-                                    <h4>Lisa Simpson</h4>
-                                </div>
+            <div class="row"> 
+                <h2 class="titleSec mt-4" id="faqs">Preguntas Frecuentes</h2>
+                <div class="offset-2 col-md-8 mt-4">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                ¿Qué es Reseñando?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Reseñando es una plataforma virtual donde podrás acceder a todos tus libros favoritos y reseñarlos.</div>
                             </div>
                         </div>
-                        <div class="row">
-                            
-                            <div class="col-md-10">
-                                <h2 class="title">Este libro es genial</h2>
-                                <p>Este libro me gustó mucho. No podía parar de leerlo, lo terminé en sólo 3 días.</p>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                ¿Cómo consigo un libro?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Buscalo en el sitio, si está disponible acercate a tu punto Reseñando más cercano y pedilo prestado.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                ¿Cuánto tiempo duran los préstamos?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Los préstamos tienen una duración de 7 días a partir del momento en que te llevas el libro. Pero siempre podrás solicitar una renovación por 7 días más al acercarte a tu Reseñando más cercano.</div>
                             </div>
                         </div>
                     </div>
@@ -109,32 +128,3 @@
     <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>
-
-
-<!--<footer class="footer-07">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-12 text-center">
-						<h2 class="footer-heading"><a href="#" class="logo">Reseñando</a></h2>
-						<p class="menu">
-							<a href="#">Inicio</a>
-							<a href="#">Categorias</a>
-							<a href="#">Preguntas frecuentes</a>
-							<a href="#">Contacto</a>
-						</p>
-						<ul class="ftco-footer-social p-0">
-              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><span class="ion-logo-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><span class="ion-logo-facebook"></span></a></li>
-              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram"><span class="ion-logo-instagram"></span></a></li>
-            </ul>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-md-12 text-center">
-						<p class="copyright">
-					  Copyright ©<script>document.write(new Date().getFullYear());</script>2021 All rights reserved | This template is made with <i class="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Reseñando.com</a>
-					  </p>
-					</div>
-				</div>
-			</div>
-		</footer>-->

@@ -17,13 +17,13 @@
                     Categorias
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li th:each="genero:${genero}">
-                            <a class="dropdown-item" th:href="@{/libros/generos/(genero=__${genero}__)}" th:text="${genero}"></a>
+                        <li th:each="genero:${generos}">
+                            <a class="dropdown-item" th:href="@{/libros/generos/(genero=__${genero.key}__)}" th:text="${genero.value}"></a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/inicio}">Preguntas frecuentes</a>
+                    <a class="nav-link" th:href="@{/#faqs}">Preguntas frecuentes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/contacto}">Contacto</a>
@@ -62,11 +62,12 @@
                 </li>
             </ul>
             <form class="d-flex">
+                <!--
                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
-                <br>
-                <a th:href="@{/login}" class="btn btn-outline-success" th:if="${session.usuariosession == null}">Login</a>
-                <a th:href="@{/logout}" th:if="${session.usuariosession != null}" class="btn btn-outline-danger">Logout</a>
+                <br>-->
+                <a th:href="@{/login}" class="btn btn-success px-4 py-1" th:if="${session.usuariosession == null}">Login</a>
+                <a th:href="@{/logout}" th:if="${session.usuariosession != null}" class="btn btn-outline-danger px-4 py-1">Logout</a>
             </form>
         </div>
     </div>

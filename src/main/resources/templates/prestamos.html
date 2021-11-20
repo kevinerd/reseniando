@@ -11,6 +11,16 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <h4 class="alert-heading">ERROR!</h4>
+                    <p th:text="${error}"></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 mb-3 mt-3">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamos/crear-prestamo}" class="btn btn-primary px-5 py-2 ms-auto">Crear Prestamo</a>
             </div>
@@ -20,6 +30,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Libro</th>
                             <th scope="col">Fecha inicio</th>
                             <th scope="col">Fecha estimativa</th>
@@ -30,6 +41,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="prestamo:${prestamos}">
+                            <td th:text="${prestamo.usuario.nombre + ' ' + prestamo.usuario.apellido}"></td>
                             <td th:text="${prestamo.libro.titulo}" th:value="${prestamo.libro.isbn}"></td>
                             <td th:text="${prestamo.fechaPrestamo}" th:value="${prestamo.fechaPrestamo}"></td>
                             <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaEstimativa}"></td>
@@ -37,7 +49,7 @@
                             <td th:if="${prestamo.devuelto != false}">Si</td>
                             <td th:if="${prestamo.devuelto == false}">No</td>
                             <td>
-                                <a th:href="@{/prestamos/editar-prestamo(id=__${prestamo.id}__)}" class="btn btn-outline-warning btn-sm" role="button">Editar</a>
+                                <a th:if="${prestamo.devuelto == false}" th:href="@{/prestamos/editar-prestamo(id=__${prestamo.id}__)}" class="btn btn-outline-warning btn-sm" role="button">Editar</a>
                             </td>
                         </tr>
                     </thead>

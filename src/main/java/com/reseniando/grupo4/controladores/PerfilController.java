@@ -3,10 +3,12 @@ package com.reseniando.grupo4.controladores;
 import com.reseniando.grupo4.entidades.Perfil;
 import com.reseniando.grupo4.entidades.Resenia;
 import com.reseniando.grupo4.entidades.Usuario;
+import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import com.reseniando.grupo4.servicios.PerfilServicio;
 import com.reseniando.grupo4.servicios.PrestamoServicio;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,13 @@ public class PerfilController {
             return "redirect:/logout";
         }
         List<Resenia> reseniasPerfil = perfilServicio.listarResenias(login.getPerfil());
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.addAttribute("reseniasPerfil", reseniasPerfil);
         model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
         
@@ -45,11 +54,18 @@ public class PerfilController {
     }
     
     @GetMapping("/crear-perfil")
-    public String crearPerfil( HttpSession session ) {
+    public String crearPerfil( HttpSession session, ModelMap model ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
         if( login == null ) {
             return "redirect:/logout";
         }
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         return "crearPerfil";
     }
 
@@ -74,9 +90,24 @@ public class PerfilController {
             model.put("error", e.getMessage());
             model.put("nickname", nickname);
             model.put("bio", bio);
+            
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
 
             return "crearPerfil";
         }
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.put("titulo", "¡Bienvenido a Reseñando!");
         model.put("descripcion", "Ya puedes disfrutar de toda la plataforma.");
         session.setAttribute("usuariosession", usuario);
@@ -91,8 +122,22 @@ public class PerfilController {
         }
         try {
             Perfil perfil = perfilServicio.findById( login.getPerfil().getId() );
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
             model.addAttribute("perfil", perfil);
         } catch (ErrorServicio e) {
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
             model.addAttribute("error", e.getMessage());
         }
 
@@ -113,12 +158,26 @@ public class PerfilController {
         try {
             perfil = perfilServicio.findById(id);
             perfilServicio.modificarPerfil(archivo, id, nickname, bio);
+            
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            modelo.addAttribute("generos", generos);
             return "redirect:/perfil/";
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put( "archivo", archivo );
             modelo.put("perfil", perfil);
-
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            modelo.addAttribute("generos", generos);
             return "modificarPerfil";
         }
     }

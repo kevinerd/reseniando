@@ -47,6 +47,19 @@ public class PrestamoServicio {
     }
     
     @Transactional
+    public void renovarPrestamo( String id ) throws ErrorServicio {
+        
+        Optional<Prestamo> respuesta = prestamoRepositorio.findById( id );
+        if( respuesta.isPresent() ) {
+            Prestamo prestamo = respuesta.get();
+            prestamo.setFechaEstimativa(LocalDate.now().plusDays(7));
+            prestamoRepositorio.save( prestamo );
+        } else {
+            throw new ErrorServicio( "No se encontró el prestamo solicitado." );
+        }
+    }
+    
+    @Transactional
     public void eliminarPrestamo(String id) throws ErrorServicio {
         Optional<Prestamo> respuesta = prestamoRepositorio.findById(id);
 

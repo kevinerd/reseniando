@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.reseniando.grupo4.entidades.Perfil;
+import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.repositorios.PerfilRepositorio;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Controller
@@ -39,8 +41,14 @@ public class ReseniaController {
     
     @GetMapping("/lista")
     public String listarResenias( Model model ) {
-        List <Resenia> resenias = reseniaServicio.listarTodo();
         model.addAttribute("resenias", reseniaServicio.listarTodo());
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         
         return "resenias";
     }
@@ -78,6 +86,13 @@ public class ReseniaController {
         model.addAttribute("resenia", resenia);
         model.addAttribute("perfil", perfil);
         model.addAttribute("libro", libro);
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         
         return "resenia";
     }
@@ -95,6 +110,13 @@ public class ReseniaController {
         }
         
         model.addAttribute("libro", libro);
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         
         return "crearReseña";
     }
@@ -123,10 +145,24 @@ public class ReseniaController {
             model.put("error", e.getMessage());
             model.put("titulo", titulo);
             model.put("comentario", comentario);
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
             return "crearReseña";
         }
         model.put("titulo", "¡Reseña registrada!");
         model.put("descripcion", "Gracias por compartir tu opinión.");
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         return "exito";
     }
     
@@ -143,9 +179,23 @@ public class ReseniaController {
             for(Resenia res : resenias) { 
                 if( res.getId().equals(id) ) {
                     model.addAttribute("resenia", resenia);
+                    HashMap<String, String> generos = new HashMap();
+                    for (Generos nombreGen : Generos.values()) {
+                        String nombre = nombreGen.name();
+                        String valueGen = nombreGen.getGen();
+                        generos.put(nombre, valueGen);
+                    }
+                    model.addAttribute("generos", generos);
                     return "modificarResenia";
                 } else {
                     model.addAttribute("error", "No se pudo encontrar la reseña solicitada.");
+                    HashMap<String, String> generos = new HashMap();
+                    for (Generos nombreGen : Generos.values()) {
+                        String nombre = nombreGen.name();
+                        String valueGen = nombreGen.getGen();
+                        generos.put(nombre, valueGen);
+                    }
+                    model.addAttribute("generos", generos);
                     return "/perfil/";
                 }
             }
@@ -178,9 +228,22 @@ public class ReseniaController {
         } catch (Exception e) {
             model.put("error", e.getMessage());
             model.addAttribute("resenia", resenia);
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
             return "modificarResenia";
         }
-        
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
         model.put("titulo", "¡Reseña editada!");
         model.put("descripcion", "Gracias por compartir tu opinión.");
         return "exito";

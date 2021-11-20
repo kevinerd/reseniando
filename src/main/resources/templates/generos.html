@@ -4,6 +4,7 @@
 <head th:replace="/fragments/head :: head"></head>
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
+    <header class="headerGeneros text-center"></header>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -13,21 +14,19 @@
         <div class="row mt-5 mb-5">
             <div class="col-md-3" th:each="libro:${libros}">
                 <div class="card libros mt-5" style="max-width: 250px;">
-                    <img th:if="${ libro.portada != null }" th:src="${'/foto/libro/' + libro.isbn}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${libro.titulo}" th:value="${libro.isbn}"></h5>
-                    </div>
-                    <div class="card-footer bg-danger" th:if="${libro.alta == FALSE}"><h5>NO DISPONIBLE</h5></div>
-                    <div class="card-footer p-0" th:if="${libro.alta == TRUE}">
-                        <div class="d-grid" sec:authorize="isAuthenticated()">
-                            <a th:href="@{/resenias/crear-resenia(isbn=__${libro.isbn}__)}" class="btn btn-primary" type="button" style="border-radius: 0px;">Reseñar</a>
-                            <a th:href="@{/libros/modificar-libro(isbn=__${libro.isbn}__)}" class="btn btn-warning" type="button" style="border-radius: 0px;" sec:authorize="hasRole('ROLE_ADMIN')">Modificar libro</a>
-                        </div>
+                    <a th:href="@{/libros/libro(isbn=__${libro.isbn}__)}">
+                        <img th:if="${ libro.portada == null }" src="/img/portadaLibro.png" class="card-img-top"/>
+                        <img th:if="${ libro.portada != null }" th:src="${'/foto/libro/' + libro.isbn}" class="card-img-top"/>
+                    </a>
+                    <div class="card-footer bg-danger text-white text-center" th:if="${libro.alta == FALSE}">
+                        <h6>NO DISPONIBLE</h6>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
+    <div class="fallaGeneros" th:if="${ libros.isEmpty() }"></div>
     <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>

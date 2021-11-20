@@ -29,6 +29,16 @@
                                 <a th:href="@{/resenias/resenia(id=__${resenia.id}__)}" class="btn btn-outline-primary btn-sm" role="button">Ver</a>
                             </td>
                         </tr>
+                        <tr th:if="${ resenias.isEmpty() }">
+                            <td colspan="3" class="text-center">
+                                NO HAY NINGUNA RESEÑA POR EL MOMENTO.
+                            </td>
+                        </tr>
+                        <tr  th:if="${ resenias.isEmpty() }">
+                            <td colspan="3" class="text-center">
+                                <p>¡SÉ EL PRIMERO EN ESCRIBIR UNA!</p>
+                            </td>
+                        </tr>
                     </thead>
                 </table>
             </div>

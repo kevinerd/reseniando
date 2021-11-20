@@ -30,16 +30,28 @@ public class LibroController {
     private LibroRepositorio libroRepositorio;
     
     @GetMapping("/lista")
-    public String listarLibros( Model model ) {
-        HashMap<String, String> generos = new HashMap();
-        for (Generos nombreGen : Generos.values()) {
-            String nombre = nombreGen.name();
-            String valueGen = nombreGen.getGen();
-            generos.put(nombre, valueGen);
+    public String listarLibros( Model model, @RequestParam(required=false) String query ) {
+        if( query != null ) {
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("query", query);
+            model.addAttribute("generos", generos);
+            model.addAttribute("libros", libroServicio.listarLibrosByQuery(query));
+        } else {
+            HashMap<String, String> generos = new HashMap();
+            for (Generos nombreGen : Generos.values()) {
+                String nombre = nombreGen.name();
+                String valueGen = nombreGen.getGen();
+                generos.put(nombre, valueGen);
+            }
+            model.addAttribute("generos", generos);
+            model.addAttribute("libros", libroServicio.listarTodo());
         }
-        model.addAttribute("generos", generos);
-        model.addAttribute("libros", libroServicio.listarTodo());
-
+        
         return "libros";
     }
     

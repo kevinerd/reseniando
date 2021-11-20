@@ -1,20 +1,20 @@
 package com.reseniando.grupo4.controladores;
 
 import com.reseniando.grupo4.entidades.Perfil;
-import com.reseniando.grupo4.entidades.Resenia;
 import com.reseniando.grupo4.entidades.Usuario;
 import com.reseniando.grupo4.enumeraciones.Generos;
 import com.reseniando.grupo4.errores.ErrorServicio;
+import com.reseniando.grupo4.repositorios.PerfilRepositorio;
 import com.reseniando.grupo4.repositorios.UsuarioRepositorio;
 import com.reseniando.grupo4.servicios.PerfilServicio;
 import com.reseniando.grupo4.servicios.PrestamoServicio;
 import java.util.HashMap;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +26,9 @@ public class PerfilController {
 
     @Autowired
     private PerfilServicio perfilServicio;
+    
+    @Autowired
+    private PerfilRepositorio perfilRepositorio;
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -39,7 +42,6 @@ public class PerfilController {
         if( login == null ) {
             return "redirect:/logout";
         }
-        List<Resenia> reseniasPerfil = perfilServicio.listarResenias(login.getPerfil());
         HashMap<String, String> generos = new HashMap();
         for (Generos nombreGen : Generos.values()) {
             String nombre = nombreGen.name();
@@ -47,12 +49,41 @@ public class PerfilController {
             generos.put(nombre, valueGen);
         }
         model.addAttribute("generos", generos);
-        model.addAttribute("reseniasPerfil", reseniasPerfil);
-        model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
         
         return "perfil";
     }
     
+    @GetMapping("/prestamos")
+    public String misPrestamos( ModelMap model, HttpSession session ) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if( login == null ) {
+            return "redirect:/logout";
+        }
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
+        model.addAttribute("prestamosUsuario", prestamoServicio.listarPorUsuario(login));
+        
+        return "misPrestamos";
+    }
+    
+    @GetMapping("/{nickname}")
+    public String perfilPublico( ModelMap model, @PathVariable(value="nickname") String nickname ) {
+        HashMap<String, String> generos = new HashMap();
+        for (Generos nombreGen : Generos.values()) {
+            String nombre = nombreGen.name();
+            String valueGen = nombreGen.getGen();
+            generos.put(nombre, valueGen);
+        }
+        model.addAttribute("generos", generos);
+        model.addAttribute("perfil", perfilRepositorio.findByNickname(nickname));
+        return "perfilPublico";
+    }
+
     @GetMapping("/crear-perfil")
     public String crearPerfil( HttpSession session, ModelMap model ) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");

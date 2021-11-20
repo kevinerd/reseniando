@@ -11,8 +11,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 mb-3 mt-3">
+            <div class="col-md-12 mb-2 mt-3 text-center">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/libros/crear-libro}" class="btn btn-primary px-5 py-2 ms-auto">Crear libro</a>
+            </div>
+        </div>
+        <div class="row mt-2 mb-4">
+            <div class="offset-2 col-md-8">
+                <form th:action="@{/admin/libros}" method="GET" class="col-offset-2 col-md-8 mx-auto mt-5 d-flex">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Buscar por título...">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
             </div>
         </div>
         <div class="row">

@@ -116,7 +116,7 @@ public class PrestamoController {
             
             if( prestamo.getDevuelto().equals(Boolean.TRUE) ) {
                 model.addAttribute("error", "No se puede modificar un préstamo finalizado.");
-                return adminController.listarPrestamos(model);
+                return adminController.listarPrestamos(model, session, null);
             }
             
             model.addAttribute("prestamo", prestamo);

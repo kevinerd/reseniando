@@ -2,121 +2,85 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="/fragments/head :: head"></head>
+
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
     <div class="container">
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-datos-tab" data-bs-toggle="pill" data-bs-target="#pills-datos" type="button" role="tab" aria-controls="pills-datos" aria-selected="true">Mis Datos</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-resenias-tab" data-bs-toggle="pill" data-bs-target="#pills-resenias" type="button" role="tab" aria-controls="pills-resenias" aria-selected="false">Mis Reseñas</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-prestamos-tab" data-bs-toggle="pill" data-bs-target="#pills-prestamos" type="button" role="tab" aria-controls="pills-prestamos" aria-selected="false">Mis Prestamos</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-datos" role="tabpanel" aria-labelledby="pills-datos-tab">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card" th:if="${session.usuariosession.perfil} != null" >
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h3 class="card-header">
-                                                        Datos del Perfil
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                            <div class="row card-body">
-                                                <div class="col-md-4">
-                                                    <img th:src="${'/foto/perfil/' + session.usuariosession.perfil.id}" class="img-fluid rounded-start">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <h6 class="card-title" th:text="'Nickname: ' + ${session.usuariosession.perfil.nickname}"></h6>
-                                                    <h6 class="card-title" th:text="'Bio: ' + ${session.usuariosession.perfil.bio}"></h6>
-                                                </div>
-                                            </div>
-                                            <div class="row card-footer">
-                                                <a sec:authorize="isAuthenticated()" th:href="@{/perfil/editar-perfil}" class="card-link">Editar Perfil</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="offset-2 col-md-4">
-                                        <div class="card" th:if="${session.usuariosession.perfil} != null">
-                                            <h3 class="card-header">
-                                                Datos del Usuario
-                                            </h3>
-                                            <div class="card-body">
-                                                <h6 class="card-title" th:text="'DNI: ' + ${session.usuariosession.dni}"></h6>
-                                                <h6 class="card-title" th:text="'Nombre y apellido: ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h6>
-                                                <h6 class="card-title" th:text="'Email: ' + ${session.usuariosession.email}"></h6>
-                                                <h6 class="card-title" th:text="'Dirección: ' + ${session.usuariosession.domicilio}"></h6>
-                                            </div>
-                                            <div class="card-footer">
-                                                <a sec:authorize="isAuthenticated()" th:href="@{/usuario/editar-usuario(dni=__${session.usuariosession.dni}__)}" class="card-link">Editar Usuario</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="card shadow mt-5 mb-5" th:if="${session.usuariosession.perfil} != null" >
+            <div class="row mt-3">
+                <div class="col-md-4 my-auto">
+                    <div class="row"> <!-- -- PORTADA -- -->
+                        <div class="col-md-12 text-center">
+                            <img th:if="${ session.usuariosession.perfil.foto != null }" th:src="${'/foto/perfil/' + session.usuariosession.perfil.id}" class="card-img-top imgLibro m-3">
+                            <img th:if="${ session.usuariosession.perfil.foto == null }" src="/img/PerfilDefault.png" class="card-img-top imgLibro m-3"/>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-resenias" role="tabpanel" aria-labelledby="pills-resenias-tab">
-                        <div class="row">
-                            <div class="offset-2 col-md-8">
-                                <table class="table table-striped mt-5">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Título</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="resenia:${reseniasPerfil}">
-                                            <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
-                                            <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
-                                            <td>
-                                                <a th:href="@{/resenias/resenia(id=__${resenia.id}__)}" class="btn btn-outline-primary btn-sm" role="button">Ver</a>
-                                                <a th:href="@{/resenias/editar-resenia(id=__${resenia.id}__)}" class="btn btn-outline-warning btn-sm" role="button">Modificar</a>
-                                                <a th:href="@{/resenias/editar-resenia(id=__${resenia.id}__)}" class="btn btn-outline-danger btn-sm" role="button">Eliminar</a>
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                    <div class="row"> <!-- -- BOTONES -- -->
+                        <div class="d-grid gap-1 offset-2 col-8 mx-auto">
+                            <a th:href="@{/perfil/editar-perfil}" class="btn btn-outline-primary btn-lg mb-3 d-inline py-1" type="button" style="border-radius: 0px;" sec:authorize="isAuthenticated()" role="button">Editar Perfil</a>
+                            <a th:href="@{/usuario/editar-usuario(dni=__${session.usuariosession.dni}__)}" class="btn btn-outline-primary btn-lg mb-3 d-inline py-1" type="button" style="border-radius: 0px;" sec:authorize="isAuthenticated()" role="button">Editar Usuario</a>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-prestamos" role="tabpanel" aria-labelledby="pills-prestamos-tab">
-                        <div class="row">
-                            <div class="offset-2 col-md-8">
-                                <table class="table table-striped mt-5">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Libro</th>
-                                            <th scope="col">Fecha inicio</th>
-                                            <th scope="col">Fecha devolución</th>
-                                            <th scope="col">Devuelto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="prestamo:${prestamosUsuario}">
-                                            <td th:text="${prestamo.libro.titulo}" th:value="${prestamo.libro.isbn}"></td>
-                                            <td th:text="${prestamo.fechaPrestamo}" th:value="${prestamo.fechaPrestamo}"></td>
-                                            <td th:text="${prestamo.fechaEstimativa}" th:value="${prestamo.fechaPrestamo}"></td>
-                                            <td th:if="${prestamo.devuelto != false}">Si</td>
-                                            <td th:if="${prestamo.devuelto == false}">No</td>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                </div>
+                <div class="col-md-7"> <!-- -- INFO PERFIL -- -->
+                    <div class="row">
+                        <h1 th:text="${session.usuariosession.perfil.nickname}"></h1>
+                    </div>
+                    <div class="row mt-3">
+                        <h5>Biografía:</h5>
+                        <p th:text="${session.usuariosession.perfil.bio}"></p>
+                    </div>
+                    <hr>
+                    <div class="row"> <!-- -- INFO USUARIO -- -->
+                        <div class="col-md-12 mb-3">
+                            <h3>Datos Personales</h3>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 th:text="'DNI: ' + ${session.usuariosession.dni}"></h5>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 th:text="'Nombre y apellido: ' + ${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h5>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 th:text="'Email: ' + ${session.usuariosession.email}"></h5>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 th:text="'Dirección: ' + ${session.usuariosession.domicilio}"></h5>
                         </div>
                     </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row"> <!-- -- RESEÑAS -- -->
+                <div class="col-md-12 text-center">
+                    <h1>Mis Reseñas</h1>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="offset-2 col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="resenia:${session.usuariosession.perfil.resenias}" th:if="${ session.usuariosession.perfil.resenias != null }">
+                                <td th:text="${resenia.titulo}" th:value="${resenia.titulo}"></td>
+                                <td th:text="${resenia.fecha}" th:value="${resenia.fecha}"></td>
+                                <td>
+                                    <a th:href="@{/resenias/resenia(id=__${resenia.id}__)}" class="btn btn-outline-primary btn-sm" role="button">Ver</a>
+                                </td>
+                            </tr>
+                            <tr th:if="${ session.usuariosession.perfil.resenias.isEmpty }">
+                                <td colspan="3" class="text-center">
+                                    NO HAY NINGUNA RESEÑA POR EL MOMENTO.
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>

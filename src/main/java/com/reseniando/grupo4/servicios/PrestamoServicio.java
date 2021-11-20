@@ -109,4 +109,8 @@ public class PrestamoServicio {
     public List<Prestamo> listarPorUsuario( Usuario usuario ){
         return prestamoRepositorio.buscarPrestamoPorUsuario( usuario );
     }
+    
+    public List<Prestamo> listarPrestamosByQuery( String query) {
+        return prestamoRepositorio.findAllByQuery("%" + query + "%");
+    }
 }

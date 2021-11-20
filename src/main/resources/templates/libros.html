@@ -6,6 +6,11 @@
     <nav th:replace="/fragments/nav :: nav"></nav>
     <header class="headerLibros text-center"></header>
     <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 th:if="${ query != null }" th:text="${'Buscando: ' + query}"></h1>
+            </div>
+        </div>
         <div th:replace="/fragments/libros :: div"></div>
     </div>
     <footer th:replace="/fragments/footer :: footer"></footer>

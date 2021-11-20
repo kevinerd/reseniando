@@ -107,6 +107,10 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findAll();
     }
     
+    public List<Usuario> listarUsuariosByQuery( String query) {
+        return usuarioRepositorio.findAllByQuery("%" + query + "%");
+    }
+    
     public Usuario encontrarPorDni(String dni) throws ErrorServicio {
         Usuario usuario= null;
         

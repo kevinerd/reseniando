@@ -12,5 +12,5 @@ public interface PerfilRepositorio extends JpaRepository<Perfil, String> {
     public Perfil buscarPorId(@Param("id") String id);
     
     @Query( "SELECT p FROM Perfil p WHERE p.nickname = :nickname" )
-    public Perfil findByNickname( @Param("nickname") String nickname );
+    Perfil findByNickname( @Param("nickname") String nickname );
 }

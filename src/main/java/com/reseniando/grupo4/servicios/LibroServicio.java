@@ -123,4 +123,8 @@ public class LibroServicio {
         List<Libro> libros = libroRepositorio.buscarPorGenero(genero);
         return libros;
     }
+    
+    public List<Libro> listarLibrosByQuery( String query) {
+        return libroRepositorio.findAllByQuery("%" + query + "%");
+    }
 }

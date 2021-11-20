@@ -21,5 +21,8 @@ public interface PrestamoRepositorio extends JpaRepository<Prestamo, String>{
      List<Prestamo> buscarPrestamoPorId(@Param("id") String id); 
      
      @Query("SELECT p FROM Prestamo p WHERE p.usuario = :usuario")
-     List<Prestamo> buscarPrestamoPorUsuario(@Param("usuario") Usuario usuario); 
+     List<Prestamo> buscarPrestamoPorUsuario(@Param("usuario") Usuario usuario);
+     
+     @Query("SELECT p FROM Prestamo p WHERE p.usuario.nombre LIKE :query OR p.usuario.apellido LIKE :query")
+     List<Prestamo> findAllByQuery(@Param("query") String query);
 }

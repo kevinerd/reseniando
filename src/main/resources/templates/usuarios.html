@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+    <nav th:replace="/fragments/nav :: nav"></nav>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h1>Usuarios</h1>
+            </div>
+        </div>
+        <div class="row mt-2 mb-5">
+            <div class="offset-2 col-md-8">
+                <form th:action="@{/admin/usuarios}" method="GET" class="col-offset-2 col-md-8 mx-auto mt-5 d-flex">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Buscar por nombre o apellido...">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre y Apellido</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nickname</th>
+                            <th scope="col">Alta</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario:${usuarios}">
+                            <td th:text="${usuario.dni}"></td>
+                            <td th:text="${usuario.nombre + ' ' + usuario.apellido}"></td>
+                            <td th:text="${usuario.domicilio}"></td>
+                            <td th:text="${usuario.email}"></td>
+                            <td th:text="${usuario.perfil.nickname}" th:if="${usuario.perfil}"></td>
+                            <td th:if="${usuario.alta != false}">Si</td>
+                            <td th:if="${usuario.alta == false}">No</td>
+                            <td th:if="${usuario.perfil}">
+                                <a th:href="@{/perfil/} + ${usuario.perfil.nickname}" class="btn btn-outline-primary btn-sm" role="button">Ver Perfil</a>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

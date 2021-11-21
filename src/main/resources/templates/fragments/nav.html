@@ -40,15 +40,15 @@
                             <a class="dropdown-item" th:href="@{/perfil/}">Mi Perfil</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" th:href="@{/perfil/prestamos}">Mis Prestamos</a>
+                            <a th:if="${session.usuariosession.perfil != null}" class="dropdown-item" th:href="@{/perfil/prestamos}">Mis Prestamos</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" th:href="@{/perfil/editar-perfil}">Editar Perfil</a>
+                            <a th:if="${session.usuariosession.perfil != null}" class="dropdown-item" th:href="@{/perfil/editar-perfil}">Editar Perfil</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
-                    <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="nav-link">Crea tu perfil</a>
+                    <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="nav-link"><b>Crea tu perfil</b></a>
                 </li>
                 <li class="nav-item dropdown" th:if="${session.usuariosession != null}"  sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

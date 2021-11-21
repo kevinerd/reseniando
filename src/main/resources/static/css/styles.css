@@ -510,3 +510,9 @@ a.aContact {
     background-position: center top;
     height: 40rem;
 }
+
+.alerta {
+    background-color: #FFD2D5;
+    width: 30rem;
+    padding: 2rem;
+}

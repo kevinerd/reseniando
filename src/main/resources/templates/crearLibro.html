@@ -52,7 +52,7 @@
                         <div class="offset-2 col-md-8">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="anio-addon">Año de Publicación</span>
-                                <input type="number" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro" aria-label="Año" aria-describedby="anio-addon">
+                                <input type="number" min="1900" max="2099" step="1" class="form-control" name="anio" th:value="${anio}" placeholder="Ingrese el año de publicación del libro" aria-label="Año" aria-describedby="anio-addon">
                             </div>
                         </div>
                     </div>

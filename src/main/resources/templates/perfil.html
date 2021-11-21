@@ -5,7 +5,7 @@
 
 <body>
     <nav th:replace="/fragments/nav :: nav"></nav>
-    <div class="container">
+    <div class="container my-auto">
         <div class="card shadow mt-5 mb-5" th:if="${session.usuariosession.perfil} != null" >
             <div class="row mt-3">
                 <div class="col-md-4 my-auto">
@@ -81,6 +81,28 @@
                             </tr>
                         </thead>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mt-5 mb-5" th:if="${session.usuariosession.perfil} == null">
+            <div class="row">
+                <div class="col-md-12 text-center mt-3">
+                    <h1>¡Bienvenido a Reseñando!</h1>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-12 mt-5 mb-5 alerta">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Para acceder a todas las características crea tu perfil.</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center mt-3">
+                            <a th:if="${session.usuariosession.perfil == null}" th:href="@{/perfil/crear-perfil}" class="btn btn-lg btn-primary">Crea tu perfil</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

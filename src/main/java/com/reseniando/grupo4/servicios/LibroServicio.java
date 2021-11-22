@@ -75,9 +75,16 @@ public class LibroServicio {
             libro.setEjemplaresPrestados(ejemplaresPrestados);
             libro.setAlta(alta);
             libro.setDestacado(destacado);
-            Foto foto = fotoServicio.actualizar(libro.getPortada().getId(), archivo);
-            libro.setPortada(foto);
-            libroRepositorio.save(libro);
+            
+            if( libro.getPortada() == null ) {
+                Foto foto = fotoServicio.guardar(archivo);
+                libro.setPortada(foto);
+                libroRepositorio.save(libro);
+            } else {
+                Foto foto = fotoServicio.actualizar(libro.getPortada().getId(), archivo);
+                libro.setPortada(foto);
+                libroRepositorio.save(libro);
+            }
         } else {
             throw new ErrorServicio("No existe el libro solicitado.");
         }

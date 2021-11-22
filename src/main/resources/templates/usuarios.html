@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-striped mb-5">
                     <thead>
                         <tr>
                             <th scope="col">DNI</th>
@@ -39,6 +39,7 @@
                             <td th:text="${usuario.domicilio}"></td>
                             <td th:text="${usuario.email}"></td>
                             <td th:text="${usuario.perfil.nickname}" th:if="${usuario.perfil}"></td>
+                            <td th:if="${usuario.perfil == null}"></td>
                             <td th:if="${usuario.alta != false}">Si</td>
                             <td th:if="${usuario.alta == false}">No</td>
                             <td th:if="${usuario.perfil}">

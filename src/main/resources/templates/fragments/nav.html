@@ -71,8 +71,8 @@
                 <input class="form-control me-2" type="search" name="query" placeholder="Buscar libro..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
                 
-                <a th:href="@{/login}" class="btn btn-success px-4 py-1" th:if="${session.usuariosession == null}">Login</a>
-                <a th:href="@{/logout}" th:if="${session.usuariosession != null}" class="btn btn-outline-danger px-4 py-1">Logout</a>
+                <a th:href="@{/login}" class="btn btn-success px-4 py-1 btnLogin" th:if="${session.usuariosession == null}">Login</a>
+                <a th:href="@{/logout}" th:if="${session.usuariosession != null}" class="btn btn-outline-danger px-4 py-1 btnLogin">Logout</a>
             </form>
         </div>
     </div>

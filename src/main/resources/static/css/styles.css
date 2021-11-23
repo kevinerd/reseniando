@@ -210,7 +210,7 @@ li a:hover{
 }
 
 /* --- RESEÑAS POPULARES LANDING --- */
-.reseñas {
+/* .reseñas {
     background-color: #92D7E0;
     border-radius: 20px;
     border: none;
@@ -226,7 +226,7 @@ li a:hover{
     border-radius: 100%;
     width: 70px;
     height: 70px;
-}
+} */
 
 /* --- LIBROS --- */
 .headerLibros {
@@ -296,6 +296,48 @@ input#btn_enviar{
     margin-top: 0%;
 }
 
+/* --- INPUT FILE --- */
+.file-select {
+    position: relative;
+    display: inline-block;
+}
+
+.file-select::before {
+    font-family: Poppins;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #DF6951;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar'; /* texto por defecto */
+    position: absolute;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.file-select input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 55px;
+    display: inline-block;
+}
+
+:root {
+    --fn: 'Seleccionar Archivo';
+}
+
+.file-select::before {
+    white-space: nowrap;
+    content: var(--fn);
+}
+
 /* --- FOOTER --- */
 footer {
     position: absolute;
@@ -303,6 +345,7 @@ footer {
     width: 100%;
     height: 150px;
 }
+
 /* --- ÉXITO --- */
 header.masthead-exito {
     position: relative;
